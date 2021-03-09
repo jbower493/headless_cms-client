@@ -1,0 +1,35 @@
+.sidebar {
+  position: fixed;
+  width: $width--sidebar;
+  height: 100%;
+  margin: $height--header 0;
+  padding: 30px 15px;
+  background-color: $clr--light-navy;
+  color: white;
+}
+
+.ct-menu, .users-menu {
+  margin-bottom: 100px;
+
+  &__title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  &__title-text {
+    color: $clr--grey;
+  }
+
+  &__add-button {
+    margin-left: 10px;
+    color: $clr--primary;
+    transform: scale(1.2);
+  }
+
+  &__item {
+    margin: 10px 0;
+  }
+}
