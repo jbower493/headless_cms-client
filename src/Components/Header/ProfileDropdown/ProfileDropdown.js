@@ -1,10 +1,23 @@
 import React from 'react';
 //import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+import { logout } from '../../../redux/actions/authActions';
+
 class ProfileDropdown extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    this.props.logout();
+  }
+
   render() {
     return (
-      <div>
+      <div onClick={this.handleClick}>
         Profile
       </div>
     );
@@ -13,4 +26,8 @@ class ProfileDropdown extends React.Component {
 
 ProfileDropdown.propTypes = {};
 
-export default ProfileDropdown;
+const mapStateToProps = state => ({
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps, { logout })(ProfileDropdown);

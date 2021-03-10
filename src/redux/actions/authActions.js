@@ -67,7 +67,7 @@ export const initialRequest = () => {
           })
             .then(res => {
               if(res.data.success) {
-                dispatch(getUserAC(true/*res.data.user*/));
+                dispatch(getUserAC(res.data.user));
               }
               dispatch(receivedAuthDataAC());
             })
@@ -128,3 +128,49 @@ export const initialRequest = () => {
 //       })
 //   };
 // };
+
+export const login = (credentials) => {
+  return (dispatch) => {
+    dispatch(requestingAuthDataAC());
+
+    Axios({
+      method: 'POST',
+      withCredentials: true,
+      url: `${url}/auth/login`,
+      data: credentials,
+      headers: {'Content-Type': 'application/json' }
+    })
+      .then(res => {
+        console.log(res.data)
+        dispatch(loginAC(res.data.user));
+        dispatch(receivedAuthDataAC());
+      })
+      .catch(e => {
+        console.log(e);
+        dispatch(loginAC(null));
+        dispatch(receivedAuthDataAC());
+      })
+  };
+};
+
+export const logout = () => {
+  return (dispatch) => {
+    dispatch(requestingAuthDataAC());
+
+    Axios({
+      method: 'GET',
+      withCredentials: true,
+      url: `${url}/auth/logout`
+    })
+      .then(res => {
+        if(res.data.success) {
+          dispatch(logoutAC());
+        }
+        dispatch(receivedAuthDataAC());
+      })
+      .catch(e => {
+        console.log(e);
+        dispatch(receivedAuthDataAC());
+      })
+  };
+};

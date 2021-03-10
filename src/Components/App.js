@@ -3,6 +3,8 @@ import React from 'react';
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import MainWindow from './MainWindow/MainWindow';
+import AdminSetup from './AdminSetup/AdminSetup';
+import Auth from './Auth/Auth';
 
 import { connect } from 'react-redux';
 import { initialRequest } from '../redux/actions/authActions';
@@ -29,14 +31,14 @@ class App extends React.Component {
       page = (
         <div>
           <Header />
-          <h1 style={{paddingTop: 200}}>No Admin</h1>
+          <AdminSetup />
         </div>
       );
     } else if(!this.props.user) {
       page = (
         <div>
           <Header />
-          <h1 style={{paddingTop: 200}}>Login page</h1>
+          <Auth />
         </div>
         );
     } else {
