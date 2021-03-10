@@ -1,0 +1,12 @@
+.ct-home {
+
+  &__heading {
+    margin-bottom: 50px;
+  }
+
+  &__container {
+    background-color: $clr--light-grey;
+    height: 300px;
+    border-radius: $border-radius--standard;
+  }
+}

@@ -1,13 +1,12 @@
 import React from 'react';
 //import PropTypes from 'prop-types';
+import ContentTypesHome from './ContentTypes/ContentTypesHome';
 
 class MainWindow extends React.Component {
   render() {
     return (
-      <div>
-        <div className="placeholder">
-          <div className="box">Hello</div>
-        </div>
+      <div className="main-window">
+        <ContentTypesHome />
       </div>
     );
   }
