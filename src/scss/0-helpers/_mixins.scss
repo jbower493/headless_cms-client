@@ -1,0 +1,10 @@
+@mixin main-window-heading {
+  margin-bottom: 50px;
+}
+
+@mixin main-window-container {
+  background-color: $clr--light-grey;
+  height: 300px;
+  border-radius: $border-radius--standard;
+  padding: 20px;
+}

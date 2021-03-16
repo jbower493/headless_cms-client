@@ -3,6 +3,7 @@ import { CHECK_FOR_ADMIN, GET_USER, LOGIN, LOGOUT, REQUESTING_AUTH_DATA, RECEIVE
 const initialState = {
   user: null,
   adminExists: false,
+  //userIsAdmin: false,
   fetchingAuthData: false
 };
 

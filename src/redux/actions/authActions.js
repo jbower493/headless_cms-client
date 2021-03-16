@@ -141,7 +141,6 @@ export const login = (credentials) => {
       headers: {'Content-Type': 'application/json' }
     })
       .then(res => {
-        console.log(res.data)
         dispatch(loginAC(res.data.user));
         dispatch(receivedAuthDataAC());
       })

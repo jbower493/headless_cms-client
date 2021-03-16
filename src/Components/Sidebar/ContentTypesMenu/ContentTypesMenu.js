@@ -1,20 +1,37 @@
 import React from 'react';
 //import PropTypes from 'prop-types';
-import { AddCircleOutline } from '@material-ui/icons';
+//import { AddCircleOutline } from '@material-ui/icons';
 
-const contentTypes = ['Posts', 'Titles', 'Articles'];
+import { connect } from 'react-redux';
+import { showContentTypes } from '../../../redux/actions/mainWindowActions';
+import { getContentTypes } from '../../../redux/actions/contentTypesActions';
+
+//const contentTypes = ['Posts', 'Titles', 'Articles'];
 
 class ContentTypesMenu extends React.Component {
+  componentDidMount() {
+    this.props.getContentTypes();
+  }
+
   render() {
+    let title;
+    console.log(this.props.contentTypes)
+
+    if(this.props.user.role === 'admin') {
+      title = <h4 className="ct-menu__title ct-menu__title--admin" onClick={this.props.showContentTypes}>Content Types</h4>;
+    } else {
+      title = <h4 className="ct-menu__title">Content Types</h4>
+    }
+
     return (
       <div className="ct-menu">
-        <div className="ct-menu__title-container">
-          <h4 className="ct-menu__title-text">Content Types</h4>
-          <AddCircleOutline className="ct-menu__add-button" />
-        </div>
-
+        
+        {title}
+        
         {
-          contentTypes.map(type => <p key={contentTypes.indexOf(type)} className="ct-menu__item">{type}</p>)
+          this.props.fetchingContentTypesData
+            ? <p>Fetching data</p>
+            : this.props.contentTypes.map(contentType => <p key={this.props.contentTypes.indexOf(contentType)} className="ct-menu__item">{contentType.name}s</p>)
         }
       </div>
     );
@@ -23,4 +40,10 @@ class ContentTypesMenu extends React.Component {
 
 ContentTypesMenu.propTypes = {};
 
-export default ContentTypesMenu;
+const mapStateToProps = state => ({
+  user: state.auth.user,
+  contentTypes: state.contentTypes.contentTypes,
+  fetchingContentTypesData: state.contentTypes.fetchingContentTypesData
+});
+
+export default connect(mapStateToProps, { showContentTypes, getContentTypes })(ContentTypesMenu);

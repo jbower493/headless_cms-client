@@ -1,4 +1,6 @@
 @import '0-helpers/variables';
+@import '0-helpers/mixins';
+
 @import '1-base/reset';
 @import '1-base/base';
 
@@ -9,3 +11,5 @@
 
 @import '2-components/main-window';
 @import '2-components/contentTypesHome';
+@import '2-components/dashboard';
+@import '2-components/users';

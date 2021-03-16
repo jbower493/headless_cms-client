@@ -3,12 +3,16 @@ import React from 'react';
 import ContentTypesMenu from './ContentTypesMenu/ContentTypesMenu';
 import UsersMenu from './UsersMenu/UsersMenu';
 
+import { connect } from 'react-redux';
+
 class Sidebar extends React.Component {
   render() {
     return (
       <div className="sidebar">
         <ContentTypesMenu />
-        <UsersMenu />
+        {
+          this.props.user.role === 'admin' ? <UsersMenu /> : null
+        }
       </div>
     );
   }
@@ -16,4 +20,8 @@ class Sidebar extends React.Component {
 
 Sidebar.propTypes = {};
 
-export default Sidebar;
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+export default connect(mapStateToProps)(Sidebar);
