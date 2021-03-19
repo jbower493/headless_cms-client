@@ -1,6 +1,6 @@
-import { SHOW_DASHBOARD, SHOW_CONTENT_TYPES, SHOW_USERS } from './types';
+import { SHOW_DASHBOARD, SHOW_CONTENT_TYPES, SHOW_USERS, SHOW_CONTENT } from './types';
 
-const showDashboardAC = () => {
+export const showDashboardAC = () => {
   return {
     type: SHOW_DASHBOARD
   };
@@ -15,6 +15,12 @@ const showContentTypesAC = () => {
 const showUsersAC = () => {
   return {
     type: SHOW_USERS
+  };
+};
+
+export const showContentAC = () => {
+  return {
+    type: SHOW_CONTENT
   };
 };
 
@@ -33,5 +39,11 @@ export const showContentTypes = () => {
 export const showUsers = () => {
   return (dispatch) => {
     dispatch(showUsersAC());
+  };
+};
+
+export const showContent = () => {
+  return (dispatch) => {
+    dispatch(showContentAC());
   };
 };

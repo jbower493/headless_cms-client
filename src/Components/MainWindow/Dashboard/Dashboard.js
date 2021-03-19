@@ -8,7 +8,9 @@ class Dashboard extends React.Component {
       <div className="dashboard">
         <h1 className="dashboard__heading">Dashboard</h1>
 
-        <div className="dashboard__container">Welcome {this.props.user.username}</div>
+        <div className="dashboard__container">
+          <p>Welcome {this.props.user.username}. Use the sidebar to edit your content.</p>
+        </div>
       </div>
     );
   }

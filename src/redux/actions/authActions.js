@@ -1,6 +1,7 @@
 import { CHECK_FOR_ADMIN, GET_USER, LOGIN, LOGOUT, REQUESTING_AUTH_DATA, RECEIVED_AUTH_DATA } from './types';
-import Axios from 'axios';
+import { showDashboardAC } from './mainWindowActions';
 
+import Axios from 'axios';
 import { url } from '../../Components/App';
 
 const checkForAdminAC = (adminExists) => {
@@ -164,6 +165,7 @@ export const logout = () => {
       .then(res => {
         if(res.data.success) {
           dispatch(logoutAC());
+          dispatch(showDashboardAC());
         }
         dispatch(receivedAuthDataAC());
       })

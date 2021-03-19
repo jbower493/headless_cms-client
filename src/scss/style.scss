@@ -4,6 +4,8 @@
 @import '1-base/reset';
 @import '1-base/base';
 
+@import '2-components/utilities/button';
+
 @import '2-components/header';
 @import '2-components/sidebar';
 
@@ -13,3 +15,4 @@
 @import '2-components/contentTypesHome';
 @import '2-components/dashboard';
 @import '2-components/users';
+@import '2-components/content';

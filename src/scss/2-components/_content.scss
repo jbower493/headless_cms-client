@@ -1,0 +1,20 @@
+.content {
+
+  &__heading {
+    @include main-window-heading;
+  }
+
+  &__container {
+    @include main-window-container;
+  }
+
+  &__table-headings {
+    display: flex;
+    color: $clr--primary;
+    margin-bottom: 30px;
+  }
+
+  &__table-heading {
+    flex: 1;
+  }
+}

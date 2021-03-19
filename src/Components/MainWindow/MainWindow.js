@@ -3,6 +3,7 @@ import React from 'react';
 import ContentTypesHome from './ContentTypes/ContentTypesHome';
 import Dashboard from './Dashboard/Dashboard';
 import Users from './Users/Users';
+import Content from './Content/Content';
 
 import { connect } from 'react-redux';
 
@@ -10,13 +11,19 @@ class MainWindow extends React.Component {
   render() {
     let content;
 
-    if(this.props.view === 'dashboard') {
-      content = <Dashboard />;
-    } else if(this.props.view === 'content types') {
-      content = <ContentTypesHome />;
-    } else {
-      content = <Users />;
-    }
+    switch(this.props.view) {
+      case 'content types':
+        content = <ContentTypesHome />;
+        break;
+      case 'users':
+        content = <Users />;
+        break;
+      case 'content':
+        content = <Content />;
+        break;
+      default:
+        content = <Dashboard />;
+    };
 
     return (
       <div className="main-window">
@@ -24,7 +31,7 @@ class MainWindow extends React.Component {
       </div>
     );
   }
-}
+};
 
 MainWindow.propTypes = {};
 

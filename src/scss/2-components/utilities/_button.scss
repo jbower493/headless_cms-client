@@ -1,0 +1,18 @@
+.btn {
+  padding: 8px 30px;
+  border-radius: 5px;
+  border: none;
+  margin: 20px 0;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+
+  &--primary {
+    background-color: $clr--primary;
+    color: white;
+
+    &:hover {
+      background-color: $clr--primary--darker;
+    }
+  }
+}

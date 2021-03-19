@@ -1,4 +1,4 @@
-import { SHOW_DASHBOARD, SHOW_CONTENT_TYPES, SHOW_USERS } from '../actions/types';
+import { SHOW_DASHBOARD, SHOW_CONTENT_TYPES, SHOW_USERS, SHOW_CONTENT } from '../actions/types';
 
 const initialState = {
   view: 'dashboard'
@@ -20,6 +20,11 @@ const mainWindowReducer = (state = initialState, action) => {
       return {
         ...state,
         view: 'users'
+      };
+    case SHOW_CONTENT:
+      return {
+        ...state,
+        view: 'content'
       };
     default:
       return state;
