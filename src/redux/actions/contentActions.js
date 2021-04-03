@@ -1,5 +1,6 @@
-import { SET_CURRENT_CONTENT_TYPE, GET_ALL_CONTENT, SET_FIRST_FIELD, REQUESTING_CONTENT_DATA, RECEIVED_CONTENT_DATA } from './types';
+import { SET_CURRENT_CONTENT_TYPE, GET_ALL_CONTENT, SET_FIRST_FIELD, GET_CONTENT_FIELDS, REQUESTING_CONTENT_DATA, RECEIVED_CONTENT_DATA } from './types';
 import { showContentAC } from './mainWindowActions';
+import { setModalAC, requestingModalDataAC, receivedModalDataAC } from './modalActions';
 
 import { url } from '../../Components/App';
 import Axios from 'axios';
@@ -37,6 +38,13 @@ const setFirstFieldAC = field => {
   };
 };
 
+const getContentFieldsAC = fields => {
+  return {
+    type: GET_CONTENT_FIELDS,
+    payload: fields
+  }
+};
+
 export const showAllContent = contentType => {
   return dispatch => {
     dispatch(setCurrentContentTypeAC(contentType));
@@ -63,4 +71,26 @@ export const showAllContent = contentType => {
         dispatch(receivedContentDataAC());
       })
   };
+};
+
+export const getContentFields = (contentType, modalType) => {
+  return dispatch => {
+    dispatch(setModalAC(modalType))
+    dispatch(requestingModalDataAC());
+
+    Axios({
+      method: 'GET',
+      withCredentials: true,
+      url: `${url}/api/content-type/${contentType}`
+    })
+      .then(res => {
+        dispatch(receivedModalDataAC());
+        console.log(res.data)
+      })
+      .catch(e => {
+        console.log(e);
+        dispatch(receivedModalDataAC());
+        dispatch(setModalAC(null));
+      })
+  }
 };

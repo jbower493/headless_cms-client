@@ -1,6 +1,7 @@
 import React from 'react';
 //import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getContentFields } from '../../../redux/actions/contentActions';
 import ContentItem from './ContentItem/ContentItem';
 
 class Content extends React.Component {
@@ -28,7 +29,11 @@ class Content extends React.Component {
               }
             </h1>
 
-            <button className="btn btn--primary">Add New</button>
+            <button
+              className="btn btn--primary"
+              onClick={() => this.props.getContentFields('article', 'new content')} >
+              Add New
+            </button>
     
             <div className="content__container">
 
@@ -74,4 +79,8 @@ const mapStateToProps = (state) => ({
   firstField: state.content.firstField
 });
 
-export default connect(mapStateToProps)(Content);
+const mapDispatchToProps = {
+  getContentFields
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Content);

@@ -9,8 +9,10 @@ class ContentItem extends React.Component {
 
   render() {
     return (
-      <li>
-        {this.props.item[Object.keys(this.props.item)[0]]}
+      <li className="content__item">
+        <p className="content__field">{this.props.item[Object.keys(this.props.item)[0]]}</p>
+        <p className="content__field">{this.props.item.author.username}</p>
+        <p className="content__field">View, Edit, Delete</p>
       </li>
     );
   }

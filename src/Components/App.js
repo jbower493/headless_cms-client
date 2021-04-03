@@ -5,6 +5,7 @@ import Sidebar from './Sidebar/Sidebar';
 import MainWindow from './MainWindow/MainWindow';
 import AdminSetup from './AdminSetup/AdminSetup';
 import Auth from './Auth/Auth';
+import Modal from './Modal/Modal';
 
 import { connect } from 'react-redux';
 import { initialRequest } from '../redux/actions/authActions';
@@ -52,7 +53,12 @@ class App extends React.Component {
     }
 
     return (
-      page
+      <div>
+        {page}
+        {
+          this.props.modal ? <div className="dark-overlay"><Modal /></div> : null
+        }
+      </div>
     );
   }
 };
@@ -65,6 +71,7 @@ const mapStateToProps = state => ({
   user: state.auth.user,
   adminExists: state.auth.adminExists,
   fetchingAuthData: state.auth.fetchingAuthData,
+  modal: state.modal.modal
 });
 
 export default connect(mapStateToProps, { initialRequest })(App);

@@ -11,10 +11,19 @@
   &__table-headings {
     display: flex;
     color: $clr--primary;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
   }
 
   &__table-heading {
+    flex: 1;
+  }
+
+  &__item {
+    display: flex;
+    margin: 20px 0;
+  }
+
+  &__field {
     flex: 1;
   }
 }
