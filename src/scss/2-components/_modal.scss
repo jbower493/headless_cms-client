@@ -11,7 +11,29 @@
 }
 
 .modal {
-  width: 400px;
-  height: 300px;
+  width: 600px;
   background-color: white;
+  border-radius: $border-radius--standard;
+
+  &__header {
+    padding: $padding--20;
+    border-bottom: 1px solid grey;
+  }
+
+  &__body {
+    padding: $padding--20;
+  }
+
+  &__footer {
+    padding: $padding--20;
+    border-top: 1px solid grey;
+
+    & .btn {
+      margin: 0;
+    }
+
+    & .btn--primary {
+      margin-right: 20px;
+    }
+  }
 }
