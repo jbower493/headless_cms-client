@@ -84,8 +84,11 @@ export const getContentFields = (contentType, modalType) => {
       url: `${url}/api/content-type/${contentType}`
     })
       .then(res => {
+        const initialFields = res.data.contentType.fields;
+        const fields = initialFields.filter(field => field.name !== 'owner_id');
+
+        dispatch(getContentFieldsAC(fields));
         dispatch(receivedModalDataAC());
-        console.log(res.data)
       })
       .catch(e => {
         console.log(e);

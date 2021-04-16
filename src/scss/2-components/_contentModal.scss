@@ -1,0 +1,34 @@
+.content-modal {
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__headings {
+    display: flex;
+    color: $clr--primary;
+    margin-bottom: 10px;
+  }
+
+  &__heading {
+    width: $width--data;
+
+    &:last-of-type {
+      width: $width--data--value;
+    }
+  }
+
+  &__list-item {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  &__data {
+    width: $width--data;
+
+    &--value {
+      width: $width--data--value;
+    }
+  }
+}

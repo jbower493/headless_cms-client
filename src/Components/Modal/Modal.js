@@ -1,11 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import ContentModal from './ContentModal/ContentModal';
 
-const Modal = () => {
+const Modal = ({ fetchingModalData }) => {
   return (
-    <ContentModal />
+    fetchingModalData
+      ? <h1>Loading</h1>
+      : <ContentModal />
   );
 };
 
-export default Modal
+const mapStateToProps = state => ({
+  fetchingModalData: state.modal.fetchingModalData
+});
+
+export default connect(mapStateToProps)(Modal);

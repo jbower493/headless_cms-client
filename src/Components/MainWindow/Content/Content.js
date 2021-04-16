@@ -31,7 +31,7 @@ class Content extends React.Component {
 
             <button
               className="btn btn--primary"
-              onClick={() => this.props.getContentFields('article', 'new content')} >
+              onClick={() => this.props.getContentFields(this.props.currentContentType, 'new content')} >
               Add New
             </button>
     

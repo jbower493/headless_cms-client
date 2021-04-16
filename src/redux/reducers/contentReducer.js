@@ -1,7 +1,8 @@
-import { SET_CURRENT_CONTENT_TYPE, GET_ALL_CONTENT, SET_FIRST_FIELD, REQUESTING_CONTENT_DATA, RECEIVED_CONTENT_DATA } from '../actions/types';
+import { SET_CURRENT_CONTENT_TYPE, GET_ALL_CONTENT, SET_FIRST_FIELD, GET_CONTENT_FIELDS, REQUESTING_CONTENT_DATA, RECEIVED_CONTENT_DATA } from '../actions/types';
 
 const initialState = {
   currentContentType: null,
+  currentContentTypeFields: [],
   contentItems: [],
   fetchingContentData: false,
   firstField: null
@@ -33,6 +34,11 @@ const contentReducer = (state = initialState, action) => {
       return {
         ...state,
         firstField: action.payload
+      };
+    case GET_CONTENT_FIELDS:
+      return {
+        ...state,
+        currentContentTypeFields: action.payload
       };
     default:
       return state;
