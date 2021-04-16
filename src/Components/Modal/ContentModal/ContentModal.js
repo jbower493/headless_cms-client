@@ -29,7 +29,7 @@ const ContentModal = ({ currentContentTypeFields }) => {
   };
 
   const handleCancel = e => {
-    console.log('Cancelled');
+    console.log('It cancelled');
   };
 
   return (
