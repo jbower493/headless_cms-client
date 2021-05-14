@@ -1,6 +1,6 @@
 import { SET_CURRENT_CONTENT_TYPE, GET_ALL_CONTENT, SET_FIRST_FIELD, GET_CONTENT_FIELDS, REQUESTING_CONTENT_DATA, RECEIVED_CONTENT_DATA } from './types';
 import { showContentAC } from './mainWindowActions';
-import { setModalAC, requestingModalDataAC, receivedModalDataAC } from './modalActions';
+import { setModalAC, requestingModalDataAC, receivedModalDataAC, setSendingTrueAC, setSendingFalseAC } from './modalActions';
 
 import { url } from '../../Components/App';
 import Axios from 'axios';
@@ -96,4 +96,26 @@ export const getContentFields = (contentType, modalType) => {
         dispatch(setModalAC(null));
       })
   }
+};
+
+export const createNewContent = (contentItem, contentTypeName) => {
+  return dispatch => {
+    dispatch(setSendingTrueAC());
+
+    Axios({
+      method: 'POST',
+      url: `${url}/api/content/${contentTypeName}`,
+      withCredentials: true,
+      data: contentItem
+    })
+      .then(res => {
+        dispatch(setSendingFalseAC());
+        dispatch(setModalAC(null));
+        console.log(res);
+      })
+      .catch(e => {
+        console.log(e);
+        dispatch(setSendingFalseAC());
+      })
+  };
 };

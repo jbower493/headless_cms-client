@@ -1,8 +1,9 @@
-import { SET_MODAL, REQUESTING_MODAL_DATA, RECEIVED_MODAL_DATA } from '../actions/types';
+import { SET_MODAL, REQUESTING_MODAL_DATA, RECEIVED_MODAL_DATA, SET_SENDING_TRUE, SET_SENDING_FALSE } from '../actions/types';
 
 const initialState = {
   modal: null,
-  fetchingModalData: false
+  fetchingModalData: false,
+  sending: false
 };
 
 const modalReducer = (state = initialState, action) => {
@@ -13,6 +14,10 @@ const modalReducer = (state = initialState, action) => {
       return Object.assign({}, state, { fetchingModalData: true });
     case RECEIVED_MODAL_DATA:
       return Object.assign({}, state, { fetchingModalData: false });
+    case SET_SENDING_TRUE:
+      return Object.assign({}, state, { sending: true });
+    case SET_SENDING_FALSE:
+      return Object.assign({}, state, { sending: false });
     default:
       return Object.assign({}, state);
   }

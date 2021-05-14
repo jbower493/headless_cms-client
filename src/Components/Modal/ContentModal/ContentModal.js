@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { createNewContent } from '../../../redux/actions/contentActions';
 
 
-const ContentModal = ({ currentContentTypeFields }) => {
-  const initialInputValues = currentContentTypeFields.map(field => '');
+const ContentModal = (props) => {
+  const initialInputValues = props.currentContentTypeFields.map(field => '');
 
   const [inputValues, setInputValues] = useState(initialInputValues);
 
@@ -20,12 +21,11 @@ const ContentModal = ({ currentContentTypeFields }) => {
 
   const handlePublish = e => {
     const itemToSend = {};
-    currentContentTypeFields.forEach((field, index) => {
+    props.currentContentTypeFields.forEach((field, index) => {
       itemToSend[field.name] = inputValues[index];
     });
 
-    console.log(itemToSend);
-    // just need to write the action to send this data to server on publish now
+    props.createNewContent(itemToSend, props.currentContentType);
   };
 
   const handleCancel = e => {
@@ -35,7 +35,7 @@ const ContentModal = ({ currentContentTypeFields }) => {
   return (
     <div className="modal">
       <div className="modal__header">
-        <h2 className="modal__title">New Article</h2>
+        <h2 className="modal__title">New {props.currentContentType}</h2>
       </div>
 
       <div className="modal__body">
@@ -48,7 +48,7 @@ const ContentModal = ({ currentContentTypeFields }) => {
 
         <ul className="content-modal__list">
           {
-            currentContentTypeFields.map((field, index) => (
+            props.currentContentTypeFields.map((field, index) => (
               <li className="content-modal__list-item" key={index}>
                 <p className="content-modal__data">{field.name}</p>
                 <p className="content-modal__data">{field.type}</p>
@@ -64,11 +64,15 @@ const ContentModal = ({ currentContentTypeFields }) => {
       </div>
 
       <div className="modal__footer">
-        <button
-          className="btn btn--primary"
-          onClick={handlePublish} >
-          Publish
-        </button>
+        {
+          props.modalSending
+            ? <p>Sending...</p>
+            : <button
+                className="btn btn--primary"
+                onClick={handlePublish} >
+                Publish
+              </button>
+        }
         <button
           className="btn btn--outlined"
           onClick={handleCancel} >
@@ -82,8 +86,9 @@ const ContentModal = ({ currentContentTypeFields }) => {
 const mapStateToProps = (state) => {
   return {
     currentContentType: state.content.currentContentType,
-    currentContentTypeFields: state.content.currentContentTypeFields
+    currentContentTypeFields: state.content.currentContentTypeFields,
+    modalSending: state.modal.sending
   };
 };
 
-export default connect(mapStateToProps)(ContentModal);
+export default connect(mapStateToProps, { createNewContent })(ContentModal);

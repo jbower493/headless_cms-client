@@ -20,6 +20,10 @@
     border-bottom: 1px solid grey;
   }
 
+  &__title {
+    text-transform: capitalize;
+  }
+
   &__body {
     padding: $padding--20;
   }
