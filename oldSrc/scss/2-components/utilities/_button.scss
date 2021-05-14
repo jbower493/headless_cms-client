@@ -1,0 +1,33 @@
+.btn {
+  padding: 0 30px;
+  height: 40px;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 5px;
+  border: none;
+  margin: 20px 0;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+
+  &--primary {
+    background-color: $clr--primary;
+    color: white;
+
+    &:hover {
+      background-color: $clr--primary--darker;
+    }
+  }
+
+  &--outlined {
+    border: 2px solid $clr--primary;
+    background-color: white;
+    color: $clr--primary;
+
+    &:hover {
+      border: 2px solid $clr--primary--darker;
+      color: $clr--primary--darker;
+    }
+  }
+}

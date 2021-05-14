@@ -1,0 +1,10 @@
+.dashboard {
+
+  &__heading {
+    @include main-window-heading;
+  }
+
+  &__container {
+    @include main-window-container;
+  }
+}

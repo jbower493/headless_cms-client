@@ -1,0 +1,10 @@
+.ct-home {
+
+  &__heading {
+    @include main-window-heading;
+  }
+
+  &__container {
+    @include main-window-container;
+  }
+}
