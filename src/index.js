@@ -1,13 +1,19 @@
+/*----------Base imports----------*/
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import './scss/style.scss';
-import App from './containers/app/app';
-
-//import store from './redux/store';
+import store from 'store/store';
 import { Provider } from 'react-redux';
-
 import axios from 'axios';
-import { url } from './config/config.json';
+import { url } from 'config/config.json';
+
+/*----------Components, sections, modules----------*/
+import App from 'app/app';
+
+/*----------Shared components----------*/
+
+/*----------Actions----------*/
+
+/*----------Component start----------*/
 
 axios.defaults.baseURL = url;
 axios.defaults.withCredentials = true;
@@ -15,9 +21,9 @@ axios.defaults.withCredentials = true;
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
       <App />
-    {/* </Provider> */}
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

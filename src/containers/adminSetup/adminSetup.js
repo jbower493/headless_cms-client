@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 /*----------Actions----------*/
 
 /*----------Component start----------*/
-class ContentTypes extends Component {
+class AdminSetup extends Component {
   constructor(props) {
     super(props);
   }
@@ -28,8 +28,8 @@ class ContentTypes extends Component {
 
     /*----------Render component----------*/
     return (
-      <div className={`contentTypes`}>
-        Content Tyes
+      <div className={`adminSetup`}>
+        Admin setup
       </div>
     );
   }
@@ -42,4 +42,4 @@ export default withRouter(connect((state) => {
 },
 {
 
-})(ContentTypes));
+})(AdminSetup));

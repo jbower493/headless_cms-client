@@ -1,16 +1,21 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 /*----------Components, sections, modules----------*/
+import Router from 'router/router';
+import Header from 'containers/header/header';
+import Sidebar from 'containers/sidebar/sidebar';
+import Auth from 'containers/auth/auth';
+import AdminSetup from 'containers/adminSetup/adminSetup';
 
 /*----------Shared components----------*/
 
 /*----------Actions----------*/
 
 /*----------Component start----------*/
-class ContentTypes extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
   }
@@ -28,18 +33,21 @@ class ContentTypes extends Component {
 
     /*----------Render component----------*/
     return (
-      <div className={`contentTypes`}>
-        Content Tyes
-      </div>
+      <BrowserRouter>
+        <div className={`app`}>
+          <Header />
+          <Router />
+        </div>
+      </BrowserRouter>
     );
   }
 };
 
 /*----------Component end----------*/
 
-export default withRouter(connect((state) => {
+export default connect((state) => {
 
 },
 {
 
-})(ContentTypes));
+})(App);
