@@ -1,17 +1,16 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 /*----------Components, sections, modules----------*/
-import Router from 'router/router';
 
 /*----------Shared components----------*/
 
 /*----------Actions----------*/
 
 /*----------Component start----------*/
-class App extends Component {
+class ProtectedRoute extends Component {
   constructor(props) {
     super(props);
   }
@@ -26,23 +25,29 @@ class App extends Component {
   }
 
   render() {
+    const { auth_user_data, auth_admin_exists_data, location, component: Component } = this.props;
 
     /*----------Render component----------*/
     return (
-      <BrowserRouter>
-        <div className={`app`}>
-          <Router />
-        </div>
-      </BrowserRouter>
+      <Route render={() => {
+        if (auth_user_data) {
+          return <Component />;
+        }
+        if (auth_admin_exists_data) {
+          return <Redirect from={location.pathname} to='/login' />;
+        }
+        return <Redirect from={location.pathname} to='/admin-setup' />
+      }} />
     );
   }
-};
+}
 
 /*----------Component end----------*/
 
 export default connect((state) => ({
-
+  auth_user_data: state.auth.auth_user_data,
+  auth_admin_exists_data: state.auth.auth_admin_exists_data
 }),
 {
 
-})(App);
+})(ProtectedRoute);

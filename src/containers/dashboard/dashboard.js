@@ -25,11 +25,11 @@ class Dashboard extends Component {
   }
 
   render() {
-
+console.log(this.props)
     /*----------Render component----------*/
     return (
       <div className={`dashboard`}>
-        Dashboard
+        Dashboard lol
       </div>
     );
   }
@@ -37,9 +37,9 @@ class Dashboard extends Component {
 
 /*----------Component end----------*/
 
-export default withRouter(connect((state) => {
+export default withRouter(connect((state) => ({
 
-},
+}),
 {
 
 })(Dashboard));
