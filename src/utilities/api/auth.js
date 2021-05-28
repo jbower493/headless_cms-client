@@ -5,6 +5,10 @@ export const API = {
     GET: {
       adminExists: () => {
         return axios.get('/auth/admin-exists');
+      },
+
+      getUser: () => {
+        return axios.get('/auth/get-user');
       }
     }
   }

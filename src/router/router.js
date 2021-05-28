@@ -1,11 +1,10 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 /*----------Components, sections, modules----------*/
 import ProtectedRoute from './protectedRoute';
-import Header from 'containers/header/header';
 import Sidebar from 'containers/sidebar/sidebar';
 import Dashboard from 'containers/dashboard/dashboard';
 import Content from 'containers/content/content';
@@ -36,7 +35,6 @@ class Router extends Component {
     /*----------Render component----------*/
     return (
       <>
-        <Header />
         <Switch>
           <Route exact path='/admin-setup' render={() => null} />
           <Route exact path='/login' render={() => null} />
