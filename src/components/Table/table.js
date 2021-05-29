@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
+import Button from 'components/Button/button';
 
 /*----------Actions----------*/
 
@@ -41,6 +42,33 @@ class Table extends Component {
         : ''
     };
 
+    const renderOneAction = (action) => {
+      const { style, text, onClick } = action;
+      if (style === 'solid button') {
+        return (
+          <Button
+            type='onClick'
+            onClick={onClick}
+            text={text} />
+        );
+      }
+      if (style === 'outline button') {
+        return (
+          <Button
+            type='onClick'
+            style='outline'
+            onClick={onClick}
+            text={text} />
+        );
+      }
+    };
+
+    const renderActions = (actions) => {
+      return Array.isArray(actions)
+        ? actions.map(action => renderOneAction(action))
+        : renderOneAction(actions)
+    };
+
     const renderBody = () => {
       return body.map((row, index) => {
         return (
@@ -48,8 +76,8 @@ class Table extends Component {
             {
               Object.keys(row).map((key, index) => {
                 return (
-                  <td key={index} className={key}>{row[key]}</td>
-                )
+                    <td key={index} className={key}>{key === 'action' ? renderActions(row[key]) : row[key]}</td>
+                );
               })
             }
           </tr>
