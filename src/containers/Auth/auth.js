@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
+import Button from 'components/Button/button';
 
 /*----------Actions----------*/
 
@@ -29,7 +30,10 @@ class Auth extends Component {
     /*----------Render component----------*/
     return (
       <div className={`auth`}>
-        Auth
+        <Button
+          type='onClick'
+          onClick={() => console.log('Clicked')}
+          text='Hello' />
       </div>
     );
   }
@@ -37,9 +41,9 @@ class Auth extends Component {
 
 /*----------Component end----------*/
 
-export default withRouter(connect((state) => {
+export default withRouter(connect((state) => ({
 
-},
+}),
 {
 
 })(Auth));

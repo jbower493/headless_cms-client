@@ -1,0 +1,32 @@
+.SolidButton, .OutlineButton {
+  padding: 0 30px;
+  height: 40px;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.SolidButton {
+  border: none;
+  background-color: $clr--primary;
+  color: white;
+
+  &:hover {
+    background-color: $clr--primary--darker;
+  }
+}
+
+.OutlineButton {
+  border: 2px solid $clr--primary;
+  background-color: white;
+  color: $clr--primary;
+
+  &:hover {
+    background-color: $clr--primary;
+    color: white;
+  }
+}

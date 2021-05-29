@@ -7,8 +7,7 @@
 @import '1-base/base';
 
 /*----------Shared components----------*/
-@import '../components/Buttons/SolidButton/style';
-@import '../components/Buttons/OutlineButton/style';
+@import '../components/Button/style';
 @import '../components/Errors/PageError/style';
 @import '../components/Loaders/RequestLoader/style';
 @import '../components/Modal/style';
