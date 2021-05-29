@@ -30,8 +30,7 @@ class Router extends Component {
   }
 
   render() {
-    const { auth_user_data, auth_admin_exists_data } = this.props;
-
+    console.log('Hit the router')
     /*----------Render component----------*/
     return (
       <>

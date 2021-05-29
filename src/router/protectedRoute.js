@@ -1,7 +1,7 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 /*----------Components, sections, modules----------*/
 
@@ -30,13 +30,13 @@ class ProtectedRoute extends Component {
     /*----------Render component----------*/
     return (
       <Route render={() => {
-        if (auth_user_data) {
+        if (auth_user_data.user) {
           return <Component />;
         }
         if (auth_admin_exists_data) {
           return <Redirect from={location.pathname} to='/login' />;
         }
-        return <Redirect from={location.pathname} to='/admin-setup' />
+        return <Redirect from={location.pathname} to='/admin-setup' />;
       }} />
     );
   }

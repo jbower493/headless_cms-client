@@ -23,7 +23,7 @@ class App extends Component {
 
   /*----------Lifecycle methods----------*/
   componentDidMount() {
-    const { checkForadmin, getUser } = this.props;
+    const { checkForAdmin, getUser } = this.props;
 
     checkForAdmin();
     getUser();
@@ -40,7 +40,7 @@ class App extends Component {
       auth_user_status,
       auth_user_data
     } = this.props;
-
+    console.log('Hit the app', auth_admin_exists_status)
     const renderApp = () => {
       return (
         <BrowserRouter>
@@ -51,7 +51,7 @@ class App extends Component {
     };
 
     const renderPage = () => {
-      if (auth_user_status === 'loading' || auth_admin_exists_status === 'loading') {
+      if (!auth_user_status || auth_user_status === 'loading' || !auth_admin_exists_status || auth_admin_exists_status === 'loading') {
         return <RequestLoader />;
       }
       if (auth_user_status === 'error' || auth_admin_exists_status === 'error') {

@@ -1,20 +1,17 @@
+/*----------Includes----------*/
 @import '0-helpers/variables';
 @import '0-helpers/mixins';
 
+/*----------Base styles----------*/
 @import '1-base/reset';
 @import '1-base/base';
 
-@import '2-components/utilities/button';
+/*----------Shared components----------*/
+@import '../components/Buttons/SolidButton/style';
+@import '../components/Buttons/OutlineButton/style';
+@import '../components/Errors/PageError//style';
+@import '../components/Loaders/RequestLoader/style';
+@import '../components/Modal/style';
+@import '../components/Table/style';
 
-@import '2-components/header';
-@import '2-components/sidebar';
-
-@import '2-components/auth';
-
-@import '2-components/main-window';
-@import '2-components/contentTypesHome';
-@import '2-components/dashboard';
-@import '2-components/users';
-@import '2-components/content';
-@import '2-components/modal';
-@import '2-components/contentModal';
+/*----------Containers----------*/
