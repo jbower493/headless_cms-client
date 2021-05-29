@@ -8,12 +8,11 @@ import Header from 'containers/header/header';
 import Router from 'router/router';
 
 /*----------Shared components----------*/
-import RerquestLoader from 'components/Loaders/RequestLoader/requestLoader';
+import RequestLoader from 'components/Loaders/RequestLoader/requestLoader';
 import PageError from 'components/Errors/PageError/pageError';
 
 /*----------Actions----------*/
 import { checkForAdmin, getUser } from 'containers/auth/actions';
-import RequestLoader from 'components/Loaders/RequestLoader/requestLoader';
 
 /*----------Component start----------*/
 class App extends Component {
@@ -40,7 +39,7 @@ class App extends Component {
       auth_user_status,
       auth_user_data
     } = this.props;
-    console.log('Hit the app', auth_admin_exists_status)
+
     const renderApp = () => {
       return (
         <BrowserRouter>

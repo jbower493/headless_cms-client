@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
-import Button from 'components/Button/button';
+import Table from 'components/Table/table';
 
 /*----------Actions----------*/
 
@@ -27,13 +27,45 @@ class Auth extends Component {
 
   render() {
 
+    const getTableHead = () => {
+      return [
+        'Column 1',
+        'Column 2',
+        'Column 3',
+        'Actions'
+      ];
+    };
+
+    const getTableBody = () => {
+      const arr = [];
+      for(let i = 0; i < 5; i++) {
+        arr.push({
+          columnOne: (
+            <div>
+              <div>Top of cell, row {i + 1}</div>
+              <div>Bottom of cell, row {i + 1}</div>
+            </div>
+          ),
+          columnTwo: 'Something in column 2',
+          column3: 'Something in column 3',
+          // action: {
+          //   style: 'solid button',
+          //   text: 'Save',
+          //   onClick: () => console.log('clicked')
+          // }
+          action: 'action'
+        })
+      }
+      return arr;
+    };
+
     /*----------Render component----------*/
     return (
       <div className={`auth`}>
-        <Button
-          type='onClick'
-          onClick={() => console.log('Clicked')}
-          text='Hello' />
+        <Table
+          status={'loading'}
+          head={getTableHead()}
+          body={getTableBody()} />
       </div>
     );
   }
