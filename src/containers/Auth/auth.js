@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
-import Button from 'components/Button/button';
 
 /*----------Actions----------*/
 
@@ -30,10 +29,7 @@ class Auth extends Component {
     /*----------Render component----------*/
     return (
       <div className={`auth`}>
-        <Button
-          type='onClick'
-          onClick={() => console.log('Clicked')}
-          text='Hello' />
+        auth
       </div>
     );
   }

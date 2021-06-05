@@ -32,7 +32,7 @@ class Router extends Component {
   }
 
   render() {
-    console.log('Hit the router')
+    
     /*----------Render component----------*/
     return (
       <>

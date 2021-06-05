@@ -1,0 +1,53 @@
+.Table {
+  padding: 100px 50px;
+  background-color: $clr--lightGrey;
+  width: 100%;
+
+  &__head {
+    @include displayFlex;
+    margin-bottom: 30px;
+    color: $clr--primary;
+    font-weight: 600;
+  }
+
+  &__heading {
+    @include flex(1, 1, 0);
+
+    &--actions {
+      @include flex(0, 0, auto);
+      width: $width--tableAction;
+    }
+  }
+
+  &__row {
+    @include displayFlex;
+    @include alignItems(center);
+    padding: 15px 0;
+  }
+
+  &__column {
+    @include flex(1, 1, 0);
+
+    &--actions {
+      @include flex(0, 0, auto);
+      @include displayFlex;
+      @include justifyContent(flex-end);
+      width: $width--tableAction;
+
+      i {
+        color: $clr--primary;
+        margin-right: 30px;
+        font-size: 18px;
+        cursor: pointer;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+
+        &:hover {
+          color: $clr--primary--darker;
+        }
+      }
+    }
+  }
+}
