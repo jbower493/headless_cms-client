@@ -1,16 +1,14 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
-import { eye, trash, edit } from 'utilities/icons';
 
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
-import Table from 'components/Table/table';
 
 /*----------Actions----------*/
 
 /*----------Component start----------*/
-class PageError extends Component {
+class ComponentError extends Component {
   constructor(props) {
     super(props);
   }
@@ -29,7 +27,7 @@ class PageError extends Component {
     /*----------Render component----------*/
     return (
       <div>
-        Page Error
+        Component Error
       </div>
     );
   }
@@ -37,4 +35,4 @@ class PageError extends Component {
 
 /*----------Component end----------*/
 
-export default PageError;
+export default ComponentError;

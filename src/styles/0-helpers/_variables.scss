@@ -1,12 +1,12 @@
 $clr--primary: #FB8700;
 $clr--primary--darker:  #c26700;
-$clr--dark-navy: #272830;
-$clr--light-navy: #3B3C46;
+$clr--darkNavy: #272830;
+$clr--lightNavy: #3B3C46;
 $clr--grey: #B0B0B0;
-$clr--light-grey: #EFEFEF;
+$clr--lightGrey: #EFEFEF;
 $clr--white: #FFFFFF;
 
-$bg--sidebar-hover: rgba(255, 255, 255, 0.2);
+$background--sidebarHover: rgba(255, 255, 255, 0.2);
 
 $ff--primary: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
@@ -21,10 +21,8 @@ $fs--xxl: 28px;
 $height--header: 60px;
 
 $width--sidebar: 200px;
-$width--data: 150px;
-$width--data--value: 300px;
+$width--tableAction: 200px;
 
-$padding--sidebar-items: 5px 15px;
-$padding--20: 20px;
+$padding--sidebarItems: 5px 15px;
 
-$border-radius--standard: 5px;
+$borderRadius--standard: 5px;

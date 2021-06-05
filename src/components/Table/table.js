@@ -5,6 +5,8 @@ import React, { Component } from 'react';
 
 /*----------Shared components----------*/
 import Button from 'components/Button/button';
+import ComponentError from 'components/Errors/ComponentError/componentError';
+import RequestLoader from 'components/Loaders/RequestLoader/requestLoader';
 
 /*----------Actions----------*/
 
@@ -29,24 +31,23 @@ class Table extends Component {
     const renderHead = () => {
       return head
         ? (
-          <thead>
-            <tr>
+            <div className={`Table__head`}>
               {head.map((item, index) => {
                 return (
-                  <th key={index}>{item}</th>
+                  <div className={`Table__heading${item.type === 'actions' ? ' Table__heading--actions' : ''}`} key={index}>{item.heading}</div>
                 );
               })}
-            </tr>
-          </thead>
+            </div>
         )
         : ''
     };
 
-    const renderOneAction = (action) => {
-      const { style, text, onClick } = action;
+    const renderOneAction = (action, index) => {
+      const { style, text, onClick, icon } = action;
       if (style === 'solid button') {
         return (
           <Button
+            key={index || 1}
             type='onClick'
             onClick={onClick}
             text={text} />
@@ -55,47 +56,64 @@ class Table extends Component {
       if (style === 'outline button') {
         return (
           <Button
+            key={index || 1}
             type='onClick'
             style='outline'
             onClick={onClick}
             text={text} />
         );
       }
+      if (style === 'icon') {
+        return <i className={icon} onClick={onClick} />
+      }
     };
 
     const renderActions = (actions) => {
       return Array.isArray(actions)
-        ? actions.map(action => renderOneAction(action))
+        ? actions.map((action, index) => renderOneAction(action, index + 1))
         : renderOneAction(actions)
     };
 
+    const renderColumn = (row, key, index) => {
+      return (
+        <div className={`Table__column ${key === 'actions' ? 'Table__column--actions' : key}`} key={index}>
+          {key === 'actions' ? renderActions(row[key]) : row[key]}
+        </div>
+      );
+    }
+
+    const renderRow = (row, index) => {
+      return (
+        <div className={`Table__row`} key={index}>
+          {Object.keys(row).map((key, index) => renderColumn(row, key, index))}
+        </div>
+      )
+    };
+
     const renderBody = () => {
-      return body.map((row, index) => {
-        return (
-          <tr key={index}>
-            {
-              Object.keys(row).map((key, index) => {
-                return (
-                    <td key={index} className={key}>{key === 'action' ? renderActions(row[key]) : row[key]}</td>
-                );
-              })
-            }
-          </tr>
-        )
-      })
+      return (
+        <div className={`Table__body`}>
+          {body.map((row, index) => renderRow(row, index))}
+        </div>
+      )
+    };
+
+    const renderTable = () => {
+      return (
+        <div className={`Table`}>
+          {renderHead()}
+          {renderBody()}
+        </div>
+      );
     };
 
     /*----------Render component----------*/
-    return (
-      <div className={`theTable`}>
-        <table>
-          {renderHead()}
-          <tbody>
-            {renderBody()}
-          </tbody>
-        </table>
-      </div>
-    );
+    switch (status) {
+      case 'success': return renderTable();
+      case 'loading': return <RequestLoader />;
+      case 'error':
+      default: return <ComponentError />;
+    }
   }
 };
 
