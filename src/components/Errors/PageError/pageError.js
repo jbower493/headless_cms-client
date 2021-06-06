@@ -1,11 +1,10 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
-import { eye, trash, edit } from 'utilities/icons';
 
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
-import Table from 'components/Table/table';
+import ComponentError from 'components/Errors/ComponentError/componentError';
 
 /*----------Actions----------*/
 
@@ -30,6 +29,7 @@ class PageError extends Component {
     return (
       <div>
         Page Error
+        <ComponentError />
       </div>
     );
   }

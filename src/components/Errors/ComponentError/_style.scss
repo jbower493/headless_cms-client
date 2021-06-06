@@ -1,0 +1,15 @@
+.ComponentError {
+  padding: 50px 30px;
+  text-align: center;
+
+  i {
+    color: $clr--primary;
+    font-size: 60px;
+    margin-bottom: 50px;
+  }
+
+  &__text {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
