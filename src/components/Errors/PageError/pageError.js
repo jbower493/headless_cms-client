@@ -1,10 +1,10 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
+import { error } from 'utilities/icons';
 
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
-import ComponentError from 'components/Errors/ComponentError/componentError';
 
 /*----------Actions----------*/
 
@@ -27,9 +27,9 @@ class PageError extends Component {
 
     /*----------Render component----------*/
     return (
-      <div>
-        Page Error
-        <ComponentError />
+      <div className={`PageError`}>
+        <i className={error}></i>
+        <div className={`PageError__text`}>Oops, looks like the page failed to load!</div>
       </div>
     );
   }

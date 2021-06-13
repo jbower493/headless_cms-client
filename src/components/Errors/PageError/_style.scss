@@ -1,0 +1,24 @@
+.PageError {
+  padding: 30px 10px;
+  text-align: center;
+
+  i {
+    color: $clr--primary;
+    font-size: 60px;
+    margin-bottom: 30px;
+
+    @include screenSize('xs') {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__text {
+    font-size: 20px;
+    font-weight: 600;
+
+    @include screenSize('xs') {
+      font-size: 16px;
+    }
+  }
+}
