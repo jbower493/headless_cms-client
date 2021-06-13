@@ -1,5 +1,6 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
+import { error } from 'utilities/icons';
 
 /*----------Components, sections, modules----------*/
 
@@ -26,8 +27,9 @@ class ComponentError extends Component {
 
     /*----------Render component----------*/
     return (
-      <div>
-        Component Error
+      <div className={`ComponentError`}>
+        <i className={error}></i>
+        <div className={`ComponentError__text`}>Oops, something went wrong!</div>
       </div>
     );
   }
