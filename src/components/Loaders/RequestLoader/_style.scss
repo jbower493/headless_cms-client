@@ -1,0 +1,65 @@
+.RequestLoader {
+  position: relative;
+  width: 160px;
+  height: 80px;
+
+  &__logo {
+    position: absolute;
+    width: 30%;
+    top: 0;
+    left: 0;
+    animation: bounce 1.6s linear infinite alternate;
+  }
+
+  &--md {
+    width: 80px;
+    height: 40px;
+
+    .RequestLoader__logo {
+      width: 40%;
+      animation: bounce 1.4s linear infinite alternate;
+    }
+  }
+
+  &--sm {
+    width: 50px;
+    height: 25px;
+
+    .RequestLoader__logo {
+      width: 40%;
+      animation: bounce 1.2s linear infinite alternate;
+    }
+  }
+}
+
+@keyframes bounce {
+  0% {
+    top: 0;
+    left: 0;
+    transform: translateX(0) rotate(-90deg);
+  }
+
+  25% {
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -100%) rotate(0);
+  }
+
+  50% {
+    top: 0;
+    left: 100%;
+    transform: translate(-100%, 0) rotate(90deg);
+  }
+
+  75% {
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -100%) rotate(0);
+  }
+
+  100% {
+    top: 0;
+    left: 0;
+    transform: translate(0, 0) rotate(-90deg);
+  }
+}
