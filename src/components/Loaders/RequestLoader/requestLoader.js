@@ -1,32 +1,17 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
-
-/*----------Components, sections, modules----------*/
-
-/*----------Shared components----------*/
-
-/*----------Actions----------*/
+import { product_name } from 'config/config';
 
 /*----------Component start----------*/
 class RequestLoader extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  /*----------Lifecycle methods----------*/
-  componentDidMount() {
-    
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-
-  }
-
   render() {
+    const { size } = this.props;
 
     /*----------Render component----------*/
     return (
-      <div>Request Loader</div>
+      <div className={`RequestLoader${size ? ' RequestLoader--' + size : ''}`}>
+        <img className={`RequestLoader__logo`} src={`images/logo.png`} alt={`${product_name}`} />
+      </div>
     );
   }
 };
