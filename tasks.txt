@@ -1,6 +1,6 @@
 Tasks
 
-Build Component Error and Page Error, in progress
-Build loading animation and Request loader, todo
+Build Component Error and Page Error, done
+Build loading animation and Request loader, in progress
 Build Admin Setup page, todo
 Build Login page, todo
