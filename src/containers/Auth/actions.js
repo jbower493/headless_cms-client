@@ -22,7 +22,6 @@ export const checkForAdmin = () => {
         })
       })
       .catch(error => {
-        console.log(error)
         dispatch({
           type: AUTH_ADMIN_EXISTS_ERROR,
           auth_admin_exists_error: error
@@ -44,7 +43,6 @@ export const getUser = () => {
         })
       })
       .catch(error => {
-        console.log(error)
         dispatch({
           type: AUTH_USER_ERROR,
           auth_user_error: error
