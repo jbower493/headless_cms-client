@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
-import RequestLoader from 'components/Loaders/RequestLoader/requestLoader';
+import RequestLoader from 'components/Loaders/RequestLoader';
 
 /*----------Actions----------*/
 

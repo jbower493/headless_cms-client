@@ -6,11 +6,11 @@ import { Route, Switch } from 'react-router-dom';
 /*----------Components, sections, modules----------*/
 import ProtectedRoute from './protectedRoute';
 import Sidebar from 'containers/sidebar/sidebar';
-import AdminSetup from 'containers/adminSetup/adminSetup';
-import Auth from 'containers/auth/auth';
-import Dashboard from 'containers/dashboard/dashboard';
-import Content from 'containers/content/content';
-import ContentTypes from 'containers/contentTypes/contentTypes';
+import AdminSetup from 'containers/adminSetup';
+import Auth from 'containers/auth';
+import Dashboard from 'containers/dashboard';
+import Content from 'containers/content';
+import ContentTypes from 'containers/contentTypes';
 
 /*----------Shared components----------*/
 

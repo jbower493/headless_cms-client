@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 /*----------Components, sections, modules----------*/
-import Header from 'containers/header/header';
+import Header from 'containers/header';
 import Router from 'router/router';
 
 /*----------Shared components----------*/
-import RequestLoader from 'components/Loaders/RequestLoader/requestLoader';
-import PageError from 'components/Errors/PageError/pageError';
+import RequestLoader from 'components/Loaders/RequestLoader';
+import PageError from 'components/Errors/PageError';
 
 /*----------Actions----------*/
 import { checkForAdmin, getUser } from 'containers/auth/actions';

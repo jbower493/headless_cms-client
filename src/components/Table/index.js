@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
-import Button from 'components/Button/button';
-import ComponentError from 'components/Errors/ComponentError/componentError';
-import RequestLoader from 'components/Loaders/RequestLoader/requestLoader';
+import Button from 'components/Button';
+import ComponentError from 'components/Errors/ComponentError';
+import RequestLoader from 'components/Loaders/RequestLoader';
 
 /*----------Actions----------*/
 

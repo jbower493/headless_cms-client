@@ -8,7 +8,7 @@ import axios from 'axios';
 import { url } from 'config/config.json';
 
 /*----------Components, sections, modules----------*/
-import App from 'app/app';
+import App from 'app';
 
 /*----------Shared components----------*/
 
