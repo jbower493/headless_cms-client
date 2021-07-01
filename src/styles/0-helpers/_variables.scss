@@ -19,6 +19,8 @@ $fs--xl: 24px;
 $fs--xxl: 28px;
 
 $height--header: 60px;
+// always must be vh minus header height
+$height--mainPage: calc(100vh - 60px);
 
 $width--sidebar: 200px;
 $width--tableAction: 200px;

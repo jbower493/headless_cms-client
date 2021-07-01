@@ -33,12 +33,7 @@ class App extends Component {
   }
 
   render() {
-    const {
-      auth_admin_exists_status,
-      auth_admin_exists_data,
-      auth_user_status,
-      auth_user_data
-    } = this.props;
+    const { auth_admin_exists_status, auth_user_status } = this.props;
 
     const getLoadingStatus = () => {
       if (!auth_user_status || auth_user_status === 'loading' || !auth_admin_exists_status || auth_admin_exists_status === 'loading') {
@@ -49,8 +44,6 @@ class App extends Component {
       }
       return 'success';
     };
-
-    console.log(getLoadingStatus())
 
     const renderApp = () => {
       switch (getLoadingStatus()) {

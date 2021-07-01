@@ -17,7 +17,10 @@ class AdminSetup extends Component {
 
   /*----------Lifecycle methods----------*/
   componentDidMount() {
-    
+    const { auth_admin_exists_data, history } = this.props;
+    if (auth_admin_exists_data) {
+      //history.push('/login');
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -25,7 +28,6 @@ class AdminSetup extends Component {
   }
 
   render() {
-
     /*----------Render component----------*/
     return (
       <div className={`adminSetup`}>
@@ -37,9 +39,9 @@ class AdminSetup extends Component {
 
 /*----------Component end----------*/
 
-export default withRouter(connect((state) => {
-
-},
+export default withRouter(connect((state) => ({
+  auth_admin_exists_data: state.auth.auth_admin_exists_data
+}),
 {
 
 })(AdminSetup));

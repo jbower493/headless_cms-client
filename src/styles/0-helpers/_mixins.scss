@@ -37,7 +37,6 @@ $md: 1000px;
 $lg: 1500px;
 
 @mixin screenSize($sizes...) {
-  // loop through somehow and get every media size
   @for $i from 1 through length($sizes) {
     @include singleScreenSize(nth($sizes, $i)) {
       @content;

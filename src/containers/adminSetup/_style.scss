@@ -1,0 +1,6 @@
+.adminSetup {
+  height: $height--mainPage;
+  @include displayFlex;
+  @include justifyContent(center);
+  @include alignItems(center);
+}
