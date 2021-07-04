@@ -3,7 +3,8 @@
   height: 40px;
   width: fit-content;
   display: inline-flex;
-  align-items: center;
+  @include justifyContent(center);
+  @include alignItems(center);
   border-radius: 5px;
   font-size: 16px;
   font-family: inherit;

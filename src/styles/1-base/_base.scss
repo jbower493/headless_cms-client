@@ -7,15 +7,34 @@ ul {
   list-style: none;
 }
 
-input {
+// Form styles
 
-  &[type="text"], &[type="email"] {
-    border: 1px solid grey;
-    border-radius: 5px;
-    padding: 10px;
+form {
 
-    &:focus {
-      border: 1px solid $clr--primary;
+  label {
+    display: block;
+    font-size: $fs--small;
+    margin-bottom: 5px;
+    color: $clr--text--grey;
+  }
+  
+  input {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+  
+    & {
+      border: 1px solid grey;
+      border-radius: 5px;
+      padding: 10px;
+  
+      &:focus {
+        border: 1px solid $clr--primary;
+      }
     }
+  }
+
+  .SolidButton, .OutlineButton {
+    width: 100%;
   }
 }

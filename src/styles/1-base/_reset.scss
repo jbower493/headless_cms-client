@@ -12,7 +12,7 @@ input {
     -webkit-appearance: none;
   }
 
-  &[type="text"], &[type="email"] {
+  & {
     border-radius: 0px;
     -webkit-border-radius: 0px;
   }

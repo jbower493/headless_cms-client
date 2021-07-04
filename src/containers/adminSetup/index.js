@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 /*----------Components, sections, modules----------*/
+import AdminSetupForm from './forms/adminSetupForm';
 
 /*----------Shared components----------*/
 
@@ -31,7 +32,7 @@ class AdminSetup extends Component {
     /*----------Render component----------*/
     return (
       <div className={`adminSetup`}>
-        Admin setup
+        <AdminSetupForm />
       </div>
     );
   }
