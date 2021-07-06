@@ -1,20 +1,22 @@
 import Button from 'components/Button';
 
-export const TextField = ({ label, id, ...rest }) => {
+export const TextField = ({ field, form, ...rest }) => {
+  
   return (
-    <>
-      <label htmlFor={id}>{label}</label>
-      <input type="text" id={id} {...rest} />
-    </>
+    <div className={`formFieldGroup`}>
+      <label htmlFor={field.name}>{rest.label}</label>
+      <input type="text" id={field.name} {...field} {...rest} />
+    </div>
   )
 };
 
-export const PasswordField = ({ label, id, ...rest }) => {
+export const PasswordField = ({ field, form, ...rest }) => {
+  
   return (
-    <>
-      <label htmlFor={id}>{label}</label>
-      <input type="password" id={id} {...rest} />
-    </>
+    <div className={`formFieldGroup`}>
+      <label htmlFor={field.name}>{rest.label}</label>
+      <input type="password" id={field.name} {...field} {...rest} />
+    </div>
   );
 };
 

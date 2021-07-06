@@ -3,12 +3,22 @@ import axios from 'axios';
 export const API = {
   auth: {
     GET: {
-      adminExists: () => {
+      admin: () => {
         return axios.get('/auth/admin-exists');
       },
 
-      getUser: () => {
+      user: () => {
         return axios.get('/auth/get-user');
+      },
+    },
+
+    POST: {
+      admin: () => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve('Hello');
+          }, 2000);
+        })
       }
     }
   }

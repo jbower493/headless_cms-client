@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { product_name } from 'config/config';
 
 /*----------Components, sections, modules----------*/
@@ -28,19 +28,29 @@ class AdminSetupForm extends Component {
   }
 
   render() {
+    const { handleSubmit } = this.props;
+
     /*----------Render component----------*/
     return (
       <div className={`adminSetupForm`}>
         <h2 className={`adminSetupForm__heading`}>Admin Setup</h2>
-        <p className={`adminSetupForm__intro`}>Welcome to {product_name}. Please create an admin account for this intance.</p>
+        <p className={`adminSetupForm__intro`}>Welcome to {product_name}. Please create an admin account to begin.</p>
         <Formik
           initialValues={{
             username: 'John Doe',
             password: 'password'
           }}
-          onSubmit={(values) => {
-            console.log('Values');
-          }} >
+          validate={values => {
+            const { username, password } = values;
+            const errors = {};
+            if (!username) {
+              errors.username = 'Required';
+            }
+            if (!password) {
+              errors.password = 'Required';
+            }
+          }}
+          onSubmit={handleSubmit} >
           {({
             values,
             errors,
@@ -51,18 +61,26 @@ class AdminSetupForm extends Component {
             isSubmitting,
           }) => (
             <Form>
+              {/* <Field type="text" name="username" />
+              <ErrorMessage name="text" component="div" />
+              <Field type="password" name="password" />
+              <ErrorMessage name="password" component="div" />
+              <button type="submit" disabled={isSubmitting}>
+                Submit
+              </button> */}
+
               <Field
                 label="Username"
                 id="username"
                 name="username"
-                placeholder="Your Username"
+                placeholder="Username"
                 component={TextField}
               />
               <Field
                 label="Password"
                 id="password"
                 name="password"
-                placeholder="Your password"
+                placeholder="Password"
                 component={PasswordField}
               />
 

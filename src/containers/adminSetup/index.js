@@ -32,7 +32,7 @@ class AdminSetup extends Component {
     /*----------Render component----------*/
     return (
       <div className={`adminSetup`}>
-        <AdminSetupForm />
+        <AdminSetupForm handleSubmit={(values) => console.log(values)} />
       </div>
     );
   }
