@@ -8,9 +8,10 @@ import { product_name } from 'config/config';
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
-import { TextField, PasswordField, SubmitButton } from 'utilities/formInputs';
+import { TextField, PasswordField, SubmitButton } from 'utilities/form/inputs';
 
 /*----------Actions----------*/
+import { requiredField } from 'utilities/form/validation';
 
 /*----------Component start----------*/
 class AdminSetupForm extends Component {
@@ -37,19 +38,19 @@ class AdminSetupForm extends Component {
         <p className={`adminSetupForm__intro`}>Welcome to {product_name}. Please create an admin account to begin.</p>
         <Formik
           initialValues={{
-            username: 'John Doe',
-            password: 'password'
+            username: '',
+            password: ''
           }}
-          validate={values => {
-            const { username, password } = values;
-            const errors = {};
-            if (!username) {
-              errors.username = 'Required';
-            }
-            if (!password) {
-              errors.password = 'Required';
-            }
-          }}
+          // validate={values => {
+          //   const { username, password } = values;
+          //   const errors = {};
+          //   if (!username) {
+          //     errors.username = 'Required';
+          //   }
+          //   if (!password) {
+          //     errors.password = 'Required';
+          //   }
+          // }}
           onSubmit={handleSubmit} >
           {({
             values,
@@ -61,20 +62,13 @@ class AdminSetupForm extends Component {
             isSubmitting,
           }) => (
             <Form>
-              {/* <Field type="text" name="username" />
-              <ErrorMessage name="text" component="div" />
-              <Field type="password" name="password" />
-              <ErrorMessage name="password" component="div" />
-              <button type="submit" disabled={isSubmitting}>
-                Submit
-              </button> */}
-
               <Field
                 label="Username"
                 id="username"
                 name="username"
                 placeholder="Username"
                 component={TextField}
+                validate={requiredField}
               />
               <Field
                 label="Password"
@@ -82,13 +76,15 @@ class AdminSetupForm extends Component {
                 name="password"
                 placeholder="Password"
                 component={PasswordField}
+                validate={requiredField}
               />
 
               <SubmitButton
                 valid={true}
                 text={`Continue`}
                 style={`solid`}
-                color={`primary`} />
+                color={`primary`}
+                disabled={false} />
             </Form>
           )}
         </Formik>

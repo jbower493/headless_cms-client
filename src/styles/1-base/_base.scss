@@ -21,11 +21,12 @@ form {
   input {
     display: block;
     width: 100%;
-    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
   
     & {
       border: 1px solid grey;
-      border-radius: 5px;
+      border-radius: $borderRadius--standard;
       padding: 10px;
   
       &:focus {
@@ -36,5 +37,38 @@ form {
 
   .SolidButton, .OutlineButton {
     width: 100%;
+  }
+
+  .form {
+
+    &__group {
+      margin-bottom: 20px;
+    }
+
+    &__error {
+      margin-top: -10px;
+      padding: 10px 10px 0 10px;
+      height: 35px;
+      @include displayFlex;
+      @include alignItems(center);
+      color: $clr--text--error;
+      font-size: 13px;
+      background-color: $clr--background--error;
+      border-bottom-left-radius: $borderRadius--standard;
+      border-bottom-right-radius: $borderRadius--standard;
+      position: relative;
+      animation: reveal 0.5s forwards;
+      overflow: hidden;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 35px;
   }
 }

@@ -26,15 +26,15 @@ class ProtectedRoute extends Component {
 
   render() {
     const { auth_user_data, auth_admin_exists_data, location, component: Component } = this.props;
-
+console.log(this.props)
     /*----------Render component----------*/
     return (
       <Route render={() => {
-        if (auth_user_data.user) {
+        if (auth_user_data) {
           return <Component />;
         }
         if (auth_admin_exists_data) {
-          return <Redirect from={location.pathname} to='/admin-setup'/*'/login'*/ />;
+          return <Redirect from={location.pathname} to='/login' />;
         }
         return <Redirect from={location.pathname} to='/admin-setup' />;
       }} />

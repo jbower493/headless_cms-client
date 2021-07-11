@@ -23,7 +23,7 @@ class Button extends Component {
   }
 
   render() {
-    const { type, text, style, color, onClick } = this.props;
+    const { type, text, style, color, onClick, disabled } = this.props;
 
     const getClassName = () => {
       switch (style) {
@@ -39,8 +39,20 @@ class Button extends Component {
 
     /*----------Render component----------*/
     switch (type) {
-      case 'submit': return <button type={type} className={`${getClassName()}${addColorModifier()}`}>{text}</button>;
-      case 'onClick': return <button onClick={onClick} className={`${getClassName()}${addColorModifier()}`}>{text}</button>;
+      case 'submit': return (
+        <input
+          className={`${getClassName()}${addColorModifier()}`}
+          type={type}
+          value={text}
+          disabled={disabled} />
+      );
+      case 'onClick': return (
+        <button
+          onClick={onClick}
+          className={`${getClassName()}${addColorModifier()}`} >
+            {text}
+        </button>
+      );
       default: return <button className={`${getClassName()}${addColorModifier()}`}>{text}</button>;
     }
   }

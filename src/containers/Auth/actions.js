@@ -24,7 +24,7 @@ export const checkForAdmin = () => {
       .then(res => {
         dispatch({
           type: AUTH_ADMIN_EXISTS_SUCCESS,
-          auth_admin_exists_data: res.data
+          auth_admin_exists_data: res.data.adminExists
         })
       })
       .catch(error => {
@@ -62,7 +62,7 @@ export const getUser = () => {
       .then(res => {
         dispatch({
           type: AUTH_USER_SUCCESS,
-          auth_user_data: res.data
+          auth_user_data: res.data.user
         })
       })
       .catch(error => {

@@ -5,7 +5,7 @@
   display: inline-flex;
   @include justifyContent(center);
   @include alignItems(center);
-  border-radius: 5px;
+  border-radius: $borderRadius--standard;
   font-size: 16px;
   font-family: inherit;
   cursor: pointer;

@@ -13,7 +13,7 @@
 .adminSetupForm {
   width: 400px;
   border: $clr--border--grey;
-  border-radius: 3px;
+  border-radius: $borderRadius--small;
   padding: 20px;
 
   &__heading {

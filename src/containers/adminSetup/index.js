@@ -20,7 +20,7 @@ class AdminSetup extends Component {
   componentDidMount() {
     const { auth_admin_exists_data, history } = this.props;
     if (auth_admin_exists_data) {
-      //history.push('/login');
+      history.push('/login');
     }
   }
 
