@@ -1,6 +1,6 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
-import { error } from 'utilities/icons';
+import { pageError } from 'utilities/icons';
 
 /*----------Components, sections, modules----------*/
 
@@ -28,7 +28,7 @@ class ComponentError extends Component {
     /*----------Render component----------*/
     return (
       <div className={`ComponentError`}>
-        <i className={error}></i>
+        <i className={pageError}></i>
         <div className={`ComponentError__text`}>Oops, something went wrong!</div>
       </div>
     );
