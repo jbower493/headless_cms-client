@@ -14,7 +14,7 @@ export const API = {
 
     POST: {
 
-      admin: (profile) => axios.post('/auth/create-admi', profile)
+      admin: (profile) => axios.post('/auth/create-admin', profile)
 
     }
   }
