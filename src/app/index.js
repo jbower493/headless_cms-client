@@ -74,9 +74,6 @@ class App extends Component {
       <div className={`app`}>
         {renderApp()}
         {notification_data && <Notification />}
-        <button onClick={() => {
-          setNotification('info', 'This shit is fucked bro');
-        }}>Hello</button>
       </div>
     );
   }
