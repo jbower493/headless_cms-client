@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import { product_name } from 'config/config';
 
 /*----------Components, sections, modules----------*/
@@ -41,16 +41,6 @@ class AdminSetupForm extends Component {
             username: '',
             password: ''
           }}
-          // validate={values => {
-          //   const { username, password } = values;
-          //   const errors = {};
-          //   if (!username) {
-          //     errors.username = 'Required';
-          //   }
-          //   if (!password) {
-          //     errors.password = 'Required';
-          //   }
-          // }}
           onSubmit={handleSubmit} >
           {({
             values,
@@ -80,7 +70,6 @@ class AdminSetupForm extends Component {
               />
 
               <SubmitButton
-                valid={true}
                 text={`Continue`}
                 style={`solid`}
                 color={`primary`}

@@ -49,6 +49,7 @@ class App extends Component {
       switch (getLoadingStatus()) {
         case 'loading': return <RequestLoader />;
         case 'error': return <PageError />;
+        case 'sucess':
         default: return (
           <BrowserRouter>
             <Header />
@@ -71,9 +72,7 @@ class App extends Component {
 
 export default connect((state) => ({
   auth_admin_exists_status: state.auth.auth_admin_exists_status,
-  auth_admin_exists_data: state.auth.auth_admin_exists_data,
-  auth_user_status: state.auth.auth_user_status,
-  auth_user_data: state.auth.auth_user_data
+  auth_user_status: state.auth.auth_user_status
 }),
 {
   checkForAdmin,

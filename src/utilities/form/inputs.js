@@ -40,7 +40,7 @@ export const PasswordField = ({ field, form, label, className, ...rest }) => {
   );
 };
 
-export const SubmitButton = ({ valid, text, style, color, disabled }) => {
+export const SubmitButton = ({ text, style, color, disabled }) => {
   return (
     <Button 
       type="submit"

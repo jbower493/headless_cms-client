@@ -1,4 +1,5 @@
 import { API } from 'utilities/api/auth';
+import { getSuccessData, getErrorData, getErrorStatus } from 'utilities/commonActions';
 
 export const AUTH_ADMIN_EXISTS_REQUEST = 'auth/AUTH_ADMIN_EXISTS_REQUEST';
 export const AUTH_ADMIN_EXISTS_SUCCESS = 'auth/AUTH_ADMIN_EXISTS_SUCCESS';
@@ -21,16 +22,16 @@ export const checkForAdmin = () => {
       type: AUTH_ADMIN_EXISTS_REQUEST
     });
     API.auth.GET.admin()
-      .then(res => {
+      .then(response => {
         dispatch({
           type: AUTH_ADMIN_EXISTS_SUCCESS,
-          auth_admin_exists_data: res.data.adminExists
+          auth_admin_exists_data: getSuccessData(response)
         })
       })
       .catch(error => {
         dispatch({
           type: AUTH_ADMIN_EXISTS_ERROR,
-          auth_admin_exists_error: error
+          auth_admin_exists_error: getErrorData(error)
         })
       })
   };
@@ -41,12 +42,20 @@ export const setupAdmin = (profile) => {
     dispatch({
       type: AUTH_ADMIN_SETUP_REQUEST
     });
-    API.auth.POST.admin()
+    API.auth.POST.admin(profile)
       .then(response => {
-        console.log(response);
+        dispatch({
+          type: AUTH_ADMIN_SETUP_SUCCESS,
+          auth_admin_setup_data: getSuccessData(response)
+        })
+        console.log(getSuccessData(response))
       })
       .catch(error => {
-        console.log(error)
+        dispatch({
+          type: AUTH_ADMIN_SETUP_ERROR,
+          auth_admin_setup_error: getErrorData(error)
+        })
+        console.log(getErrorData(error))
       })
   };
 };
@@ -59,16 +68,16 @@ export const getUser = () => {
       type: AUTH_USER_REQUEST
     });
     API.auth.GET.user()
-      .then(res => {
+      .then(response => {
         dispatch({
           type: AUTH_USER_SUCCESS,
-          auth_user_data: res.data.user
+          auth_user_data: getSuccessData(response)
         })
       })
       .catch(error => {
         dispatch({
           type: AUTH_USER_ERROR,
-          auth_user_error: error
+          auth_user_error: error//getErrorData(error)
         })
       })
   };

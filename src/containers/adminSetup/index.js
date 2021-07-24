@@ -9,30 +9,38 @@ import AdminSetupForm from './forms/adminSetupForm';
 /*----------Shared components----------*/
 
 /*----------Actions----------*/
+import { setupAdmin } from 'containers/auth/actions';
 
 /*----------Component start----------*/
 class AdminSetup extends Component {
   constructor(props) {
     super(props);
+
+    this.handleAdminSetup = this.handleAdminSetup.bind(this);
   }
 
   /*----------Lifecycle methods----------*/
   componentDidMount() {
-    const { auth_admin_exists_data, history } = this.props;
-    if (auth_admin_exists_data) {
-      history.push('/login');
-    }
+    
   }
 
   componentDidUpdate(prevProps, prevState) {
 
   }
 
+  handleAdminSetup(values) {
+    const { setupAdmin } = this.props;
+
+    setupAdmin(values);
+  }
+
   render() {
+    const { handleAdminSetup } = this;
+
     /*----------Render component----------*/
     return (
       <div className={`adminSetup`}>
-        <AdminSetupForm handleSubmit={(values) => console.log(values)} />
+        <AdminSetupForm handleSubmit={handleAdminSetup} />
       </div>
     );
   }
@@ -44,5 +52,5 @@ export default withRouter(connect((state) => ({
   auth_admin_exists_data: state.auth.auth_admin_exists_data
 }),
 {
-
+  setupAdmin
 })(AdminSetup));
