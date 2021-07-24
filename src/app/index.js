@@ -10,9 +10,12 @@ import Router from 'router/router';
 /*----------Shared components----------*/
 import RequestLoader from 'components/Loaders/RequestLoader';
 import PageError from 'components/Errors/PageError';
+import Notification from 'components/Notification';
 
 /*----------Actions----------*/
 import { checkForAdmin, getUser } from 'containers/auth/actions';
+
+import { setNotification } from 'components/Notification/actions';
 
 /*----------Component start----------*/
 class App extends Component {
@@ -37,7 +40,10 @@ class App extends Component {
       auth_admin_exists_status,
       auth_admin_exists_data,
       auth_user_status,
-      auth_user_data
+      auth_user_data,
+      notification_data,
+
+      setNotification
     } = this.props;
 
     const getLoadingStatus = () => {
@@ -49,8 +55,6 @@ class App extends Component {
       }
       return 'success';
     };
-
-    console.log(getLoadingStatus())
 
     const renderApp = () => {
       switch (getLoadingStatus()) {
@@ -69,6 +73,10 @@ class App extends Component {
     return (
       <div className={`app`}>
         {renderApp()}
+        {notification_data && <Notification />}
+        <button onClick={() => {
+          setNotification('info', 'This shit is fucked bro');
+        }}>Hello</button>
       </div>
     );
   }
@@ -80,9 +88,12 @@ export default connect((state) => ({
   auth_admin_exists_status: state.auth.auth_admin_exists_status,
   auth_admin_exists_data: state.auth.auth_admin_exists_data,
   auth_user_status: state.auth.auth_user_status,
-  auth_user_data: state.auth.auth_user_data
+  auth_user_data: state.auth.auth_user_data,
+  notification_data: state.notification.notification_data
 }),
 {
   checkForAdmin,
-  getUser
+  getUser,
+
+  setNotification
 })(App);

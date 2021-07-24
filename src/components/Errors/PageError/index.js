@@ -1,6 +1,6 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
-import { error } from 'utilities/icons';
+import { pageError } from 'utilities/icons';
 
 /*----------Components, sections, modules----------*/
 
@@ -28,7 +28,7 @@ class PageError extends Component {
     /*----------Render component----------*/
     return (
       <div className={`PageError`}>
-        <i className={error}></i>
+        <i className={pageError}></i>
         <div className={`PageError__text`}>Oops, looks like the page failed to load!</div>
       </div>
     );
