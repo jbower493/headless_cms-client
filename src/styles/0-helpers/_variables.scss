@@ -5,14 +5,17 @@ $clr--lightNavy: #3B3C46;
 $clr--grey: #B0B0B0;
 $clr--lightGrey: #EFEFEF;
 $clr--white: #FFFFFF;
-$clr--error: rgb(255, 44, 44);
+$clr--error: #FF2C2C;
+$clr--info: #2F90FF;
+$clr--success: #2AB92A;
 
 $clr--text--grey: #6d6d6d;
-$clr--text--error: rgb(255, 44, 44);
+$clr--text--error: #FF2C2C;
 
-$clr--border--grey: 1px solid #B0B0B0;
+$clr--border--grey: #B0B0B0;
 
-$clr--background--error: rgb(255, 234, 234);
+$clr--background--white: #FFFFFF;
+$clr--background--error: #FFEAEA;
 $clr--background--sidebarHover: rgba(255, 255, 255, 0.2);
 
 $ff--primary: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -34,5 +37,6 @@ $width--tableAction: 200px;
 
 $padding--sidebarItems: 5px 15px;
 
-$borderRadius--small: 3px;
 $borderRadius--standard: 5px;
+
+$boxShaddow--notification: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);

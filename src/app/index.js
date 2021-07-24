@@ -10,6 +10,7 @@ import Router from 'router/router';
 /*----------Shared components----------*/
 import RequestLoader from 'components/Loaders/RequestLoader';
 import PageError from 'components/Errors/PageError';
+import Notification from 'components/Notification';
 
 /*----------Actions----------*/
 import { checkForAdmin, getUser } from 'containers/auth/actions';
@@ -33,7 +34,11 @@ class App extends Component {
   }
 
   render() {
-    const { auth_admin_exists_status, auth_user_status } = this.props;
+    const {
+      auth_admin_exists_status,
+      auth_user_status,
+      notification_data
+    } = this.props;
 
     const getLoadingStatus = () => {
       if (!auth_user_status || auth_user_status === 'loading' || !auth_admin_exists_status || auth_admin_exists_status === 'loading') {
@@ -63,6 +68,7 @@ class App extends Component {
     return (
       <div className={`app`}>
         {renderApp()}
+        {notification_data && <Notification />}
       </div>
     );
   }
@@ -72,7 +78,8 @@ class App extends Component {
 
 export default connect((state) => ({
   auth_admin_exists_status: state.auth.auth_admin_exists_status,
-  auth_user_status: state.auth.auth_user_status
+  auth_user_status: state.auth.auth_user_status,
+  notification_data: state.notification.notification_data
 }),
 {
   checkForAdmin,

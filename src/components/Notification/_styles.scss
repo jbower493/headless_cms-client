@@ -1,0 +1,80 @@
+.Notification {
+  position: fixed;
+  top: 50px;
+  right: -400px;
+  background-color: $clr--background--white;
+  height: 60px;
+  width: 400px;
+  @include displayFlex;
+  box-shadow: $boxShaddow--notification;
+  border-top-left-radius: $borderRadius--standard;
+  border-bottom-left-radius: $borderRadius--standard;
+  overflow: hidden;
+  animation: slideIn 0.5s ease-out 0s 1 forwards;
+
+  @include screenSize('xs') {
+    width: 80vw;
+  }
+
+  &__iconContainer {
+    height: 100%;
+    width: 40px;
+    @include displayFlex;
+    @include justifyContent(center);
+    @include alignItems(center);
+  }
+
+  &__icon {
+    font-size: 20px;
+    color: $clr--white;
+  }
+
+  &__text {
+    @include flex(1, 1, 0);
+    @include displayFlex;
+    @include alignItems(center);
+    padding: 0 50px 0 20px;
+    font-size: $fs--small;
+    color: $clr--text--grey;
+  }
+
+  &__dismiss {
+    position: absolute;
+    color: $clr--darkNavy;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    cursor: pointer;
+  }
+
+  &--error {
+
+    .Notification__iconContainer {
+      background-color: $clr--error;
+    }
+  }
+
+  &--success {
+
+    .Notification__iconContainer {
+      background-color: $clr--success;
+    }
+  }
+
+  &--info {
+
+    .Notification__iconContainer {
+      background-color: $clr--info;
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    right: -400px;
+  }
+
+  to {
+    right: 0;
+  }
+}
