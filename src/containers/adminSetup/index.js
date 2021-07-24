@@ -53,21 +53,11 @@ class AdminSetup extends Component {
 
   render() {
     const { handleAdminSetup } = this;
-    const { auth_admin_setup_status } = this.props;
-console.log(this.props)
-    const handleLoadingStatus = () => {
-      switch (auth_admin_setup_status) {
-        case 'loading': return <RequestLoader />;
-        case 'error':
-        case 'success':
-        default: return <AdminSetupForm handleSubmit={handleAdminSetup} />;
-      }
-    };
 
     /*----------Render component----------*/
     return (
       <div className={`adminSetup`}>
-        {handleLoadingStatus()}
+        <AdminSetupForm handleSubmit={handleAdminSetup} />
       </div>
     );
   }

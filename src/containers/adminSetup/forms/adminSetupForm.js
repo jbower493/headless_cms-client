@@ -29,7 +29,7 @@ class AdminSetupForm extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, auth_admin_setup_status } = this.props;
 
     /*----------Render component----------*/
     return (
@@ -73,6 +73,7 @@ class AdminSetupForm extends Component {
                 text={`Continue`}
                 style={`solid`}
                 color={`primary`}
+                loading={auth_admin_setup_status === 'loading'}
                 disabled={false} />
             </Form>
           )}
@@ -85,7 +86,7 @@ class AdminSetupForm extends Component {
 /*----------Component end----------*/
 
 export default withRouter(connect((state) => ({
-  
+  auth_admin_setup_status: state.auth.auth_admin_setup_status
 }),
 {
 

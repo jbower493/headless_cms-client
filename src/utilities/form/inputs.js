@@ -1,4 +1,5 @@
 import Button from 'components/Button';
+import RequestLoader from 'components/Loaders/RequestLoader';
 
 const getClassName = (className, error) => {
   return `${className ? ' ' + className : ''}${error ? ' form__input--error' : ''}`;
@@ -40,13 +41,15 @@ export const PasswordField = ({ field, form, label, className, ...rest }) => {
   );
 };
 
-export const SubmitButton = ({ text, style, color, disabled }) => {
-  return (
-    <Button 
-      type="submit"
-      text={text}
-      style={style}
-      color={color}
-      disabled={disabled} />
-  );
+export const SubmitButton = ({ text, style, color, loading, disabled }) => {
+  return loading
+    ? <div className={`ButtonLoader`}>
+      <RequestLoader size={`sm`} />
+    </div>
+    : <Button 
+        type="submit"
+        text={text}
+        style={style}
+        color={color}
+        disabled={disabled} />
 };
