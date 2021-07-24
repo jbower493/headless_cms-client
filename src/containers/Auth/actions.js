@@ -48,14 +48,12 @@ export const setupAdmin = (profile) => {
           type: AUTH_ADMIN_SETUP_SUCCESS,
           auth_admin_setup_data: getSuccessData(response)
         })
-        console.log(getSuccessData(response))
       })
       .catch(error => {
         dispatch({
           type: AUTH_ADMIN_SETUP_ERROR,
           auth_admin_setup_error: getErrorData(error)
         })
-        console.log(getErrorData(error))
       })
   };
 };
@@ -77,7 +75,7 @@ export const getUser = () => {
       .catch(error => {
         dispatch({
           type: AUTH_USER_ERROR,
-          auth_user_error: error//getErrorData(error)
+          auth_user_error: getErrorData(error)
         })
       })
   };

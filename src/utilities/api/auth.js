@@ -14,7 +14,7 @@ export const API = {
 
     POST: {
 
-      admin: (profile) => {console.log(profile);return axios.post('/auth/create-admin', profile)}
+      admin: (profile) => axios.post('/auth/create-admin', profile)
 
     }
   }

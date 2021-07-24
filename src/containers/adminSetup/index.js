@@ -7,9 +7,11 @@ import { withRouter } from 'react-router-dom';
 import AdminSetupForm from './forms/adminSetupForm';
 
 /*----------Shared components----------*/
+import RequestLoader from 'components/Loaders/RequestLoader';
 
 /*----------Actions----------*/
-import { setupAdmin } from 'containers/auth/actions';
+import { setupAdmin, checkForAdmin } from 'containers/auth/actions';
+import { setNotification } from 'components/Notification/actions';
 
 /*----------Component start----------*/
 class AdminSetup extends Component {
@@ -25,7 +27,22 @@ class AdminSetup extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const {
+      auth_admin_setup_status,
+      auth_admin_setup_error,
+      setNotification,
+      checkForAdmin
+    } = this.props;
 
+    if (auth_admin_setup_status === 'error' && prevProps.auth_admin_setup_status === 'loading') {
+      const { error } = auth_admin_setup_error;
+      setNotification('error', error);
+    }
+
+    if (auth_admin_setup_status === 'success' && prevProps.auth_admin_setup_status === 'loading') {
+      checkForAdmin();
+      setNotification('success', 'Admin User successfully created');
+    }
   }
 
   handleAdminSetup(values) {
@@ -36,11 +53,21 @@ class AdminSetup extends Component {
 
   render() {
     const { handleAdminSetup } = this;
+    const { auth_admin_setup_status } = this.props;
+console.log(this.props)
+    const handleLoadingStatus = () => {
+      switch (auth_admin_setup_status) {
+        case 'loading': return <RequestLoader />;
+        case 'error':
+        case 'success':
+        default: return <AdminSetupForm handleSubmit={handleAdminSetup} />;
+      }
+    };
 
     /*----------Render component----------*/
     return (
       <div className={`adminSetup`}>
-        <AdminSetupForm handleSubmit={handleAdminSetup} />
+        {handleLoadingStatus()}
       </div>
     );
   }
@@ -49,8 +76,12 @@ class AdminSetup extends Component {
 /*----------Component end----------*/
 
 export default withRouter(connect((state) => ({
-  auth_admin_exists_data: state.auth.auth_admin_exists_data
+  auth_admin_exists_data: state.auth.auth_admin_exists_data,
+  auth_admin_setup_status: state.auth.auth_admin_setup_status,
+  auth_admin_setup_error: state.auth.auth_admin_setup_error
 }),
 {
-  setupAdmin
+  setupAdmin,
+  checkForAdmin,
+  setNotification
 })(AdminSetup));
