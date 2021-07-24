@@ -33,7 +33,7 @@ class ProtectedRoute extends Component {
         if (auth_user_data.user) {
           return <Component />;
         }
-        if (auth_admin_exists_data) {
+        if (auth_admin_exists_data.adminExists) {
           return <Redirect from={location.pathname} to='/login' />;
         }
         return <Redirect from={location.pathname} to='/admin-setup' />;

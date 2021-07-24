@@ -15,8 +15,6 @@ import Notification from 'components/Notification';
 /*----------Actions----------*/
 import { checkForAdmin, getUser } from 'containers/auth/actions';
 
-import { setNotification } from 'components/Notification/actions';
-
 /*----------Component start----------*/
 class App extends Component {
   constructor(props) {
@@ -38,12 +36,8 @@ class App extends Component {
   render() {
     const {
       auth_admin_exists_status,
-      auth_admin_exists_data,
       auth_user_status,
-      auth_user_data,
-      notification_data,
-
-      setNotification
+      notification_data
     } = this.props;
 
     const getLoadingStatus = () => {
@@ -60,6 +54,7 @@ class App extends Component {
       switch (getLoadingStatus()) {
         case 'loading': return <RequestLoader />;
         case 'error': return <PageError />;
+        case 'sucess':
         default: return (
           <BrowserRouter>
             <Header />
@@ -83,14 +78,10 @@ class App extends Component {
 
 export default connect((state) => ({
   auth_admin_exists_status: state.auth.auth_admin_exists_status,
-  auth_admin_exists_data: state.auth.auth_admin_exists_data,
   auth_user_status: state.auth.auth_user_status,
-  auth_user_data: state.auth.auth_user_data,
   notification_data: state.notification.notification_data
 }),
 {
   checkForAdmin,
-  getUser,
-
-  setNotification
+  getUser
 })(App);

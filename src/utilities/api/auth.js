@@ -1,15 +1,21 @@
 import axios from 'axios';
 
 export const API = {
+  
   auth: {
-    GET: {
-      adminExists: () => {
-        return axios.get('/auth/admin-exists');
-      },
 
-      getUser: () => {
-        return axios.get('/auth/get-user');
-      }
+    GET: {
+
+      admin: () => axios.get('/auth/admin-exists'),
+
+      user: () => axios.get('/auth/get-user'),
+
+    },
+
+    POST: {
+
+      admin: (profile) => axios.post('/auth/create-admin', profile)
+
     }
   }
 };
