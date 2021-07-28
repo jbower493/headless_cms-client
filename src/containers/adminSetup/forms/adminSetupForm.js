@@ -54,7 +54,6 @@ class AdminSetupForm extends Component {
             <Form>
               <Field
                 label="Username"
-                id="username"
                 name="username"
                 placeholder="Username"
                 component={TextField}
@@ -62,7 +61,6 @@ class AdminSetupForm extends Component {
               />
               <Field
                 label="Password"
-                id="password"
                 name="password"
                 placeholder="Password"
                 component={PasswordField}

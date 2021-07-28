@@ -13,6 +13,7 @@ $clr--text--grey: #6d6d6d;
 $clr--text--error: #FF2C2C;
 
 $clr--border--grey: #B0B0B0;
+$clr--border--darkGrey: #5f5f5f;
 
 $clr--background--white: #FFFFFF;
 $clr--background--error: #FFEAEA;
@@ -31,6 +32,7 @@ $fs--xxl: 28px;
 $height--header: 60px;
 // always must be vh minus header height
 $height--mainPage: calc(100vh - 60px);
+$height--input: 37px;
 
 $width--sidebar: 200px;
 $width--tableAction: 200px;

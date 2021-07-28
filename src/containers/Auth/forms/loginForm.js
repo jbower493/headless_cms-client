@@ -3,12 +3,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
-import { product_name } from 'config/config';
 
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
-import { TextField, PasswordField, SubmitButton } from 'utilities/form/inputs';
+import {
+  TextField,
+  PasswordField,
+  SelectField,
+  SubmitButton
+} from 'utilities/form/inputs';
 
 /*----------Actions----------*/
 import { requiredField } from 'utilities/form/validation';
@@ -54,7 +58,6 @@ class LoginForm extends Component {
             <Form>
               <Field
                 label="Username"
-                id="username"
                 name="username"
                 placeholder="Username"
                 component={TextField}
@@ -62,11 +65,26 @@ class LoginForm extends Component {
               />
               <Field
                 label="Password"
-                id="password"
                 name="password"
                 placeholder="Password"
                 component={PasswordField}
                 validate={requiredField}
+              />
+              <Field
+                label="Role"
+                name="role"
+                component={SelectField}
+                validate={requiredField}
+                options={[
+                  {
+                    label: 'Option 1',
+                    value: 'one',
+                  },
+                  {
+                    label: 'Option 2',
+                    value: 'two',
+                  }
+                ]}
               />
 
               <SubmitButton

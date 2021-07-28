@@ -1,5 +1,9 @@
+import React, { useState } from 'react';
+
 import Button from 'components/Button';
 import RequestLoader from 'components/Loaders/RequestLoader';
+
+import { downArrow } from '../icons';
 
 const getClassName = (className, error) => {
   return `${className ? ' ' + className : ''}${error ? ' form__input--error' : ''}`;
@@ -41,12 +45,45 @@ export const PasswordField = ({ field, form, label, className, ...rest }) => {
   );
 };
 
-export const SelectField = (props) => {
+export const SelectField = ({ field, form, label, className, options, ...rest }) => {
+  const [isOpen, setIsOpen] = useState(true);
 
-  console.log(props)
+  const { errors, touched, setFieldValue } = form;
+  const { name, value } = field;
 
+  const isError = errors[name] && touched[name];
+
+  const currentValueLabel = value ? options.find(option => option.value === value).label : 'Please Select';
+  
   return (
-    <input />
+    <div className={`form__group`}>
+      <input type="hidden" className={`form__hidden${getClassName(className, isError)}`} id={name} {...field} {...rest} />
+      <label htmlFor={name}>{label}</label>
+      <div
+        className={`form__select${isOpen ? ' form__select--open' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {currentValueLabel}
+        <i className={`form__selectArrow ${downArrow}`} />
+      </div>
+      <ul className={`form__selectList`}>
+        {
+          isOpen && options.map((option, index) => (
+            <li
+              key={index}
+              onClick={() => setFieldValue(name, option.value)}
+              className={`form__selectOption${value === option.value ? ' form__selectOption--selected' : ''}`}
+            >
+              {option.label}
+            </li>
+          ))
+        }
+      </ul>
+      {
+        isError &&
+          <div className={`form__error`}>{errors[name]}</div>
+      }
+    </div>
   );
 }
 
