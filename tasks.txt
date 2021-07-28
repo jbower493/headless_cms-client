@@ -2,5 +2,5 @@ Tasks
 
 Build Component Error and Page Error, done
 Build loading animation and Request loader, done
-Build Admin Setup page, in progress
-Build Login page, todo
+Build Admin Setup page, done
+Build Login page, in progress
