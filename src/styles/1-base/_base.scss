@@ -23,15 +23,12 @@ form {
     width: 100%;
     position: relative;
     z-index: 1;
-  
-    & {
-      border: 1px solid grey;
-      border-radius: $borderRadius--standard;
-      padding: 10px;
-  
-      &:focus {
-        border: 1px solid $clr--primary;
-      }
+    border: 1px solid grey;
+    border-radius: $borderRadius--standard;
+    padding: 10px;
+
+    &:focus {
+      border: 1px solid $clr--primary;
     }
   }
 
@@ -42,7 +39,7 @@ form {
   .form {
 
     &__group {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     &__error {

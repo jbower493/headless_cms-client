@@ -4,20 +4,26 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 /*----------Components, sections, modules----------*/
-import Login from './sections/login';
+import LoginForm from '../forms/loginForm';
 
 /*----------Shared components----------*/
 
 /*----------Actions----------*/
 
 /*----------Component start----------*/
-class Auth extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       step: 'login'
     };
+
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin(values) {
+    console.log(values);
   }
 
   /*----------Lifecycle methods----------*/
@@ -30,19 +36,12 @@ class Auth extends Component {
   }
 
   render() {
-    const { step } = this.state;
-
-    const renderPage = () => {
-      switch (step) {
-        case 'login':
-        default: return <Login />;
-      }
-    };
+    const { handleLogin } = this;
 
     /*----------Render component----------*/
     return (
-      <div className={`auth`}>
-        {renderPage()}
+      <div className={`login`}>
+        <LoginForm handleSubmit={handleLogin} />
       </div>
     );
   }
@@ -55,4 +54,4 @@ export default withRouter(connect((state) => ({
 }),
 {
 
-})(Auth));
+})(Login));

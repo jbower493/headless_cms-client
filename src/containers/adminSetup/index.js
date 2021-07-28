@@ -7,7 +7,6 @@ import { withRouter } from 'react-router-dom';
 import AdminSetupForm from './forms/adminSetupForm';
 
 /*----------Shared components----------*/
-import RequestLoader from 'components/Loaders/RequestLoader';
 
 /*----------Actions----------*/
 import { setupAdmin, checkForAdmin } from 'containers/auth/actions';
@@ -19,6 +18,12 @@ class AdminSetup extends Component {
     super(props);
 
     this.handleAdminSetup = this.handleAdminSetup.bind(this);
+  }
+
+  handleAdminSetup(values) {
+    const { setupAdmin } = this.props;
+
+    setupAdmin(values);
   }
 
   /*----------Lifecycle methods----------*/
@@ -43,12 +48,6 @@ class AdminSetup extends Component {
       checkForAdmin();
       setNotification('success', 'Admin User successfully created');
     }
-  }
-
-  handleAdminSetup(values) {
-    const { setupAdmin } = this.props;
-
-    setupAdmin(values);
   }
 
   render() {

@@ -41,6 +41,15 @@ export const PasswordField = ({ field, form, label, className, ...rest }) => {
   );
 };
 
+export const SelectField = (props) => {
+
+  console.log(props)
+
+  return (
+    <input />
+  );
+}
+
 export const SubmitButton = ({ text, style, color, loading, disabled }) => {
   return loading
     ? <div className={`ButtonLoader`}>
