@@ -46,7 +46,7 @@ export const PasswordField = ({ field, form, label, className, ...rest }) => {
 };
 
 export const SelectField = ({ field, form, label, className, options, ...rest }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { errors, touched, setFieldValue } = form;
   const { name, value } = field;
@@ -56,7 +56,7 @@ export const SelectField = ({ field, form, label, className, options, ...rest })
   const currentValueLabel = value ? options.find(option => option.value === value).label : 'Please Select';
   
   return (
-    <div className={`form__group`}>
+    <div className={`form__group form__group--select`}>
       <input type="hidden" className={`form__hidden${getClassName(className, isError)}`} id={name} {...field} {...rest} />
       <label htmlFor={name}>{label}</label>
       <div
@@ -66,19 +66,25 @@ export const SelectField = ({ field, form, label, className, options, ...rest })
         {currentValueLabel}
         <i className={`form__selectArrow ${downArrow}`} />
       </div>
-      <ul className={`form__selectList`}>
-        {
-          isOpen && options.map((option, index) => (
-            <li
-              key={index}
-              onClick={() => setFieldValue(name, option.value)}
-              className={`form__selectOption${value === option.value ? ' form__selectOption--selected' : ''}`}
-            >
-              {option.label}
-            </li>
-          ))
-        }
-      </ul>
+      {
+        isOpen &&
+          <ul className={`form__selectList`}>
+            {
+              options.map((option, index) => (
+                <li
+                  key={index}
+                  onClick={() => {
+                    setFieldValue(name, option.value)
+                    setIsOpen(!isOpen);
+                  }}
+                  className={`form__selectOption${value === option.value ? ' form__selectOption--selected' : ''}`}
+                >
+                  {option.label}
+                </li>
+              ))
+            }
+          </ul>
+      }
       {
         isError &&
           <div className={`form__error`}>{errors[name]}</div>
@@ -87,7 +93,7 @@ export const SelectField = ({ field, form, label, className, options, ...rest })
   );
 }
 
-export const SubmitButton = ({ text, style, color, loading, disabled }) => {
+export const SubmitButton = ({ text, color, loading, disabled }) => {
   return loading
     ? <div className={`ButtonLoader`}>
       <RequestLoader size={`sm`} />
@@ -95,7 +101,7 @@ export const SubmitButton = ({ text, style, color, loading, disabled }) => {
     : <Button 
         type="submit"
         text={text}
-        style={style}
+        style="solid"
         color={color}
         disabled={disabled} />
 };

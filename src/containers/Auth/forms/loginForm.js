@@ -54,6 +54,7 @@ class LoginForm extends Component {
             handleBlur,
             handleSubmit,
             isSubmitting,
+            isValid
           }) => (
             <Form>
               <Field
@@ -89,10 +90,9 @@ class LoginForm extends Component {
 
               <SubmitButton
                 text={`Continue`}
-                style={`solid`}
                 color={`primary`}
-                loading={'loading'}
-                disabled={false} />
+                loading={false/* login request status */}
+                disabled={false/* figure out if form is valid */} />
             </Form>
           )}
         </Formik>

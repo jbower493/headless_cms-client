@@ -41,7 +41,7 @@ class Button extends Component {
     switch (type) {
       case 'submit': return (
         <input
-          className={`${getClassName()}${addColorModifier()}`}
+          className={`${getClassName()}${addColorModifier()}${disabled ? ` ${getClassName()}--disabled` : ''}`}
           type={type}
           value={text}
           disabled={disabled} />

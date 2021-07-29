@@ -69,10 +69,9 @@ class AdminSetupForm extends Component {
 
               <SubmitButton
                 text={`Continue`}
-                style={`solid`}
                 color={`primary`}
                 loading={auth_admin_setup_status === 'loading'}
-                disabled={false} />
+                disabled={false/* form is valid and not submitting */} />
             </Form>
           )}
         </Formik>

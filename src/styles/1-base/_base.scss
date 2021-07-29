@@ -33,10 +33,10 @@ form {
     width: 100%;
     height: $height--input;
     position: relative;
-    z-index: 1;
     border: 1px solid $clr--border--darkGrey;
     border-radius: $borderRadius--standard;
     padding: 0 10px;
+    z-index: 1;
 
     &:focus {
       border: 1px solid $clr--primary;
@@ -82,7 +82,6 @@ form {
       @include displayFlex;
       @include justifyContent(space-between);
       @include alignItems(center);
-      cursor: pointer;
 
       &--open {
         border: 1px solid $clr--primary;
@@ -92,10 +91,22 @@ form {
     &__selectList {
       position: absolute;
       top: calc(100% + 5px);
+      border: 1px solid $clr--primary;
+      border-radius: $borderRadius--standard;
+      width: 100%;
+      background-color: $clr--background--white;
+      z-index: 2;
+      overflow: hidden;
     }
 
     &__selectOption {
+      padding: 10px 8px;
+      transition: $transition--hover;
+      cursor: pointer;
 
+      &:hover {
+        background-color: $clr--background--primary--light;
+      }
     }
   }
 }
