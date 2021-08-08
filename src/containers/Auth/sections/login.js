@@ -9,6 +9,7 @@ import LoginForm from '../forms/loginForm';
 /*----------Shared components----------*/
 
 /*----------Actions----------*/
+import { attemptLogin } from '../actions';
 
 /*----------Component start----------*/
 class Login extends Component {
@@ -23,7 +24,9 @@ class Login extends Component {
   }
 
   handleLogin(values) {
-    console.log(values);
+    const { attemptLogin } = this.props;
+console.log(values);
+    attemptLogin(values);
   }
 
   /*----------Lifecycle methods----------*/
@@ -53,5 +56,5 @@ export default withRouter(connect((state) => ({
 
 }),
 {
-
+  attemptLogin
 })(Login));

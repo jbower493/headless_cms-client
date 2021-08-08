@@ -50,8 +50,10 @@ export const PasswordField = ({ field, form, label, className, ...rest }) => {
 export const SelectField = ({ field, form, label, className, options }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { errors, touched, setFieldValue } = form;
+  const { errors, touched, setFieldValue, setFieldTouched } = form;
   const { name, value } = field;
+  console.log(field)
+  console.log(form)
 
   const isError = errors[name] && touched[name];
 
@@ -89,6 +91,7 @@ export const SelectField = ({ field, form, label, className, options }) => {
                     onClick={() => {
                       setFieldValue(name, option.value);
                       setIsOpen(!isOpen);
+                      setFieldTouched(name, true);
                     }}
                     className={`form__selectOption${value === option.value ? ' form__selectOption--selected' : ''}`}
                   >
@@ -107,7 +110,7 @@ export const SelectField = ({ field, form, label, className, options }) => {
   );
 }
 
-export const renderSubmitButton = (status, touched, submitting, valid, text, color) => {
+export const renderSubmitButton = (status, touched, submitting, valid, text, color) => {console.log(status, touched, submitting, valid)
   if (status === 'loading') return <div className={`ButtonLoader`}><RequestLoader size={`sm`} /></div>;
   else if (Object.keys(touched).length === 0 || submitting || !valid) return <DisabledButton text={text} />
   return <Button 

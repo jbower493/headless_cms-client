@@ -4,9 +4,10 @@ Build Component Error and Page Error, done
 
 Build loading animation and Request loader, done
 
-Build Admin Setup page, in progress
-Problems: 
-- form submit disable conditions
-- changing from uncontrolled to controlled error
+Build Admin Setup page, done
 
-Build Login page, todo
+
+Build Login page, in progress
+Problems: 
+- form submit button stays disabled after submit fail (because an error coe up for the select field)
+- select field is still generally f'ed up

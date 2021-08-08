@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 
-/*----------Components, sections, modules----------*/
-
 /*----------Shared components----------*/
 import {
   TextField,
@@ -19,21 +17,8 @@ import { requiredField } from 'utilities/form/validation';
 
 /*----------Component start----------*/
 class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  /*----------Lifecycle methods----------*/
-  componentDidMount() {
-    
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-
-  }
-
   render() {
-    const { handleSubmit } = this.props;
+    const { auth_login_status, handleSubmit } = this.props;
 
     /*----------Render component----------*/
     return (
@@ -47,7 +32,6 @@ class LoginForm extends Component {
           }}
           onSubmit={handleSubmit} >
           {({
-            values,
             touched,
             isSubmitting,
             isValid
@@ -84,7 +68,7 @@ class LoginForm extends Component {
                     }
                   ]}
                 />
-                {renderSubmitButton('success', touched, isSubmitting, isValid, 'Continue')}
+                {renderSubmitButton(auth_login_status, touched, isSubmitting, isValid, 'Continue')}
               </Form>
             );
           }}
@@ -95,9 +79,8 @@ class LoginForm extends Component {
 };
 
 /*----------Component end----------*/
-
 export default withRouter(connect((state) => ({
-  
+  auth_login_status: state.auth.auth_login_status
 }),
 {
 

@@ -7,7 +7,10 @@ import {
   AUTH_ADMIN_SETUP_ERROR,
   AUTH_USER_REQUEST,
   AUTH_USER_SUCCESS,
-  AUTH_USER_ERROR
+  AUTH_USER_ERROR,
+  AUTH_LOGIN_REQUEST,
+  AUTH_LOGIN_SUCCESS,
+  AUTH_LOGIN_ERROR
 } from './actions';
 
 const initialState = {
@@ -19,7 +22,10 @@ const initialState = {
   auth_admin_setup_error: null,
   auth_user_status: null,
   auth_user_data: null,
-  auth_user_error: null
+  auth_user_error: null,
+  auth_login_status: null,
+  auth_login_data: null,
+  auth_login_error: null
 };
 
 const authReducer = (state = initialState, action) => {
@@ -89,6 +95,28 @@ const authReducer = (state = initialState, action) => {
         ...state,
         auth_user_status: 'error',
         auth_user_error: action.auth_user_error
+      }
+
+    case AUTH_LOGIN_REQUEST:
+      return {
+        ...state,
+        auth_login_status: 'loading',
+        auth_login_data: null,
+        auth_login_error: null
+      }
+
+    case AUTH_LOGIN_SUCCESS:
+      return {
+        ...state,
+        auth_login_status: 'success',
+        auth_login_data: action.auth_login_data
+      }
+
+    case AUTH_LOGIN_ERROR:
+      return {
+        ...state,
+        auth_login_status: 'error',
+        auth_login_error: action.auth_login_error
       }
 
     default:
