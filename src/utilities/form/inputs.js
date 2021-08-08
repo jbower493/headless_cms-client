@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import ClickAwayListener from 'react-click-away-listener';
 
-import Button from 'components/Button';
+import Button from 'components/Buttons/Button';
+import DisabledButton from 'components/Buttons/DisabledButton';
 import RequestLoader from 'components/Loaders/RequestLoader';
 
 import { downArrow } from '../icons';
@@ -45,7 +47,7 @@ export const PasswordField = ({ field, form, label, className, ...rest }) => {
   );
 };
 
-export const SelectField = ({ field, form, label, className, options, ...rest }) => {
+export const SelectField = ({ field, form, label, className, options }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { errors, touched, setFieldValue } = form;
@@ -55,9 +57,19 @@ export const SelectField = ({ field, form, label, className, options, ...rest })
 
   const currentValueLabel = value ? options.find(option => option.value === value).label : 'Please Select';
   
+  // Render a hidden select field so there is actually an input there, visible select field is the 'ul'
   return (
     <div className={`form__group form__group--select`}>
-      <input type="hidden" className={`form__hidden${getClassName(className, isError)}`} id={name} {...field} {...rest} />
+      <select
+        className={`form__hidden${getClassName(className, isError)}`}
+        id={name}
+        name={name}
+        value={value}
+      >
+        {
+          options.map((option, index) => <option key={index} value={option.value}>{option.label}</option>)
+        }
+      </select>
       <label htmlFor={name}>{label}</label>
       <div
         className={`form__select${isOpen ? ' form__select--open' : ''}`}
@@ -68,22 +80,24 @@ export const SelectField = ({ field, form, label, className, options, ...rest })
       </div>
       {
         isOpen &&
-          <ul className={`form__selectList`}>
-            {
-              options.map((option, index) => (
-                <li
-                  key={index}
-                  onClick={() => {
-                    setFieldValue(name, option.value)
-                    setIsOpen(!isOpen);
-                  }}
-                  className={`form__selectOption${value === option.value ? ' form__selectOption--selected' : ''}`}
-                >
-                  {option.label}
-                </li>
-              ))
-            }
-          </ul>
+          <ClickAwayListener onClickAway={() => setIsOpen(false)} >
+            <ul className={`form__selectList`}>
+              {
+                options.map((option, index) => (
+                  <li
+                    key={index}
+                    onClick={() => {
+                      setFieldValue(name, option.value);
+                      setIsOpen(!isOpen);
+                    }}
+                    className={`form__selectOption${value === option.value ? ' form__selectOption--selected' : ''}`}
+                  >
+                    {option.label}
+                  </li>
+                ))
+              }
+            </ul>
+          </ClickAwayListener>
       }
       {
         isError &&
@@ -93,15 +107,12 @@ export const SelectField = ({ field, form, label, className, options, ...rest })
   );
 }
 
-export const SubmitButton = ({ text, color, loading, disabled }) => {
-  return loading
-    ? <div className={`ButtonLoader`}>
-      <RequestLoader size={`sm`} />
-    </div>
-    : <Button 
-        type="submit"
-        text={text}
-        style="solid"
-        color={color}
-        disabled={disabled} />
+export const renderSubmitButton = (status, touched, submitting, valid, text, color) => {
+  if (status === 'loading') return <div className={`ButtonLoader`}><RequestLoader size={`sm`} /></div>;
+  else if (Object.keys(touched).length === 0 || submitting || !valid) return <DisabledButton text={text} />
+  return <Button 
+    type="submit"
+    text={text}
+    buttonStyle="solid"
+    color={color} />
 };

@@ -11,9 +11,6 @@ import { withRouter } from 'react-router-dom';
 
 /*----------Component start----------*/
 class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   /*----------Lifecycle methods----------*/
   componentDidMount() {
@@ -36,7 +33,6 @@ console.log(this.props)
 };
 
 /*----------Component end----------*/
-
 export default withRouter(connect((state) => ({
 
 }),

@@ -1,5 +1,6 @@
 import { API } from 'utilities/api/auth';
-import { getSuccessData, getErrorData, getErrorStatus } from 'utilities/commonActions';
+import { getSuccessData, getErrorData } from 'utilities/commonActions';
+import { setNotification } from 'components/Notification/actions';
 
 export const AUTH_ADMIN_EXISTS_REQUEST = 'auth/AUTH_ADMIN_EXISTS_REQUEST';
 export const AUTH_ADMIN_EXISTS_SUCCESS = 'auth/AUTH_ADMIN_EXISTS_SUCCESS';
@@ -44,15 +45,18 @@ export const setupAdmin = (profile) => {
     });
     API.auth.POST.admin(profile)
       .then(response => {
+        dispatch(setNotification('success', 'Admin User successfully created'))
         dispatch({
           type: AUTH_ADMIN_SETUP_SUCCESS,
           auth_admin_setup_data: getSuccessData(response)
         })
       })
       .catch(error => {
+        const auth_admin_setup_error = getErrorData(error);
+        dispatch(setNotification('error', auth_admin_setup_error.error))
         dispatch({
           type: AUTH_ADMIN_SETUP_ERROR,
-          auth_admin_setup_error: getErrorData(error)
+          auth_admin_setup_error
         })
       })
   };

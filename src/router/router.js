@@ -5,31 +5,15 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 /*----------Components, sections, modules----------*/
 import ProtectedRoute from './protectedRoute';
-import Sidebar from 'containers/sidebar/sidebar';
+import Sidebar from 'containers/sidebar';
 import AdminSetup from 'containers/adminSetup';
 import Auth from 'containers/auth';
 import Dashboard from 'containers/dashboard';
 import Content from 'containers/content';
 import ContentTypes from 'containers/contentTypes';
 
-/*----------Shared components----------*/
-
-/*----------Actions----------*/
-
 /*----------Component start----------*/
 class Router extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  /*----------Lifecycle methods----------*/
-  componentDidMount() {
-    
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-
-  }
 
   render() {
     const { auth_admin_exists_data, auth_user_data } = this.props;
@@ -74,7 +58,6 @@ class Router extends Component {
 }
 
 /*----------Component end----------*/
-
 export default connect((state) => ({
   auth_admin_exists_data: state.auth.auth_admin_exists_data,
   auth_user_data: state.auth.auth_user_data

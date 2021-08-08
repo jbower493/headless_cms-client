@@ -43,11 +43,15 @@ form {
     }
   }
 
-  .SolidButton, .OutlineButton {
+  .SolidButton, .OutlineButton, .DisabledButton {
     width: 100%;
   }
 
   .form {
+
+    &__hidden {
+      display: none;
+    }
 
     &__group {
       margin-bottom: 15px;

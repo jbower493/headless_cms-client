@@ -7,7 +7,7 @@ const initialState = {
   notification_data: null
 };
 
-export default (state = initialState, action) => {
+const notificationReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case NOTIFICATION_SET:
@@ -26,3 +26,5 @@ export default (state = initialState, action) => {
 
   }
 };
+
+export default notificationReducer

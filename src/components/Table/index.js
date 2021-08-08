@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
-import Button from 'components/Button';
+import Button from 'components/Buttons/Button';
 import ComponentError from 'components/Errors/ComponentError';
 import RequestLoader from 'components/Loaders/RequestLoader';
 

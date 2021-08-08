@@ -1,0 +1,13 @@
+.DisabledButton {
+  padding: 0 30px;
+  height: 40px;
+  width: fit-content;
+  @include displayFlex;
+  @include justifyContent(center);
+  @include alignItems(center);
+  border-radius: $borderRadius--standard;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: $clr--background--disabled;
+  color: white;
+}

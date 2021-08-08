@@ -20,15 +20,6 @@
   &:hover {
     background-color: $clr--primary--darker;
   }
-
-  &--disabled {
-    background-color: $clr--background--disabled;
-    cursor: default;
-
-    &:hover {
-      background-color: $clr--background--disabled;
-    }
-  }
 }
 
 .OutlineButton {

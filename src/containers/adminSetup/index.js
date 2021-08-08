@@ -10,7 +10,6 @@ import AdminSetupForm from './forms/adminSetupForm';
 
 /*----------Actions----------*/
 import { setupAdmin, checkForAdmin } from 'containers/auth/actions';
-import { setNotification } from 'components/Notification/actions';
 
 /*----------Component start----------*/
 class AdminSetup extends Component {
@@ -34,19 +33,11 @@ class AdminSetup extends Component {
   componentDidUpdate(prevProps, prevState) {
     const {
       auth_admin_setup_status,
-      auth_admin_setup_error,
-      setNotification,
       checkForAdmin
     } = this.props;
 
-    if (auth_admin_setup_status === 'error' && prevProps.auth_admin_setup_status === 'loading') {
-      const { error } = auth_admin_setup_error;
-      setNotification('error', error);
-    }
-
     if (auth_admin_setup_status === 'success' && prevProps.auth_admin_setup_status === 'loading') {
       checkForAdmin();
-      setNotification('success', 'Admin User successfully created');
     }
   }
 
@@ -71,6 +62,5 @@ export default withRouter(connect((state) => ({
 }),
 {
   setupAdmin,
-  checkForAdmin,
-  setNotification
+  checkForAdmin
 })(AdminSetup));

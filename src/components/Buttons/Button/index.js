@@ -1,32 +1,13 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
 
-/*----------Components, sections, modules----------*/
-
-/*----------Shared components----------*/
-
-/*----------Actions----------*/
-
 /*----------Component start----------*/
 class Button extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  /*----------Lifecycle methods----------*/
-  componentDidMount() {
-    
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-
-  }
-
   render() {
-    const { type, text, style, color, onClick, disabled } = this.props;
+    const { type, text, buttonStyle, color, onClick } = this.props;
 
     const getClassName = () => {
-      switch (style) {
+      switch (buttonStyle) {
         case 'outline': return 'OutlineButton';
         case 'solid':
         default: return 'SolidButton';
@@ -41,10 +22,9 @@ class Button extends Component {
     switch (type) {
       case 'submit': return (
         <input
-          className={`${getClassName()}${addColorModifier()}${disabled ? ` ${getClassName()}--disabled` : ''}`}
+          className={`${getClassName()}${addColorModifier()}`}
           type={type}
-          value={text}
-          disabled={disabled} />
+          value={text} />
       );
       case 'onClick': return (
         <button
@@ -59,5 +39,4 @@ class Button extends Component {
 };
 
 /*----------Component end----------*/
-
 export default Button;
