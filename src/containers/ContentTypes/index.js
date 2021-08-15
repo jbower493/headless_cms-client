@@ -11,9 +11,6 @@ import { withRouter } from 'react-router-dom';
 
 /*----------Component start----------*/
 class ContentTypes extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   /*----------Lifecycle methods----------*/
   componentDidMount() {
@@ -36,7 +33,6 @@ class ContentTypes extends Component {
 };
 
 /*----------Component end----------*/
-
 export default withRouter(connect((state) => {
 
 },

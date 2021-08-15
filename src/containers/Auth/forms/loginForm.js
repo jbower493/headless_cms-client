@@ -3,28 +3,33 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
-import { product_name } from 'config/config';
 
 /*----------Shared components----------*/
-import { TextField, PasswordField, renderSubmitButton } from 'utilities/form/inputs';
+import {
+  TextField,
+  PasswordField,
+  SelectField,
+  renderSubmitButton
+} from 'utilities/form/inputs';
 
 /*----------Actions----------*/
 import { requiredField } from 'utilities/form/validation';
 
 /*----------Component start----------*/
-class AdminSetupForm extends Component {
+class LoginForm extends Component {
   render() {
-    const { handleSubmit, auth_admin_setup_status } = this.props;
+    const { auth_login_status, handleSubmit } = this.props;
 
     /*----------Render component----------*/
     return (
-      <div className={`adminSetupForm`}>
-        <h2 className={`adminSetupForm__heading`}>Admin Setup</h2>
-        <p className={`adminSetupForm__intro`}>Welcome to {product_name}. Please create an admin account to begin.</p>
+      <div className={`loginForm`}>
+        <h2 className={`loginForm__heading`}>Login</h2>
+        <p className={`loginForm__intro`}>Enter your credentials to login and start managing your content.</p>
         <Formik
           initialValues={{
             username: '',
-            password: ''
+            password: '',
+            role: 'user'
           }}
           onSubmit={handleSubmit} >
           {({
@@ -47,7 +52,23 @@ class AdminSetupForm extends Component {
                   component={PasswordField}
                   validate={requiredField}
                 />
-                {renderSubmitButton(auth_admin_setup_status, touched, isValid, 'Continue')}
+                <Field
+                  label="Role"
+                  name="role"
+                  component={SelectField}
+                  validate={requiredField}
+                  options={[
+                    {
+                      label: 'User',
+                      value: 'user',
+                    },
+                    {
+                      label: 'Admin',
+                      value: 'admin',
+                    }
+                  ]}
+                />
+                {renderSubmitButton(auth_login_status, touched, isValid, 'Continue')}
               </Form>
             );
           }}
@@ -59,8 +80,8 @@ class AdminSetupForm extends Component {
 
 /*----------Component end----------*/
 export default withRouter(connect((state) => ({
-  auth_admin_setup_status: state.auth.auth_admin_setup_status
+  auth_login_status: state.auth.auth_login_status
 }),
 {
 
-})(AdminSetupForm));
+})(LoginForm));

@@ -1,6 +1,14 @@
 Tasks
 
 Build Component Error and Page Error, done
+
 Build loading animation and Request loader, done
+<<<<<<< HEAD
 Build Admin Setup page, done
+=======
+
+Build Admin Setup page, done
+
+
+>>>>>>> feature/build-login-page
 Build Login page, in progress

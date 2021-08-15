@@ -4,7 +4,7 @@ export const getSuccessData = (res) => {
 };
 
 export const getErrorData = (err) => {
-  return err.response.data;
+  return err.response?.data?.error ?? 'Something went wrong';
 };
 
 export const getErrorStatus = (err) => {

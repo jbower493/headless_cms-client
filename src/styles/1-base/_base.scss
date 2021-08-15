@@ -9,6 +9,16 @@ ul {
 
 // Form styles
 
+@keyframes reveal {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 35px;
+  }
+}
+
 form {
 
   label {
@@ -21,28 +31,31 @@ form {
   input {
     display: block;
     width: 100%;
+    height: $height--input;
     position: relative;
+    border: 1px solid $clr--border--darkGrey;
+    border-radius: $borderRadius--standard;
+    padding: 0 10px;
     z-index: 1;
-  
-    & {
-      border: 1px solid grey;
-      border-radius: $borderRadius--standard;
-      padding: 10px;
-  
-      &:focus {
-        border: 1px solid $clr--primary;
-      }
+
+    &:focus {
+      border: 1px solid $clr--primary;
     }
   }
 
-  .SolidButton, .OutlineButton {
+  .SolidButton, .OutlineButton, .DisabledButton {
     width: 100%;
   }
 
   .form {
 
+    &__hidden {
+      display: none;
+    }
+
     &__group {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      position: relative;
     }
 
     &__error {
@@ -60,15 +73,44 @@ form {
       animation: reveal 0.5s forwards;
       overflow: hidden;
     }
-  }
-}
 
-@keyframes reveal {
-  from {
-    height: 0;
-  }
+    &__select {
+      display: block;
+      width: 100%;
+      height: $height--input;
+      position: relative;
+      z-index: 1;
+      border: 1px solid $clr--border--darkGrey;
+      border-radius: $borderRadius--standard;
+      padding: 0 10px;
+      @include displayFlex;
+      @include justifyContent(space-between);
+      @include alignItems(center);
 
-  to {
-    height: 35px;
+      &--open {
+        border: 1px solid $clr--primary;
+      }
+    }
+
+    &__selectList {
+      position: absolute;
+      top: calc(100% + 5px);
+      border: 1px solid $clr--primary;
+      border-radius: $borderRadius--standard;
+      width: 100%;
+      background-color: $clr--background--white;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    &__selectOption {
+      padding: 10px 8px;
+      transition: $transition--hover;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $clr--background--primary--light;
+      }
+    }
   }
 }

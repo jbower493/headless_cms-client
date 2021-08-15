@@ -4,20 +4,30 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 /*----------Components, sections, modules----------*/
-import Login from './sections/login';
+import LoginForm from '../forms/loginForm';
 
 /*----------Shared components----------*/
 
 /*----------Actions----------*/
+import { attemptLogin } from '../actions';
+import { getUser } from 'containers/auth/actions';
 
 /*----------Component start----------*/
-class Auth extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       step: 'login'
     };
+
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin(values) {
+    const { attemptLogin } = this.props;
+
+    attemptLogin(values);
   }
 
   /*----------Lifecycle methods----------*/
@@ -26,23 +36,20 @@ class Auth extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const { auth_login_status, getUser } = this.props;
 
+    if (auth_login_status === 'success' && prevProps.auth_login_status === 'loading') {
+      getUser();
+    }
   }
 
   render() {
-    const { step } = this.state;
-
-    const renderPage = () => {
-      switch (step) {
-        case 'login':
-        default: return <Login />;
-      }
-    };
+    const { handleLogin } = this;
 
     /*----------Render component----------*/
     return (
-      <div className={`auth`}>
-        {renderPage()}
+      <div className={`login`}>
+        <LoginForm handleSubmit={handleLogin} />
       </div>
     );
   }
@@ -51,8 +58,9 @@ class Auth extends Component {
 /*----------Component end----------*/
 
 export default withRouter(connect((state) => ({
-
+  auth_login_status: state.auth.auth_login_status
 }),
 {
-
-})(Auth));
+  attemptLogin,
+  getUser
+})(Login));

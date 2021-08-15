@@ -7,11 +7,9 @@ import { withRouter } from 'react-router-dom';
 import AdminSetupForm from './forms/adminSetupForm';
 
 /*----------Shared components----------*/
-import RequestLoader from 'components/Loaders/RequestLoader';
 
 /*----------Actions----------*/
 import { setupAdmin, checkForAdmin } from 'containers/auth/actions';
-import { setNotification } from 'components/Notification/actions';
 
 /*----------Component start----------*/
 class AdminSetup extends Component {
@@ -19,6 +17,12 @@ class AdminSetup extends Component {
     super(props);
 
     this.handleAdminSetup = this.handleAdminSetup.bind(this);
+  }
+
+  handleAdminSetup(values) {
+    const { setupAdmin } = this.props;
+
+    setupAdmin(values);
   }
 
   /*----------Lifecycle methods----------*/
@@ -29,26 +33,12 @@ class AdminSetup extends Component {
   componentDidUpdate(prevProps, prevState) {
     const {
       auth_admin_setup_status,
-      auth_admin_setup_error,
-      setNotification,
       checkForAdmin
     } = this.props;
 
-    if (auth_admin_setup_status === 'error' && prevProps.auth_admin_setup_status === 'loading') {
-      const { error } = auth_admin_setup_error;
-      setNotification('error', error);
-    }
-
     if (auth_admin_setup_status === 'success' && prevProps.auth_admin_setup_status === 'loading') {
       checkForAdmin();
-      setNotification('success', 'Admin User successfully created');
     }
-  }
-
-  handleAdminSetup(values) {
-    const { setupAdmin } = this.props;
-
-    setupAdmin(values);
   }
 
   render() {
@@ -72,6 +62,5 @@ export default withRouter(connect((state) => ({
 }),
 {
   setupAdmin,
-  checkForAdmin,
-  setNotification
+  checkForAdmin
 })(AdminSetup));

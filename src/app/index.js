@@ -17,9 +17,6 @@ import { checkForAdmin, getUser } from 'containers/auth/actions';
 
 /*----------Component start----------*/
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   /*----------Lifecycle methods----------*/
   componentDidMount() {
@@ -27,10 +24,6 @@ class App extends Component {
 
     checkForAdmin();
     getUser();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-
   }
 
   render() {
@@ -75,7 +68,6 @@ class App extends Component {
 };
 
 /*----------Component end----------*/
-
 export default connect((state) => ({
   auth_admin_exists_status: state.auth.auth_admin_exists_status,
   auth_user_status: state.auth.auth_user_status,

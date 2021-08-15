@@ -2,27 +2,8 @@
 import React, { Component } from 'react';
 import { pageError } from 'utilities/icons';
 
-/*----------Components, sections, modules----------*/
-
-/*----------Shared components----------*/
-
-/*----------Actions----------*/
-
 /*----------Component start----------*/
 class PageError extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  /*----------Lifecycle methods----------*/
-  componentDidMount() {
-    
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-
-  }
-
   render() {
 
     /*----------Render component----------*/
@@ -36,5 +17,4 @@ class PageError extends Component {
 };
 
 /*----------Component end----------*/
-
 export default PageError;

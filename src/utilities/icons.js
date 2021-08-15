@@ -13,3 +13,5 @@ export const error = 'far fa-times-circle';
 export const question = 'far fa-question-circle';
 
 export const close = 'fas fa-times';
+
+export const downArrow = 'fas fa-angle-down';
