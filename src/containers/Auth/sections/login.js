@@ -10,6 +10,7 @@ import LoginForm from '../forms/loginForm';
 
 /*----------Actions----------*/
 import { attemptLogin } from '../actions';
+import { getUser } from 'containers/auth/actions';
 
 /*----------Component start----------*/
 class Login extends Component {
@@ -25,7 +26,7 @@ class Login extends Component {
 
   handleLogin(values) {
     const { attemptLogin } = this.props;
-console.log(values);
+
     attemptLogin(values);
   }
 
@@ -35,7 +36,11 @@ console.log(values);
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const { auth_login_status, getUser } = this.props;
 
+    if (auth_login_status === 'success' && prevProps.auth_login_status === 'loading') {
+      getUser();
+    }
   }
 
   render() {
@@ -53,8 +58,9 @@ console.log(values);
 /*----------Component end----------*/
 
 export default withRouter(connect((state) => ({
-
+  auth_login_status: state.auth.auth_login_status
 }),
 {
-  attemptLogin
+  attemptLogin,
+  getUser
 })(Login));

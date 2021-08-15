@@ -16,7 +16,7 @@ export const API = {
 
       admin: (profile) => axios.post('/auth/create-admin', profile),
 
-      login: (credentials) => axios.post('/auth/logi', credentials)
+      login: (credentials) => axios.post('/auth/login', credentials)
 
     }
   }

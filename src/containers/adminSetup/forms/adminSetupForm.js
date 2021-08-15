@@ -29,7 +29,6 @@ class AdminSetupForm extends Component {
           onSubmit={handleSubmit} >
           {({
             touched,
-            isSubmitting,
             isValid
           }) => {
             return (
@@ -48,7 +47,7 @@ class AdminSetupForm extends Component {
                   component={PasswordField}
                   validate={requiredField}
                 />
-                {renderSubmitButton(auth_admin_setup_status, touched, isSubmitting, isValid, 'Continue')}
+                {renderSubmitButton(auth_admin_setup_status, touched, isValid, 'Continue')}
               </Form>
             );
           }}

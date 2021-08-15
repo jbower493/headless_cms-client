@@ -28,12 +28,12 @@ class LoginForm extends Component {
         <Formik
           initialValues={{
             username: '',
-            password: ''
+            password: '',
+            role: 'user'
           }}
           onSubmit={handleSubmit} >
           {({
             touched,
-            isSubmitting,
             isValid
           }) => {
             return (
@@ -59,16 +59,16 @@ class LoginForm extends Component {
                   validate={requiredField}
                   options={[
                     {
-                      label: 'Option 1',
-                      value: 'one',
+                      label: 'User',
+                      value: 'user',
                     },
                     {
-                      label: 'Option 2',
-                      value: 'two',
+                      label: 'Admin',
+                      value: 'admin',
                     }
                   ]}
                 />
-                {renderSubmitButton(auth_login_status, touched, isSubmitting, isValid, 'Continue')}
+                {renderSubmitButton(auth_login_status, touched, isValid, 'Continue')}
               </Form>
             );
           }}

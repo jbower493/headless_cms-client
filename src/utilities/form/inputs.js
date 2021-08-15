@@ -52,8 +52,6 @@ export const SelectField = ({ field, form, label, className, options }) => {
 
   const { errors, touched, setFieldValue, setFieldTouched } = form;
   const { name, value } = field;
-  console.log(field)
-  console.log(form)
 
   const isError = errors[name] && touched[name];
 
@@ -66,7 +64,6 @@ export const SelectField = ({ field, form, label, className, options }) => {
         className={`form__hidden${getClassName(className, isError)}`}
         id={name}
         name={name}
-        value={value}
       >
         {
           options.map((option, index) => <option key={index} value={option.value}>{option.label}</option>)
@@ -89,9 +86,9 @@ export const SelectField = ({ field, form, label, className, options }) => {
                   <li
                     key={index}
                     onClick={() => {
+                      setFieldTouched(name, true);
                       setFieldValue(name, option.value);
                       setIsOpen(!isOpen);
-                      setFieldTouched(name, true);
                     }}
                     className={`form__selectOption${value === option.value ? ' form__selectOption--selected' : ''}`}
                   >
@@ -110,9 +107,9 @@ export const SelectField = ({ field, form, label, className, options }) => {
   );
 }
 
-export const renderSubmitButton = (status, touched, submitting, valid, text, color) => {console.log(status, touched, submitting, valid)
+export const renderSubmitButton = (status, touched, valid, text, color) => {
   if (status === 'loading') return <div className={`ButtonLoader`}><RequestLoader size={`sm`} /></div>;
-  else if (Object.keys(touched).length === 0 || submitting || !valid) return <DisabledButton text={text} />
+  else if (Object.keys(touched).length === 0 || !valid) return <DisabledButton text={text} />
   return <Button 
     type="submit"
     text={text}
