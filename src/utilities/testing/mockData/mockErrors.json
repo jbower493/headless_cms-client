@@ -1,0 +1,12 @@
+{
+  "endpointNotFound": {
+    "response": {
+      "data": {
+        "error": "No route exists",
+        "message": "",
+        "success": false,
+        "user": null
+      }
+    }
+  }
+}

@@ -10,3 +10,7 @@ export const multipleValidations = (value, validations) => {
 export const requiredField = (value) => {
   return value ? undefined : 'Required';
 }
+
+export const minLengthEight = (value) => {
+  return value.length >= 8 ? undefined : 'Must be at least 8 characters.';
+}

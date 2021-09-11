@@ -1,0 +1,39 @@
+{
+  "adminExists_admin": {
+    "data": {
+      "adminExists": true
+    }
+  },
+  "adminExists_noAdmin": {
+    "data": {
+      "adminExists": false
+    }
+  },
+  "createAdmin_success": {
+    "data": {
+      "error": null,
+      "message": "Admin successfully created",
+      "success": true,
+      "user": null
+    }
+  },
+  "createAdmin_errorShortPassword": {
+    "data": {
+      "error": "Password too short",
+      "message": "",
+      "success": false,
+      "user": null
+    }
+  },
+  "getUser_user": {
+    "data": {}
+  },
+  "getUser_noUser": {
+    "data": {
+      "error": null,
+      "message": "No user is logged in",
+      "success": true,
+      "user": null
+    }
+  }
+}

@@ -9,7 +9,11 @@ import { product_name } from 'config/config';
 import { TextField, PasswordField, renderSubmitButton } from 'utilities/form/inputs';
 
 /*----------Actions----------*/
-import { requiredField, isFred, multipleValidations } from 'utilities/form/validation';
+import {
+  requiredField,
+  minLengthEight,
+  multipleValidations
+} from 'utilities/form/validation';
 
 /*----------Component start----------*/
 class AdminSetupForm extends Component {
@@ -38,14 +42,14 @@ class AdminSetupForm extends Component {
                   name="username"
                   placeholder="Username"
                   component={TextField}
-                  validate={value => multipleValidations(value, [requiredField])}
+                  validate={requiredField}
                 />
                 <Field
                   label="Password"
                   name="password"
                   placeholder="Password"
                   component={PasswordField}
-                  validate={requiredField}
+                  validate={value => multipleValidations(value, [requiredField, minLengthEight])}
                 />
                 {renderSubmitButton(auth_admin_setup_status, dirty, isValid, 'Continue')}
               </Form>
