@@ -107,9 +107,9 @@ export const SelectField = ({ field, form, label, className, options }) => {
   );
 }
 
-export const renderSubmitButton = (status, touched, valid, text, color) => {
+export const renderSubmitButton = (status, dirty, valid, text, color) => {
   if (status === 'loading') return <div className={`ButtonLoader`}><RequestLoader size={`sm`} /></div>;
-  else if (Object.keys(touched).length === 0 || !valid) return <DisabledButton text={text} />
+  else if (!dirty || !valid) return <DisabledButton text={text} />
   return <Button 
     type="submit"
     text={text}

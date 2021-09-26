@@ -116,7 +116,7 @@ export const attemptLogin = (credentials) => {
       })
       .catch(error => {
         const auth_login_error = getErrorData(error);
-        dispatch(setNotification('error', ));
+        dispatch(setNotification('error', auth_login_error));
         dispatch({
           type: AUTH_LOGIN_ERROR,
           auth_login_error

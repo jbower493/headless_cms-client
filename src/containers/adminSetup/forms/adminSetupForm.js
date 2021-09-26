@@ -9,7 +9,11 @@ import { product_name } from 'config/config';
 import { TextField, PasswordField, renderSubmitButton } from 'utilities/form/inputs';
 
 /*----------Actions----------*/
-import { requiredField } from 'utilities/form/validation';
+import {
+  requiredField,
+  minLengthEight,
+  multipleValidations
+} from 'utilities/form/validation';
 
 /*----------Component start----------*/
 class AdminSetupForm extends Component {
@@ -28,8 +32,8 @@ class AdminSetupForm extends Component {
           }}
           onSubmit={handleSubmit} >
           {({
-            touched,
-            isValid
+            isValid,
+            dirty
           }) => {
             return (
               <Form>
@@ -45,9 +49,9 @@ class AdminSetupForm extends Component {
                   name="password"
                   placeholder="Password"
                   component={PasswordField}
-                  validate={requiredField}
+                  validate={value => multipleValidations(value, [requiredField, minLengthEight])}
                 />
-                {renderSubmitButton(auth_admin_setup_status, touched, isValid, 'Continue')}
+                {renderSubmitButton(auth_admin_setup_status, dirty, isValid, 'Continue')}
               </Form>
             );
           }}

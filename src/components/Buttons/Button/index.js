@@ -21,10 +21,10 @@ class Button extends Component {
     /*----------Render component----------*/
     switch (type) {
       case 'submit': return (
-        <input
+        <button
           className={`${getClassName()}${addColorModifier()}`}
-          type={type}
-          value={text} />
+          type={'submit'}
+        >{text}</button>
       );
       case 'onClick': return (
         <button
