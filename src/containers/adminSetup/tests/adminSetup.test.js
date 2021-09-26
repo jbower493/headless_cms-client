@@ -1,7 +1,8 @@
 /*---------- Imports ----------*/
-import { waitFor, fireEvent, cleanup } from '@testing-library/react';
+import { waitFor, waitForElementToBeRemoved, fireEvent, cleanup } from '@testing-library/react';
 import "@testing-library/jest-dom/extend-expect";
 import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 import { renderWithBoth, mockLoader, debugFull } from 'utilities/testing/testUtils';
 import { API } from 'utilities/api/auth';
 import {
@@ -54,17 +55,7 @@ describe('ADMIN SETUP', () => {
 
   // practice one to figure out formik
   it('Should display loader in place of submit button while admin setup request loads on form submit', async () => {
-    API.auth.POST.admin.mockResolvedValue(createAdmin_success);
-    API.auth.GET.admin.mockResolvedValue(adminExists_admin);
-
-    const { getByText, getByLabelText } = renderWithBoth(<AdminSetup />, '/admin-setup');
-
-    expect(getByText('Continue').classList).toContain('DisabledButton');
-    userEvent.type(getByLabelText('Username'), 'Fredman');
-    userEvent.type(getByLabelText('Password'), 'password1234');
-    await waitFor(() => expect(getByText('Continue').classList).toContain('SolidButton'));
-    userEvent.click(getByText('Continue'));
-    await waitFor(() => expect(getByText('Loading')).toBeInTheDocument());
+    
   });
 
 

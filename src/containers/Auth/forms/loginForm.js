@@ -33,7 +33,7 @@ class LoginForm extends Component {
           }}
           onSubmit={handleSubmit} >
           {({
-            touched,
+            dirty,
             isValid
           }) => {
             return (
@@ -68,7 +68,7 @@ class LoginForm extends Component {
                     }
                   ]}
                 />
-                {renderSubmitButton(auth_login_status, touched, isValid, 'Continue')}
+                {renderSubmitButton(auth_login_status, dirty, isValid, 'Continue')}
               </Form>
             );
           }}
