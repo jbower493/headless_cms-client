@@ -1,0 +1,11 @@
+.dashboard {
+  @include mainWindow;
+
+  &__heading {
+    @include mainWindowHeading;
+  }
+
+  &__container {
+    @include mainWindowContainer;
+  }
+}

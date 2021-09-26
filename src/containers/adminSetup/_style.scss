@@ -1,9 +1,10 @@
 .adminSetup {
   min-height: $height--mainPage;
+  width: 100%;
+  padding: 50px 20px;
   @include displayFlex;
   @include justifyContent(center);
   @include alignItems(center);
-  padding: 50px 20px;
 
   @include screenSize('xs', 'sm') {
     padding: 30px 10px;

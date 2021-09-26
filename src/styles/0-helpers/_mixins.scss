@@ -1,12 +1,18 @@
 // MAIN WINDOW
-@mixin main-window-heading {
-  margin-bottom: 30px;
+@mixin mainWindow {
+  padding: 40px;
 }
 
-@mixin main-window-container {
-  background-color: $clr--light-grey;
+@mixin mainWindowHeading {
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+@mixin mainWindowContainer {
+  background-color: $clr--lightGrey;
   min-height: 300px;
-  border-radius: $border-radius--standard;
+  border-radius: $borderRadius--standard;
   padding: 20px;
 }
 

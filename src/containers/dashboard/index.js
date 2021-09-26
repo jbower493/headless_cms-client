@@ -26,7 +26,10 @@ class Dashboard extends Component {
     /*----------Render component----------*/
     return (
       <div className={`dashboard`}>
-        Dashboard lol
+        <h3 className={`dashboard__heading`}>Dashboard</h3>
+        <section className={`dashboard__container`}>
+          Welcome to the Headless CMS dashboard. Use the sidebar menu to start working with your content.
+        </section>
       </div>
     );
   }
