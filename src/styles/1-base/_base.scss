@@ -3,6 +3,11 @@ html {
   font-family: $ff--primary;
 }
 
+.mainPage {
+  @include displayFlex;
+  min-height: $height--mainPage;
+}
+
 ul {
   list-style: none;
 }

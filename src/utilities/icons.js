@@ -17,3 +17,5 @@ export const close = 'fas fa-times';
 export const downArrow = 'fas fa-angle-down';
 
 export const profile = 'fas fa-user-circle';
+
+export const plus = 'fas fa-plus-circle';

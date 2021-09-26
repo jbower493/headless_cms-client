@@ -20,7 +20,7 @@ class Router extends Component {
 
     /*----------Render component----------*/
     return (
-      <>
+      <div className={`mainPage`}>
         <Switch>
           <Route exact path='/admin-setup' render={() => null} />
           <Route exact path='/login' render={() => null} />
@@ -52,7 +52,7 @@ class Router extends Component {
           }} />
           <Route path='/' render={() => auth_user_data.user ? <Redirect to="/dashboard" /> : <Redirect to="/login" />} />
         </Switch>
-      </>
+      </div>
     );
   }
 }
