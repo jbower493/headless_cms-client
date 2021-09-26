@@ -1,5 +1,4 @@
 // MAIN WINDOW
-
 @mixin main-window-heading {
   margin-bottom: 30px;
 }
@@ -12,7 +11,6 @@
 }
 
 // FLEX
-
 @mixin displayFlex {
   display: flex;
 }
@@ -25,12 +23,11 @@
   justify-content: $value;
 }
 
-@mixin alignItems($value: stretch) {
+@mixin alignItems($value: flex-start) {
   align-items: $value;
 }
 
 // MEDIA QUERIES
-
 $xs: 550px;
 $sm: 750px;
 $md: 1000px;
@@ -66,4 +63,16 @@ $lg: 1500px;
       @content;
     }
   } 
-} 
+}
+
+// BORDER RADIUS
+@mixin borderRadius($br: 0px) {
+  border-radius: $br;
+}
+
+@mixin borderRadiusSpecified($tl: 0px, $tr: 0px, $br: 0px, $bl: 0px) {
+  border-top-left-radius: $tl;
+  border-top-right-radius: $tr;
+  border-bottom-right-radius: $br;
+  border-bottom-left-radius: $bl;
+}

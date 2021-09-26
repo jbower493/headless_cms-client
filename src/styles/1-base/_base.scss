@@ -25,7 +25,7 @@ form {
     display: block;
     font-size: $fs--small;
     margin-bottom: 5px;
-    color: $clr--text--grey;
+    color: $clr--textGrey;
   }
   
   input {
@@ -33,7 +33,7 @@ form {
     width: 100%;
     height: $height--input;
     position: relative;
-    border: 1px solid $clr--border--darkGrey;
+    border: 1px solid $clr--darkGrey;
     border-radius: $borderRadius--standard;
     padding: 0 10px;
     z-index: 1;
@@ -64,9 +64,9 @@ form {
       height: 35px;
       @include displayFlex;
       @include alignItems(center);
-      color: $clr--text--error;
+      color: $clr--error;
       font-size: 13px;
-      background-color: $clr--background--error;
+      background-color: $clr--errorBackground;
       border-bottom-left-radius: $borderRadius--standard;
       border-bottom-right-radius: $borderRadius--standard;
       position: relative;
@@ -80,7 +80,7 @@ form {
       height: $height--input;
       position: relative;
       z-index: 1;
-      border: 1px solid $clr--border--darkGrey;
+      border: 1px solid $clr--darkGrey;
       border-radius: $borderRadius--standard;
       padding: 0 10px;
       @include displayFlex;
@@ -98,7 +98,7 @@ form {
       border: 1px solid $clr--primary;
       border-radius: $borderRadius--standard;
       width: 100%;
-      background-color: $clr--background--white;
+      background-color: $clr--white;
       z-index: 2;
       overflow: hidden;
     }
@@ -109,7 +109,7 @@ form {
       cursor: pointer;
 
       &:hover {
-        background-color: $clr--background--primary--light;
+        background-color: $clr--primary--light;
       }
     }
   }

@@ -1,5 +1,77 @@
 .header {
+  position: relative;
   height: $height--header;
-  background-color: black;
+  background-color: $clr--darkNavy;
   color: white;
+  @include displayFlex;
+  @include justifyContent(space-between);
+  @include alignItems(center);
+  padding: 0 40px;
+
+  &__productName {
+    font-size: 20px;
+    font-weight: 500;
+    color: $clr--primary;
+    @include displayFlex;
+    @include alignItems(center);
+  }
+
+  &__logo {
+    margin-left: 15px;
+    height: 30px;
+  }
+
+  &__projectName {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: 600;
+  }
+}
+
+.profileDropdown {
+  position: relative;
+  @include displayFlex;
+  @include alignItems(center);
+
+  &__profileIcon {
+    font-size: 26px;
+  }
+
+  &__name {
+    margin: 0 15px;
+  }
+
+  &__downArrow {
+    margin-top: 4px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  &__menu {
+    position: absolute;
+    top: 60px;
+    right: 0px;
+    width: 150px;
+    background-color: $clr--darkNavy;
+    @include borderRadius($borderRadius--standard);
+  }
+
+  &__item {
+
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $clr--white;
+    padding: 10px;
+    display: block;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $clr--sidebarHover;
+    }
+  }
 }

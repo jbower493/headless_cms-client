@@ -10,6 +10,8 @@ export const API = {
 
       user: () => axios.get('/auth/get-user'),
 
+      logout: () => axios.get('/auth/logout')
+
     },
 
     POST: {

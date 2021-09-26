@@ -2,7 +2,7 @@
   position: fixed;
   top: 90px;
   right: -400px;
-  background-color: $clr--background--white;
+  background-color: $clr--white;
   height: 60px;
   width: 400px;
   @include displayFlex;
@@ -35,7 +35,7 @@
     @include alignItems(center);
     padding: 0 50px 0 20px;
     font-size: $fs--small;
-    color: $clr--text--grey;
+    color: $clr--textGrey;
   }
 
   &__dismiss {

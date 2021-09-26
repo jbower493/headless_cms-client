@@ -10,7 +10,10 @@ import {
   AUTH_USER_ERROR,
   AUTH_LOGIN_REQUEST,
   AUTH_LOGIN_SUCCESS,
-  AUTH_LOGIN_ERROR
+  AUTH_LOGIN_ERROR,
+  AUTH_LOGOUT_REQUEST,
+  AUTH_LOGOUT_SUCCESS,
+  AUTH_LOGOUT_ERROR
 } from './actions';
 
 const initialState = {
@@ -25,12 +28,15 @@ const initialState = {
   auth_user_error: null,
   auth_login_status: null,
   auth_login_data: null,
-  auth_login_error: null
+  auth_login_error: null,
+  auth_logout_status: null,
+  auth_logout_data: null,
+  auth_logout_error: null
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    
+
     case AUTH_ADMIN_EXISTS_REQUEST:
       return {
         ...state,
@@ -117,6 +123,28 @@ const authReducer = (state = initialState, action) => {
         ...state,
         auth_login_status: 'error',
         auth_login_error: action.auth_login_error
+      }
+
+    case AUTH_LOGOUT_REQUEST:
+      return {
+        ...state,
+        auth_logout_status: 'loading',
+        auth_logout_data: null,
+        auth_logout_error: null
+      }
+
+    case AUTH_LOGOUT_SUCCESS:
+      return {
+        ...state,
+        auth_logout_status: 'success',
+        auth_logout_data: action.auth_logout_data
+      }
+
+    case AUTH_LOGOUT_ERROR:
+      return {
+        ...state,
+        auth_logout_status: 'error',
+        auth_logout_error: action.auth_logout_error
       }
 
     default:

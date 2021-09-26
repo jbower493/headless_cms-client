@@ -15,3 +15,5 @@ export const question = 'far fa-question-circle';
 export const close = 'fas fa-times';
 
 export const downArrow = 'fas fa-angle-down';
+
+export const profile = 'fas fa-user-circle';
