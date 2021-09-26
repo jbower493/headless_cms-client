@@ -24,6 +24,9 @@ class Header extends Component {
   }
 
   render() {
+    const { auth_user_data } = this.props;
+
+    const { user } = auth_user_data;
 
     /*----------Render component----------*/
     return (
@@ -33,7 +36,7 @@ class Header extends Component {
           <img className={`header__logo`} src={`images/logo.png`} alt={`${product_name}`} />  
         </h2>
         <h1 className={`header__projectName`}>{project_name}</h1>
-        <ProfileDropdown />
+        {user && <ProfileDropdown />}
       </div>
     );
   }
@@ -41,7 +44,7 @@ class Header extends Component {
 
 /*----------Component end----------*/
 export default withRouter(connect((state) => ({
-
+  auth_user_data: state.auth.auth_user_data
 }),
 {
 

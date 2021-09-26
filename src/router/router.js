@@ -24,11 +24,11 @@ class Router extends Component {
         <Switch>
           <Route exact path='/admin-setup' render={() => null} />
           <Route exact path='/login' render={() => null} />
-          <Route path='/' component={Sidebar} />
+          <Route path='/' render={() => auth_user_data.user ? <Sidebar /> : null} />
         </Switch>
         
         <Switch>
-          <ProtectedRoute exact path='/' component={Dashboard} />
+          <ProtectedRoute exact path='/dashboard' component={Dashboard} />
           <ProtectedRoute exact path='/content' component={Content} />
           <ProtectedRoute exact path='/content-types' component={ContentTypes} />
 
@@ -37,20 +37,20 @@ class Router extends Component {
               return <Redirect to="/admin-setup" />;
             }
             if (auth_user_data.user) {
-              return <Redirect to="/" />;
+              return <Redirect to="/dashboard" />;
             }
             return <Auth />;
           }} />
           <Route exact path='/admin-setup' render={() => {
             if (auth_admin_exists_data.adminExists) {
               if (auth_user_data.user) {
-                return <Redirect to="/" />;
+                return <Redirect to="/dashboard" />;
               }
               return <Redirect to="/login" />;
             }
             return <AdminSetup />;
           }} />
-          <Route path='/' render={() => <div>404</div>} />
+          <Route path='/' render={() => auth_user_data.user ? <Redirect to="/dashboard" /> : <Redirect to="/login" />} />
         </Switch>
       </>
     );

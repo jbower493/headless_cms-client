@@ -45,8 +45,10 @@ class ProfileDropdown extends Component {
 
   render() {
     const { open } = this.state;
-    const { attemptLogout } = this.props;
+    const { auth_user_data, attemptLogout } = this.props;
     const { toggleDropdown } = this;
+
+    const { user: { username } } = auth_user_data;
 
     const renderMenu = () => {
       return (
@@ -68,7 +70,7 @@ class ProfileDropdown extends Component {
     return (
       <div className={`profileDropdown`}>
         <i className={`profileDropdown__profileIcon ${profile}`} />
-        <p className={`profileDropdown__name`}>{`Jamie`}</p>
+        <p className={`profileDropdown__name`}>{username}</p>
         <i onClick={toggleDropdown} className={`profileDropdown__downArrow ${downArrow}`} />
 
         {open && renderMenu()}
@@ -80,7 +82,8 @@ class ProfileDropdown extends Component {
 /*----------Component end----------*/
 
 export default withRouter(connect((state) => ({
-  auth_logout_status: state.auth.auth_logout_status
+  auth_logout_status: state.auth.auth_logout_status,
+  auth_user_data: state.auth.auth_user_data
 }),
 {
   attemptLogout,

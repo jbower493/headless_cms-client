@@ -22,7 +22,7 @@ class Dashboard extends Component {
   }
 
   render() {
-console.log(this.props)
+
     /*----------Render component----------*/
     return (
       <div className={`dashboard`}>

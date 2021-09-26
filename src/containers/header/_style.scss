@@ -59,16 +59,13 @@
     @include borderRadius($borderRadius--standard);
   }
 
-  &__item {
-
-  }
-
   &__link {
     text-decoration: none;
     color: $clr--white;
     padding: 10px;
     display: block;
     cursor: pointer;
+    transition: $transition--hover;
 
     &:hover {
       background-color: $clr--sidebarHover;
