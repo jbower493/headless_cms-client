@@ -25,6 +25,7 @@
 
   &__sectionAddNew {
     @include displayFlex;
+    @include justifyContent(space-between);
     @include alignItems(center);
     @include sidebarLink;
   }
