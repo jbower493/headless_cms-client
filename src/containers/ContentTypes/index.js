@@ -3,12 +3,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { eye, edit, trash } from 'utilities/icons';
+
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
 import Table from 'components/Table';
+import RequestLoader from 'components/Loaders/RequestLoader';
+import Modal from 'components/Modal';
 
 /*----------Actions----------*/
+import { getAllcontentTypes } from 'containers/contentTypes/actions';
 
 /*----------Component start----------*/
 class ContentTypes extends Component {
@@ -22,15 +27,25 @@ class ContentTypes extends Component {
     if (data?.length <= 0) return [];
 
     return data.map(item => {
-
+      const { name } = item;
 
       return {
-        hello: 'hello',
+        contentTypeName: `${name}s`,
         actions: [
           {
-            style: 'outline button',
-            onClick: () => alert('Hey'),
-            text: 'Say Hey'
+            buttonStyle: 'icon',
+            icon: eye,
+            onClick: () => alert('Hey')
+          },
+          {
+            buttonStyle: 'icon',
+            icon: edit,
+            onClick: () => alert('Hey')
+          },
+          {
+            buttonStyle: 'icon',
+            icon: trash,
+            onClick: () => alert('Hey')
           }
         ]
       }
@@ -39,7 +54,9 @@ class ContentTypes extends Component {
 
   /*----------Lifecycle methods----------*/
   componentDidMount() {
-    
+    const { getAllcontentTypes } = this.props;
+
+    getAllcontentTypes();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -47,31 +64,53 @@ class ContentTypes extends Component {
   }
 
   render() {
+    const { content_types_all_status, content_types_all_data } = this.props;
     const { getContentTypesMatrix } = this;
+
+    const renderMainContent = () => {
+      return (
+        <>
+          <h3 className={`contentTypes__heading`}>Content Types</h3>
+          <section className={`contentTypes__container`}>
+            <Table
+              status={'success'}
+              head={[
+                { heading: 'Content Type Name' },
+                { heading: '', type: 'actions' }
+              ]}
+              body={getContentTypesMatrix(content_types_all_data?.contentTypes)}
+            />
+          </section>
+        </>
+      );
+    };
+
+    const renderPage = () => {
+      switch (content_types_all_status) {
+        case 'success': return renderMainContent();
+        case 'error':
+        case 'loading':
+        default: return <RequestLoader />;
+      }
+    };
 
     /*----------Render component----------*/
     return (
       <div className={`contentTypes`}>
-        <h3 className={`contentTypes__heading`}>Content Types</h3>
-        <section className={`contentTypes__container`}>
-          <Table
-            status={'success'}
-            head={[
-              { heading: 'Content Type Name' },
-              { heading: '', type: 'actions' }
-            ]}
-            body={getContentTypesMatrix([1,2,3,4,5])}
-           />
-        </section>
+        {renderPage()}
+        <Modal status={`success`}>
+          Hello
+        </Modal>
       </div>
     );
   }
 };
 
 /*----------Component end----------*/
-export default withRouter(connect((state) => {
-
-},
-{
-
-})(ContentTypes));
+export default withRouter(connect((state) => ({
+  content_types_all_status: state.contentTypes.content_types_all_status,
+  content_types_all_data: state.contentTypes.content_types_all_data
+}),
+  {
+    getAllcontentTypes
+  })(ContentTypes));

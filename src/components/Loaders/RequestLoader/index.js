@@ -9,8 +9,10 @@ class RequestLoader extends Component {
 
     /*----------Render component----------*/
     return (
-      <div className={`RequestLoader${size ? ' RequestLoader--' + size : ''}`}>
-        <img className={`RequestLoader__logo`} src={`images/logo.png`} alt={`${product_name}`} />
+      <div className={`RequestLoader__container`}>
+        <div className={`RequestLoader${size ? ' RequestLoader--' + size : ''}`}>
+          <img className={`RequestLoader__logo`} src={`images/logo.png`} alt={`${product_name}`} />
+        </div>
       </div>
     );
   }

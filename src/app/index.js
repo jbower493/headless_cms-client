@@ -45,22 +45,20 @@ class App extends Component {
 
     const renderApp = () => {
       switch (getLoadingStatus()) {
-        case 'loading': return <RequestLoader />;
         case 'error': return <PageError />;
+        case 'loading': return <div className={`mainLoaderContainer`}><RequestLoader /></div>;
         case 'sucess':
-        default: return (
-          <BrowserRouter>
-            <Header />
-            <Router />
-          </BrowserRouter>
-        );
+        default: return <Router />;
       }
     };
 
     /*----------Render component----------*/
     return (
       <div className={`app`}>
-        {renderApp()}
+        <BrowserRouter>
+          <Header />
+          {renderApp()}
+        </BrowserRouter>
         {notification_data && <Notification />}
       </div>
     );

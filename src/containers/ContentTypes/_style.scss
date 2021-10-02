@@ -8,4 +8,15 @@
   &__container {
     @include mainWindowContainer;
   }
+
+  .Table {
+
+    &__column {
+
+      &.contentTypeName {
+        font-size: 18px;
+        text-transform: capitalize;
+      }
+    }
+  }
 }

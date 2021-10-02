@@ -3,6 +3,10 @@ html {
   font-family: $ff--primary;
 }
 
+.mainLoaderContainer {
+  height: $height--mainPage;
+}
+
 .mainPage {
   @include displayFlex;
   min-height: $height--mainPage;

@@ -43,8 +43,8 @@ class Table extends Component {
     };
 
     const renderOneAction = (action, index) => {
-      const { style, text, onClick, icon } = action;
-      if (style === 'solid button') {
+      const { buttonStyle, text, onClick, icon } = action;
+      if (buttonStyle === 'solid button') {
         return (
           <Button
             key={index || 1}
@@ -53,18 +53,18 @@ class Table extends Component {
             text={text} />
         );
       }
-      if (style === 'outline button') {
+      if (buttonStyle === 'outline button') {
         return (
           <Button
             key={index || 1}
             type='onClick'
-            style='outline'
+            buttonStyle='outline'
             onClick={onClick}
             text={text} />
         );
       }
-      if (style === 'icon') {
-        return <i className={icon} onClick={onClick} />
+      if (buttonStyle === 'icon') {
+        return <i key={index || 1} className={icon} onClick={onClick} />
       }
     };
 

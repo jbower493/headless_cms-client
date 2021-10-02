@@ -12,7 +12,6 @@
 
 @mixin mainWindowContainer {
   background-color: $clr--lightGrey;
-  min-height: 300px;
   width: 100%;
   border-radius: $borderRadius--standard;
   padding: 20px;

@@ -3,6 +3,14 @@
   width: 160px;
   height: 80px;
 
+  &__container {
+    height: 100%;
+    width: 100%;
+    @include displayFlex;
+    @include justifyContent(center);
+    @include alignItems(center);
+  }
+
   &__logo {
     position: absolute;
     width: 30%;

@@ -26,8 +26,6 @@ class Header extends Component {
   render() {
     const { auth_user_data } = this.props;
 
-    const { user } = auth_user_data;
-
     /*----------Render component----------*/
     return (
       <div className={`header`}>
@@ -36,7 +34,7 @@ class Header extends Component {
           <img className={`header__logo`} src={`images/logo.png`} alt={`${product_name}`} />  
         </h2>
         <h1 className={`header__projectName`}>{project_name}</h1>
-        {user && <ProfileDropdown />}
+        {auth_user_data?.user && <ProfileDropdown />}
       </div>
     );
   }
