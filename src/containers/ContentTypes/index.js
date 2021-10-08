@@ -6,11 +6,11 @@ import { withRouter } from 'react-router-dom';
 import { eye, edit, trash } from 'utilities/icons';
 
 /*----------Components, sections, modules----------*/
+import NewContentTypeForm from 'containers/contentTypes/forms/newContentTypeForm';
 
 /*----------Shared components----------*/
 import Table from 'components/Table';
 import RequestLoader from 'components/Loaders/RequestLoader';
-import Modal from 'components/Modal';
 
 /*----------Actions----------*/
 import { getAllcontentTypes } from 'containers/contentTypes/actions';
@@ -98,9 +98,7 @@ class ContentTypes extends Component {
     return (
       <div className={`contentTypes`}>
         {renderPage()}
-        <Modal status={`success`}>
-          Hello
-        </Modal>
+        <NewContentTypeForm />
       </div>
     );
   }

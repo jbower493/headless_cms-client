@@ -18,7 +18,7 @@ class Modal extends Component {
 
   /*----------Lifecycle methods----------*/
   componentDidMount() {
-    
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -26,11 +26,42 @@ class Modal extends Component {
   }
 
   render() {
-    const { status, children } = this.props;
+    const {
+      className,
+      status,
+      title: { heading, subheading },
+      body,
+      actions: { primary, secondary }
+    } = this.props;
 
     const renderContent = () => {
       return (
-        <div className={`Modal__content`}>{children}</div>
+        <div className={`Modal__content`}>
+          <div className={`Modal__header`}>
+            {heading}
+            {subheading && ':'}
+            {subheading && <span className={`Modal__subHeading`}>{subheading}</span>}
+          </div>
+          <div className={`Modal__body`}>{body}</div>
+          <div className={`Modal__footer`}>
+            {
+              primary.type === 'submit'
+                ? primary.submitButton
+                : (
+                  <Button
+                    type='onClick'
+                    buttonStyle='solid'
+                    onClick={primary.onClick}
+                    text={primary.text} />
+                )
+            }
+            <Button
+              type='onClick'
+              buttonStyle='outline'
+              onClick={secondary.onClick}
+              text={secondary.text} />
+          </div>
+        </div>
       )
     };
 
@@ -47,7 +78,7 @@ class Modal extends Component {
     return (
       <div className={`Modal__container`}>
         <div className={`Modal__backdrop`}></div>
-        <div className={`Modal`}>
+        <div className={`Modal${className ? ' ' + className : ''}`}>
           {renderModalContents()}
         </div>
       </div>

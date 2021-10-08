@@ -23,4 +23,36 @@
     background-color: $clr--black;
     opacity: 0.6;
   }
+
+  &__content {
+    @include displayFlex;
+    @include flexDirection(column);
+    height: 100%;
+  }
+
+  &__header {
+    padding: 15px 20px;
+    border-bottom: 1px solid $clr--grey;
+    font-size: $fs--large;
+  }
+
+  &__subHeading {
+    font-size: $fs--medium;
+    color: $clr--primary;
+    margin-left: 5px;
+  }
+
+  &__body {
+    @include flex(1, 1, 0px);
+    padding: 20px;
+  }
+
+  &__footer {
+    padding: 15px 20px;
+    border-top: 1px solid $clr--grey;
+
+    .SolidButton {
+      margin-right: 20px;
+    }
+  }
 }

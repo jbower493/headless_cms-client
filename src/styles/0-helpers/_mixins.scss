@@ -34,6 +34,10 @@
   align-items: $value;
 }
 
+@mixin flexDirection($value: row) {
+  flex-direction: $value;
+}
+
 // MEDIA QUERIES
 $xs: 550px;
 $sm: 750px;
