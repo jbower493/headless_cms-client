@@ -29,20 +29,20 @@ class Modal extends Component {
     const {
       className,
       status,
-      title: { heading, subheading },
-      body,
+      title,
+      body: { heading, table, rest },
       actions: { primary, secondary }
     } = this.props;
 
     const renderContent = () => {
       return (
         <div className={`Modal__content`}>
-          <div className={`Modal__header`}>
-            {heading}
-            {subheading && ':'}
-            {subheading && <span className={`Modal__subHeading`}>{subheading}</span>}
+          <h2 className={`Modal__header`}>{title}</h2>
+          <div className={`Modal__body`}>
+            <h3 className={`Modal__bodyHeading`}>{heading}</h3>
+            <div className={`Modal__bodyTable`}>{table}</div>
+            {rest}
           </div>
-          <div className={`Modal__body`}>{body}</div>
           <div className={`Modal__footer`}>
             {
               primary.type === 'submit'

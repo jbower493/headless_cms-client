@@ -1,0 +1,30 @@
+.EditableTitle {
+
+  @include displayFlex;
+  @include alignItems(center);
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  input {
+    // @include inputStyles;
+    font-size: 18px;
+    font-weight: 600;
+    width: fit-content;
+    font-family: inherit;
+
+    border: none;
+    background-color: unset;
+    width: fit-content;
+    caret-color: $clr--primary;
+  }
+
+  &__editNameIcon {
+    margin-left: 20px;
+    color: $clr--primary;
+    font-size: $fs--medium;
+    cursor: pointer;
+  }
+}

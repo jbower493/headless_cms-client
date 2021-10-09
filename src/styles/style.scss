@@ -9,12 +9,13 @@
 /*----------Shared components----------*/
 @import '../components/Buttons/Button/style';
 @import '../components/Buttons/DisabledButton/style';
+@import '../components/EditableTitle/style';
 @import '../components/Errors/PageError/style';
 @import '../components/Errors/ComponentError/style';
 @import '../components/Loaders/RequestLoader/style';
 @import '../components/Modal/style';
-@import '../components/Table/style';
 @import '../components/Notification/styles';
+@import '../components/Table/style';
 
 /*----------Containers----------*/
 @import '../containers/header/style';

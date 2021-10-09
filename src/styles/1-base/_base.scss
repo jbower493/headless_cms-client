@@ -28,6 +28,21 @@ ul {
   }
 }
 
+@mixin inputStyles {
+  display: block;
+  width: 100%;
+  height: $height--input;
+  position: relative;
+  border: 1px solid $clr--darkGrey;
+  border-radius: $borderRadius--standard;
+  padding: 0 10px;
+  z-index: 1;
+
+  &:focus {
+    border: 1px solid $clr--primary;
+  }
+}
+
 form {
 
   label {
@@ -38,18 +53,7 @@ form {
   }
   
   input {
-    display: block;
-    width: 100%;
-    height: $height--input;
-    position: relative;
-    border: 1px solid $clr--darkGrey;
-    border-radius: $borderRadius--standard;
-    padding: 0 10px;
-    z-index: 1;
-
-    &:focus {
-      border: 1px solid $clr--primary;
-    }
+    @include inputStyles;
   }
 
   .SolidButton, .OutlineButton, .DisabledButton {

@@ -1,6 +1,6 @@
 .Modal {
   position: relative;
-  height: 400px;
+  height: 450px;
   width: 800px;
   background-color: $clr--white;
   @include borderRadius($borderRadius--standard);
@@ -36,15 +36,13 @@
     font-size: $fs--large;
   }
 
-  &__subHeading {
-    font-size: $fs--medium;
-    color: $clr--primary;
-    margin-left: 5px;
-  }
-
   &__body {
     @include flex(1, 1, 0px);
     padding: 20px;
+  }
+
+  &__bodyHeading {
+    margin-bottom: 20px;
   }
 
   &__footer {
