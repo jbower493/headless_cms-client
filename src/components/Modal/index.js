@@ -44,22 +44,26 @@ class Modal extends Component {
             {rest}
           </div>
           <div className={`Modal__footer`}>
-            {
-              primary.type === 'submit'
-                ? primary.submitButton
-                : (
-                  <Button
-                    type='onClick'
-                    buttonStyle='solid'
-                    onClick={primary.onClick}
-                    text={primary.text} />
-                )
-            }
-            <Button
-              type='onClick'
-              buttonStyle='outline'
-              onClick={secondary.onClick}
-              text={secondary.text} />
+            <div className={`Modal__buttonContainer`}>
+              {
+                primary.type === 'submit'
+                  ? primary.submitButton
+                  : (
+                    <Button
+                      type='onClick'
+                      buttonStyle='solid'
+                      onClick={primary.onClick}
+                      text={primary.text} />
+                  )
+              }
+            </div>
+            <div className={`Modal__buttonContainer`}>
+              <Button
+                type='onClick'
+                buttonStyle='outline'
+                onClick={secondary.onClick}
+                text={secondary.text} />
+            </div>
           </div>
         </div>
       )

@@ -14,6 +14,8 @@ export const API = {
 
     POST: {
 
+      new: (attributes) => axios.post(`/api/content-type`, attributes)
+
     }
   }
 };

@@ -1,5 +1,6 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Formik, Field, FieldArray, Form } from 'formik';
 
 import { trash, plus } from 'utilities/icons';
@@ -50,7 +51,6 @@ class NewContentTypeForm extends Component {
           <Field
             embedded={true}
             name={`fields.${index}.name`}
-            // defaultValue={`Untitled${index === 0 ? '' : `(${index})`}`}
             component={TextField}
           />
         ),
@@ -92,6 +92,7 @@ class NewContentTypeForm extends Component {
   }
 
   render() {
+    const { handleSubmit, content_types_new_status } = this.props;
     const { name } = this.state;
     const { setName, addNewField, getFieldsMatrix } = this;
 
@@ -117,7 +118,7 @@ class NewContentTypeForm extends Component {
                 body={getFieldsMatrix(formProps, arrayHelpers)} />
             ),
             rest: <i onClick={() => arrayHelpers.push({
-              name: `Untitled${fields.length > 0 ? `(${fields.length})` : ''}`,
+              name: '',
               type: 'text',
               required: false
             })} className={`newCTForm__addFieldIcon ${plus}`} />
@@ -125,7 +126,7 @@ class NewContentTypeForm extends Component {
           actions={{
             primary: {
               type: 'submit',
-              submitButton: renderSubmitButton(null, dirty, isValid, 'Save Data')
+              submitButton: renderSubmitButton(content_types_new_status, dirty, isValid, 'Create')
             },
             secondary: {
               type: 'onClick',
@@ -143,7 +144,7 @@ class NewContentTypeForm extends Component {
         initialValues={{
           fields: []
         }}
-        onSubmit={(values) => console.log(values)} >
+        onSubmit={(values) => handleSubmit({ ...values, name })} >
         {(formProps) => {
           return (
             <Form>
@@ -159,4 +160,6 @@ class NewContentTypeForm extends Component {
 };
 
 /*----------Component end----------*/
-export default NewContentTypeForm;
+export default connect(state => ({
+  content_types_new_status: state.contentTypes.content_types_new_status
+}))(NewContentTypeForm);

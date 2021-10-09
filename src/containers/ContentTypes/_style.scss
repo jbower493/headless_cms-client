@@ -30,6 +30,13 @@
       }
     }
   }
+
+  &__addNewIcon {
+    margin-top: 20px;
+    font-size: 20px;
+    color: $clr--primary;
+    cursor: pointer;
+  }
 }
 
 .newCTForm {

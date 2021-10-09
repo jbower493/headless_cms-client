@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { eye, edit, trash } from 'utilities/icons';
+import { eye, edit, trash, plus } from 'utilities/icons';
 
 /*----------Components, sections, modules----------*/
 import NewContentTypeForm from 'containers/contentTypes/forms/newContentTypeForm';
@@ -13,14 +13,33 @@ import Table from 'components/Table';
 import RequestLoader from 'components/Loaders/RequestLoader';
 
 /*----------Actions----------*/
-import { getAllcontentTypes } from 'containers/contentTypes/actions';
+import { getAllcontentTypes, createNewContentType } from 'containers/contentTypes/actions';
 
 /*----------Component start----------*/
 class ContentTypes extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      showModal: false
+    }
+
+    this.submitNewContentType = this.submitNewContentType.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
     this.getContentTypesMatrix = this.getContentTypesMatrix.bind(this);
+  }
+
+  submitNewContentType(attributes) {
+    const { createNewContentType } = this.props;
+
+    createNewContentType(attributes);
+  }
+
+  toggleModal(cb) {
+    this.setState({
+      ...this.state,
+      showModal: !this.state.showModal
+    }, () => { if (cb) cb() });
   }
 
   getContentTypesMatrix(data) {
@@ -60,12 +79,16 @@ class ContentTypes extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const { toggleModal } = this;
+    const { content_types_new_status, getAllcontentTypes } = this.props;
 
+    if (content_types_new_status === 'success' && prevProps.content_types_new_status === 'loading') toggleModal(getAllcontentTypes);
   }
 
   render() {
     const { content_types_all_status, content_types_all_data } = this.props;
-    const { getContentTypesMatrix } = this;
+    const { showModal } = this.state;
+    const { submitNewContentType, toggleModal, getContentTypesMatrix } = this;
 
     const renderMainContent = () => {
       return (
@@ -80,6 +103,7 @@ class ContentTypes extends Component {
               ]}
               body={getContentTypesMatrix(content_types_all_data?.contentTypes)}
             />
+            <i onClick={() => toggleModal()} className={`contentTypes__addNewIcon ${plus}`} />
           </section>
         </>
       );
@@ -98,7 +122,7 @@ class ContentTypes extends Component {
     return (
       <div className={`contentTypes`}>
         {renderPage()}
-        <NewContentTypeForm />
+        {showModal && <NewContentTypeForm handleSubmit={submitNewContentType} />}
       </div>
     );
   }
@@ -107,8 +131,9 @@ class ContentTypes extends Component {
 /*----------Component end----------*/
 export default withRouter(connect((state) => ({
   content_types_all_status: state.contentTypes.content_types_all_status,
-  content_types_all_data: state.contentTypes.content_types_all_data
-}),
-  {
-    getAllcontentTypes
-  })(ContentTypes));
+  content_types_all_data: state.contentTypes.content_types_all_data,
+  content_types_new_status: state.contentTypes.content_types_new_status
+}), {
+  getAllcontentTypes,
+  createNewContentType
+})(ContentTypes));
