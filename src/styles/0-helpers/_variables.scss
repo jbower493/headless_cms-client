@@ -30,6 +30,7 @@ $height--header: 60px;
 // always must be vh minus header height
 $height--mainPage: calc(100vh - 60px);
 $height--input: 37px;
+$height--input--embedded: 30px;
 
 $width--sidebar: 250px;
 $width--tableAction: 200px;
@@ -41,3 +42,4 @@ $borderRadius--standard: 5px;
 $boxShaddow--notification: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
 
 $transition--hover: background-color 0.7s;
+$transition--checkbox: background-color 0.3s;

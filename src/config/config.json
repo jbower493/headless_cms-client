@@ -1,5 +1,19 @@
 {
   "url": "http://localhost:8080",
   "product_name": "Headless CMS",
-  "project_name": "Jamie's Content"
+  "project_name": "Jamie's Content",
+  "supported_field_types": [
+    {
+      "label": "JSON",
+      "value": "json"
+    },
+    {
+      "label": "Text",
+      "value": "text"
+    },
+    {
+      "label": "Interger",
+      "value": "int"
+    }
+  ]
 }

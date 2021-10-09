@@ -27,7 +27,7 @@ class LoginForm extends Component {
         <p className={`loginForm__intro`}>Enter your credentials to login and start managing your content.</p>
         <Formik
           initialValues={{
-            username: '',
+            // username: '',
             password: '',
             role: 'user'
           }}

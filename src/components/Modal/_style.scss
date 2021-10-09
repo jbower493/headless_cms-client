@@ -1,6 +1,6 @@
 .Modal {
   position: relative;
-  height: 450px;
+  height: 500px;
   width: 800px;
   background-color: $clr--white;
   @include borderRadius($borderRadius--standard);
@@ -39,6 +39,7 @@
   &__body {
     @include flex(1, 1, 0px);
     padding: 20px;
+    overflow-y: auto;
   }
 
   &__bodyHeading {
@@ -48,9 +49,10 @@
   &__footer {
     padding: 15px 20px;
     border-top: 1px solid $clr--grey;
+    @include displayFlex;
 
-    .SolidButton {
-      margin-right: 20px;
+    .OutlineButton {
+      margin-left: 20px;
     }
   }
 }

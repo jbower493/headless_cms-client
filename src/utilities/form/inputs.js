@@ -11,19 +11,19 @@ const getClassName = (className, error) => {
   return `${className ? ' ' + className : ''}${error ? ' form__input--error' : ''}`;
 };
 
-export const TextField = ({ field, form, label, className, ...rest }) => {
+export const TextField = ({ field, form, label, embedded, className, ...rest }) => {
   const { errors, touched } = form;
   const { name } = field;
 
   const isError = errors[name] && touched[name];
 
   return (
-    <div className={`form__group`}>
-      <label htmlFor={name}>{label}</label>
+    <div className={`form__group${embedded ? ' form__group--embedded' : ''}`}>
+      {!embedded && <label htmlFor={name}>{label}</label>}
       <input className={`form__input${getClassName(className, isError)}`} type="text" id={name} {...field} {...rest} />
       {
         isError &&
-          <div className={`form__error`}>{errors[name]}</div>
+        <div className={`form__error`}>{errors[name]}</div>
       }
     </div>
   )
@@ -41,13 +41,13 @@ export const PasswordField = ({ field, form, label, className, ...rest }) => {
       <input className={`form__password${getClassName(className, isError)}`} type="password" id={name} {...field} {...rest} />
       {
         isError &&
-          <div className={`form__error`}>{errors[name]}</div>
+        <div className={`form__error`}>{errors[name]}</div>
       }
     </div>
   );
 };
 
-export const SelectField = ({ field, form, label, className, options }) => {
+export const SelectField = ({ field, form, label, embedded, className, options }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { errors, touched, setFieldValue, setFieldTouched } = form;
@@ -56,10 +56,10 @@ export const SelectField = ({ field, form, label, className, options }) => {
   const isError = errors[name] && touched[name];
 
   const currentValueLabel = value ? options.find(option => option.value === value).label : 'Please Select';
-  
+
   // Render a hidden select field so there is actually an input there, visible select field is the 'ul'
   return (
-    <div className={`form__group form__group--select`}>
+    <div className={`form__group form__group--select${embedded ? ' form__group--embedded' : ''}`}>
       <select
         className={`form__hidden${getClassName(className, isError)}`}
         id={name}
@@ -69,7 +69,7 @@ export const SelectField = ({ field, form, label, className, options }) => {
           options.map((option, index) => <option key={index} value={option.value}>{option.label}</option>)
         }
       </select>
-      <label htmlFor={name}>{label}</label>
+      {!embedded && <label htmlFor={name}>{label}</label>}
       <div
         className={`form__select${isOpen ? ' form__select--open' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
@@ -79,38 +79,65 @@ export const SelectField = ({ field, form, label, className, options }) => {
       </div>
       {
         isOpen &&
-          <ClickAwayListener onClickAway={() => setIsOpen(false)} >
-            <ul className={`form__selectList`}>
-              {
-                options.map((option, index) => (
-                  <li
-                    key={index}
-                    onClick={() => {
-                      setFieldTouched(name, true);
-                      setFieldValue(name, option.value);
-                      setIsOpen(!isOpen);
-                    }}
-                    className={`form__selectOption${value === option.value ? ' form__selectOption--selected' : ''}`}
-                  >
-                    {option.label}
-                  </li>
-                ))
-              }
-            </ul>
-          </ClickAwayListener>
+        <ClickAwayListener onClickAway={() => setIsOpen(false)} >
+          <ul className={`form__selectList`}>
+            {
+              options.map((option, index) => (
+                <li
+                  key={index}
+                  onClick={() => {
+                    setFieldTouched(name, true);
+                    setFieldValue(name, option.value);
+                    setIsOpen(!isOpen);
+                  }}
+                  className={`form__selectOption${value === option.value ? ' form__selectOption--selected' : ''}`}
+                >
+                  {option.label}
+                </li>
+              ))
+            }
+          </ul>
+        </ClickAwayListener>
       }
       {
         isError &&
-          <div className={`form__error`}>{errors[name]}</div>
+        <div className={`form__error`}>{errors[name]}</div>
       }
     </div>
   );
 }
 
+export const CheckboxField = ({ field, form, label, embedded, controlled, className, ...rest }) => {
+  const { errors, touched, setFieldValue, setFieldTouched } = form;
+  const { name, value } = field;
+
+  const isError = errors[name] && touched[name];
+
+  return (
+    <div
+      onClick={() => {
+        setFieldTouched(name, true);
+        setFieldValue(name, !value);
+      }}
+      className={`form__group form__group--checkbox${embedded ? ' form__group--embedded' : ''}`}
+    >
+      <input className={`form__hidden`} type="checkbox" id={name} {...field} {...rest} />
+      <div className={`form__checkbox${value ? ' form__checkbox--checked' : ''}${getClassName(className, isError)}`}>
+        <div className={`form__checkboxInner`}></div>
+      </div>
+      {!embedded && <div className={`form__checkboxLabel`}>{label}</div>}
+      {
+        isError &&
+          <div className={`form__error`}>{errors[name]}</div>
+      }
+    </div>
+  )
+};
+
 export const renderSubmitButton = (status, dirty, valid, text, color) => {
   if (status === 'loading') return <div className={`ButtonLoader`}><RequestLoader size={`sm`} /></div>;
   else if (!dirty || !valid) return <DisabledButton text={text} />
-  return <Button 
+  return <Button
     type="submit"
     text={text}
     buttonStyle="solid"

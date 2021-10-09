@@ -9,13 +9,14 @@
   }
 
   input {
-    // @include inputStyles;
     font-size: 18px;
     font-weight: 600;
     width: fit-content;
     font-family: inherit;
 
-    border: none;
+    border: none !important;
+    padding: 0;
+    height: unset;
     background-color: unset;
     width: fit-content;
     caret-color: $clr--primary;

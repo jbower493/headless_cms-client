@@ -37,6 +37,8 @@ ul {
   border-radius: $borderRadius--standard;
   padding: 0 10px;
   z-index: 1;
+  font-size: 14px;
+  font-family: inherit;
 
   &:focus {
     border: 1px solid $clr--primary;
@@ -51,14 +53,6 @@ form {
     margin-bottom: 5px;
     color: $clr--textGrey;
   }
-  
-  input {
-    @include inputStyles;
-  }
-
-  .SolidButton, .OutlineButton, .DisabledButton {
-    width: 100%;
-  }
 
   .form {
 
@@ -69,6 +63,35 @@ form {
     &__group {
       margin-bottom: 15px;
       position: relative;
+
+      &--embedded {
+        margin: 0;
+
+        input {
+          height: $height--input--embedded;
+          padding: 0 8px;
+        }
+
+        &.form__group--select {
+          width: 120px;
+        }
+
+        .form__select {
+          height: $height--input--embedded;
+          padding: 0;
+          border: none;
+
+          &--open {
+            border: none;
+          }
+        }
+      }
+
+      &--checkbox {
+        @include displayFlex;
+        @include alignItems(center);
+        cursor: pointer;
+      }
     }
 
     &__error {
@@ -87,10 +110,19 @@ form {
       overflow: hidden;
     }
 
+    &__input {
+      @include inputStyles;
+    }
+
+    &__password {
+      @include inputStyles;
+    }
+
     &__select {
       display: block;
       width: 100%;
       height: $height--input;
+      font-size: 14px;
       position: relative;
       z-index: 1;
       border: 1px solid $clr--darkGrey;
@@ -99,6 +131,7 @@ form {
       @include displayFlex;
       @include justifyContent(space-between);
       @include alignItems(center);
+      cursor: pointer;
 
       &--open {
         border: 1px solid $clr--primary;
@@ -119,11 +152,43 @@ form {
     &__selectOption {
       padding: 10px 8px;
       transition: $transition--hover;
+      font-size: 14px;
       cursor: pointer;
 
       &:hover {
         background-color: $clr--primary--light;
       }
+    }
+
+    &__checkbox {
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      border: 2px solid black;
+      @include displayFlex;
+      @include alignItems(center);
+      @include justifyContent(center);
+
+      &--checked {
+
+        .form__checkboxInner {
+          background-color: $clr--primary;
+        }
+      }
+    }
+
+    &__checkboxInner {
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background-color: $clr--white;
+      transition: $transition--checkbox;
+    }
+
+    &__checkboxLabel {
+      color: unset;
+      font-size: 14px;
+      margin-left: 15px;
     }
   }
 }

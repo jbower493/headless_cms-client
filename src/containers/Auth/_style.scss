@@ -31,4 +31,8 @@
   &__intro {
     margin-bottom: 20px;
   }
+
+  .SolidButton, .OutlineButton, .DisabledButton {
+    width: 100%;
+  }
 }

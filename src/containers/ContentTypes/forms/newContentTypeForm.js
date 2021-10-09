@@ -1,9 +1,12 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
+import { Formik, Field, Form } from 'formik';
 
 import { trash, plus } from 'utilities/icons';
+import { supported_field_types } from 'config/config';
 
 /*----------Components, sections, modules----------*/
+import { TextField, SelectField, CheckboxField, renderSubmitButton } from 'utilities/form/inputs';
 
 /*----------Shared components----------*/
 import Table from 'components/Table';
@@ -12,6 +15,11 @@ import Modal from 'components/Modal';
 import EditableTitle from 'components/EditableTitle';
 
 /*----------Actions----------*/
+import {
+  requiredField,
+  multipleValidations
+} from 'utilities/form/validation';
+
 
 /*----------Component start----------*/
 class NewContentTypeForm extends Component {
@@ -24,6 +32,9 @@ class NewContentTypeForm extends Component {
     }
 
     this.setName = this.setName.bind(this);
+    this.genFieldId = this.genFieldId.bind(this);
+    this.registerFieldId = this.registerFieldId.bind(this);
+    this.unregisterFieldId = this.unregisterFieldId.bind(this);
     this.addNewField = this.addNewField.bind(this);
     this.removeField = this.removeField.bind(this);
     this.getFieldsMatrix = this.getFieldsMatrix.bind(this);
@@ -38,6 +49,18 @@ class NewContentTypeForm extends Component {
     });
   }
 
+  genFieldId() {
+    return 1;
+  }
+
+  registerFieldId(id) {
+
+  }
+
+  unregisterFieldId() {
+
+  }
+
   addNewField() {
     const field = {
       name: 'Default',
@@ -47,7 +70,7 @@ class NewContentTypeForm extends Component {
 
     this.setState({
       ...this.state,
-      newFields: [ ...this.state.newFields, field ]
+      newFields: [...this.state.newFields, field]
     });
   }
 
@@ -63,11 +86,34 @@ class NewContentTypeForm extends Component {
     const { removeField } = this;
 
     return newFields.map((item, index) => {
+      const fieldId = 1;
 
       return {
-        fieldName: `The field name`,
-        type: 'text',
-        required: 'no',
+        fieldName: (
+          <Field
+            embedded={true}
+            name={`name::${fieldId}`}
+            defaultValue={`Untitled${index === 0 ? '' : `(${index})`}`}
+            component={TextField}
+          />
+        ),
+        type: (
+          <Field
+            embedded={true}
+            name={`type::${fieldId}`}
+            placeholder="text"
+            component={SelectField}
+            options={supported_field_types}
+          />
+        ),
+        required: (
+          <Field
+            embedded={true}
+            name={`required::${fieldId}`}
+            placeholder="true"
+            component={CheckboxField}
+          />
+        ),
         actions: [
           {
             buttonStyle: 'icon',
@@ -92,40 +138,60 @@ class NewContentTypeForm extends Component {
     const { name } = this.state;
     const { setName, addNewField, getFieldsMatrix } = this;
 
+    const renderModal = (formProps) => {
+      const { dirty, isValid } = formProps;
+
+      return (
+        <Modal
+          className={`newCTForm`}
+          status={`success`}
+          title={`New Content Type`}
+          body={{
+            heading: <EditableTitle name={name} onChange={setName} />,
+            table: (
+              <Table
+                status={'success'}
+                head={[
+                  { heading: 'Field Name' },
+                  { heading: 'Type' },
+                  { heading: 'Required' },
+                  { heading: '', type: 'actions' }
+                ]}
+                body={getFieldsMatrix()} />
+            ),
+            rest: <i onClick={addNewField} className={`newCTForm__addFieldIcon ${plus}`} />
+          }
+          }
+          actions={{
+            primary: {
+              type: 'submit',
+              submitButton: renderSubmitButton(null, dirty, isValid, 'Save Data')
+            },
+            secondary: {
+              type: 'onClick',
+              text: 'Cancel',
+              onClick: () => alert('Cancelled')
+            }
+          }} />
+      );
+    };
+
     /*----------Render component----------*/
     return (
-      <Modal
-        className={`newCTForm`}
-        status={`success`}
-        title={`New Content Type`}
-        body={{
-          heading: <EditableTitle name={name} onChange={setName} />,
-          table: (
-            <Table
-              status={'success'}
-              head={[
-                { heading: 'Field Name' },
-                { heading: 'Type' },
-                { heading: 'Required' },
-                { heading: '', type: 'actions' }
-              ]}
-              body={getFieldsMatrix()} />
-          ),
-          rest: <i onClick={addNewField} className={`newCTForm__addFieldIcon ${plus}`} />
-        }
-        }
-        actions={{
-          primary: {
-            type: 'onClick',
-            text: 'Save Data',
-            onClick: () => alert('Clicked')
-          },
-          secondary: {
-            type: 'onClick',
-            text: 'Cancel',
-            onClick: () => alert('Cancelled')
-          }
-        }} />
+
+      <Formik
+        initialValues={{
+
+        }}
+        onSubmit={(values) => console.log(values)} >
+        {(formProps) => {
+          return (
+            <Form>
+              {renderModal(formProps)}
+            </Form>
+          );
+        }}
+      </Formik>
     );
   }
 };
