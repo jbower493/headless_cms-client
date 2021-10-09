@@ -1,6 +1,6 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, FieldArray, Form } from 'formik';
 
 import { trash, plus } from 'utilities/icons';
 import { supported_field_types } from 'config/config';
@@ -27,16 +27,10 @@ class NewContentTypeForm extends Component {
     super(props);
 
     this.state = {
-      name: 'Untitled',
-      newFields: []
+      name: 'Untitled'
     }
 
     this.setName = this.setName.bind(this);
-    this.genFieldId = this.genFieldId.bind(this);
-    this.registerFieldId = this.registerFieldId.bind(this);
-    this.unregisterFieldId = this.unregisterFieldId.bind(this);
-    this.addNewField = this.addNewField.bind(this);
-    this.removeField = this.removeField.bind(this);
     this.getFieldsMatrix = this.getFieldsMatrix.bind(this);
   }
 
@@ -49,58 +43,21 @@ class NewContentTypeForm extends Component {
     });
   }
 
-  genFieldId() {
-    return 1;
-  }
-
-  registerFieldId(id) {
-
-  }
-
-  unregisterFieldId() {
-
-  }
-
-  addNewField() {
-    const field = {
-      name: 'Default',
-      type: 'text',
-      required: true
-    };
-
-    this.setState({
-      ...this.state,
-      newFields: [...this.state.newFields, field]
-    });
-  }
-
-  removeField(fieldIndex) {
-    this.setState({
-      ...this.state,
-      newFields: [...this.state.newFields].filter((field, index) => index !== fieldIndex)
-    });
-  }
-
-  getFieldsMatrix() {
-    const { newFields } = this.state;
-    const { removeField } = this;
-
-    return newFields.map((item, index) => {
-      const fieldId = 1;
-
+  getFieldsMatrix(formProps, arrayHelpers) {
+    return formProps.values.fields.map((item, index) => {
       return {
         fieldName: (
           <Field
             embedded={true}
-            name={`name::${fieldId}`}
-            defaultValue={`Untitled${index === 0 ? '' : `(${index})`}`}
+            name={`fields.${index}.name`}
+            // defaultValue={`Untitled${index === 0 ? '' : `(${index})`}`}
             component={TextField}
           />
         ),
         type: (
           <Field
             embedded={true}
-            name={`type::${fieldId}`}
+            name={`fields.${index}.type`}
             placeholder="text"
             component={SelectField}
             options={supported_field_types}
@@ -109,7 +66,7 @@ class NewContentTypeForm extends Component {
         required: (
           <Field
             embedded={true}
-            name={`required::${fieldId}`}
+            name={`fields.${index}.required`}
             placeholder="true"
             component={CheckboxField}
           />
@@ -118,7 +75,7 @@ class NewContentTypeForm extends Component {
           {
             buttonStyle: 'icon',
             icon: trash,
-            onClick: () => removeField(index)
+            onClick: () => arrayHelpers.remove(index)
           }
         ]
       }
@@ -138,8 +95,8 @@ class NewContentTypeForm extends Component {
     const { name } = this.state;
     const { setName, addNewField, getFieldsMatrix } = this;
 
-    const renderModal = (formProps) => {
-      const { dirty, isValid } = formProps;
+    const renderModal = (formProps, arrayHelpers) => {
+      const { dirty, isValid, values: { fields } } = formProps;
 
       return (
         <Modal
@@ -157,11 +114,14 @@ class NewContentTypeForm extends Component {
                   { heading: 'Required' },
                   { heading: '', type: 'actions' }
                 ]}
-                body={getFieldsMatrix()} />
+                body={getFieldsMatrix(formProps, arrayHelpers)} />
             ),
-            rest: <i onClick={addNewField} className={`newCTForm__addFieldIcon ${plus}`} />
-          }
-          }
+            rest: <i onClick={() => arrayHelpers.push({
+              name: `Untitled${fields.length > 0 ? `(${fields.length})` : ''}`,
+              type: 'text',
+              required: false
+            })} className={`newCTForm__addFieldIcon ${plus}`} />
+          }}
           actions={{
             primary: {
               type: 'submit',
@@ -181,13 +141,15 @@ class NewContentTypeForm extends Component {
 
       <Formik
         initialValues={{
-
+          fields: []
         }}
         onSubmit={(values) => console.log(values)} >
         {(formProps) => {
           return (
             <Form>
-              {renderModal(formProps)}
+              <FieldArray
+                name={`fields`}
+                render={arrayHelpers => renderModal(formProps, arrayHelpers)} />
             </Form>
           );
         }}

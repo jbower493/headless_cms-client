@@ -4,16 +4,16 @@
   "project_name": "Jamie's Content",
   "supported_field_types": [
     {
-      "label": "JSON",
-      "value": "json"
-    },
-    {
       "label": "Text",
       "value": "text"
     },
     {
       "label": "Interger",
       "value": "int"
+    },
+    {
+      "label": "JSON",
+      "value": "json"
     }
   ]
 }
