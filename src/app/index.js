@@ -37,7 +37,7 @@ class App extends Component {
       if (!auth_user_status || auth_user_status === 'loading' || !auth_admin_exists_status || auth_admin_exists_status === 'loading') {
         return 'loading';
       }
-      if (auth_user_status === 'error' || auth_admin_exists_status === 'error') {
+      if (auth_admin_exists_status === 'error') {
         return 'error';
       }
       return 'success';

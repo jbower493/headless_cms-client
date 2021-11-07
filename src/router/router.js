@@ -24,7 +24,7 @@ class Router extends Component {
         <Switch>
           <Route exact path='/admin-setup' render={() => null} />
           <Route exact path='/login' render={() => null} />
-          <Route path='/' render={() => auth_user_data.user ? <Sidebar /> : null} />
+          <Route path='/' render={() => auth_user_data?.user ? <Sidebar /> : null} />
         </Switch>
         
         <Switch>
@@ -36,21 +36,21 @@ class Router extends Component {
             if (!auth_admin_exists_data.adminExists) {
               return <Redirect to="/admin-setup" />;
             }
-            if (auth_user_data.user) {
+            if (auth_user_data?.user) {
               return <Redirect to="/dashboard" />;
             }
             return <Auth />;
           }} />
           <Route exact path='/admin-setup' render={() => {
             if (auth_admin_exists_data.adminExists) {
-              if (auth_user_data.user) {
+              if (auth_user_data?.user) {
                 return <Redirect to="/dashboard" />;
               }
               return <Redirect to="/login" />;
             }
             return <AdminSetup />;
           }} />
-          <Route path='/' render={() => auth_user_data.user ? <Redirect to="/dashboard" /> : <Redirect to="/login" />} />
+          <Route path='/' render={() => auth_user_data?.user ? <Redirect to="/dashboard" /> : <Redirect to="/login" />} />
         </Switch>
       </div>
     );

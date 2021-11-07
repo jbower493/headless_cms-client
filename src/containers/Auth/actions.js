@@ -101,22 +101,12 @@ export const attemptLogin = (credentials) => {
     API.auth.POST.login(credentials)
       .then(response => {
         const auth_login_data = getSuccessData(response);
-        const { error, success, message } = auth_login_data;
-
-        if (success) {
+        const { message } = auth_login_data;
           dispatch(setNotification('success', message));
           dispatch({
             type: AUTH_LOGIN_SUCCESS,
             auth_login_data
           });
-        } else {
-          dispatch(setNotification('error', error));
-          dispatch({
-            type: AUTH_LOGIN_ERROR,
-            auth_login_error: error
-          });
-        }
-
       })
       .catch(error => {
         const auth_login_error = getErrorData(error);
@@ -138,27 +128,18 @@ export const attemptLogout = () => {
     API.auth.GET.logout()
       .then(response => {
         const auth_logout_data = getSuccessData(response);
-        const { success, error } = auth_logout_data;
-        if (success) {
-          dispatch({
-            type: AUTH_LOGOUT_SUCCESS,
-            auth_logout_data
-          });
-        } else {
-          auth_logout_error = error;
-        }
+        dispatch({
+          type: AUTH_LOGOUT_SUCCESS,
+          auth_logout_data
+        });
       })
       .catch(error => {
         auth_logout_error = getErrorData(error);
-      })
-      .finally(() => {
-        if (auth_logout_error) {
-          dispatch(setNotification('error', auth_logout_error));
-          dispatch({
-            type: AUTH_LOGOUT_ERROR,
-            auth_logout_error
-          });
-        }
+        dispatch(setNotification('error', auth_logout_error));
+        dispatch({
+          type: AUTH_LOGOUT_ERROR,
+          auth_logout_error
+        });
       })
   };
 };

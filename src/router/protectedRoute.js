@@ -11,7 +11,7 @@ class ProtectedRoute extends Component {
     /*----------Render component----------*/
     return (
       <Route render={() => {
-        if (auth_user_data.user) {
+        if (auth_user_data?.user) {
           return <Component />;
         }
         if (auth_admin_exists_data.adminExists) {

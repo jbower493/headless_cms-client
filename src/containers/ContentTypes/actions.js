@@ -45,27 +45,17 @@ export const getOneContentType = (name) => {
     API.contentTypes.GET.one(name)
       .then(response => {
         const content_types_one_data = getSuccessData(response);
-        const { success, error } = content_types_one_data;
-
-        if (success) {
-          dispatch({
-            type: CONTENT_TYPES_ONE_SUCCESS,
-            content_types_one_data: getSuccessData(response)
-          });
-        } else {
-          content_types_one_error = error;
-        }
+        dispatch({
+          type: CONTENT_TYPES_ONE_SUCCESS,
+          content_types_one_data
+        });
       })
       .catch(error => {
         content_types_one_error = getErrorData(error);
-      })
-      .finally(() => {
-        if (content_types_one_error) {
-          dispatch({
-            type: CONTENT_TYPES_ONE_ERROR,
-            content_types_one_error
-          });
-        }
+        dispatch({
+          type: CONTENT_TYPES_ONE_ERROR,
+          content_types_one_error
+        });
       })
   };
 };
@@ -79,26 +69,18 @@ export const createNewContentType = (attributes) => {
     API.contentTypes.POST.new(attributes)
       .then(response => {
         const content_types_new_data = getSuccessData(response);
-        const { success, error } = content_types_new_data;
-        if (success) {
-          dispatch({
-            type: CONTENT_TYPES_NEW_SUCCESS,
-            content_types_new_data
-          });
-        } else {
-          content_types_new_error = error;
-        }
+        dispatch({
+          type: CONTENT_TYPES_NEW_SUCCESS,
+          content_types_new_data
+        });
       })
       .catch(error => {
         content_types_new_error = getErrorData(error);
-      })
-      .finally(() => {
-        if (content_types_new_error) {
-          dispatch({
-            type: CONTENT_TYPES_NEW_ERROR,
-            content_types_new_error
-          });
-        }
+        dispatch(setNotification('error', content_types_new_error));
+        dispatch({
+          type: CONTENT_TYPES_NEW_ERROR,
+          content_types_new_error
+        });
       })
   };
 };
