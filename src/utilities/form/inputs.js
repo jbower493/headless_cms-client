@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ClickAwayListener from 'react-click-away-listener';
+import { getIn } from 'formik';
 
 import Button from 'components/Buttons/Button';
 import DisabledButton from 'components/Buttons/DisabledButton';
@@ -14,16 +15,21 @@ const getClassName = (className, error) => {
 export const TextField = ({ field, form, label, embedded, className, ...rest }) => {
   const { errors, touched } = form;
   const { name } = field;
-
-  const isError = errors[name] && touched[name];
+  
+  const error = () => {
+    if (errors[name] && touched[name]) return errors[name];
+    const fieldArrayError = getIn(errors, name);
+    if (fieldArrayError) return fieldArrayError;
+    return null;
+  }
 
   return (
     <div className={`form__group${embedded ? ' form__group--embedded' : ''}`}>
       {!embedded && <label htmlFor={name}>{label}</label>}
-      <input className={`form__input${getClassName(className, isError)}`} type="text" id={name} {...field} {...rest} />
+      <input className={`form__input${getClassName(className, error())}`} type="text" id={name} {...field} {...rest} />
       {
-        isError &&
-        <div className={`form__error`}>{errors[name]}</div>
+        error() &&
+        <div className={`form__error`}>{error()}</div>
       }
     </div>
   )

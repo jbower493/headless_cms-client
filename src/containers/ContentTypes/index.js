@@ -122,7 +122,7 @@ class ContentTypes extends Component {
     return (
       <div className={`contentTypes`}>
         {renderPage()}
-        {showModal && <NewContentTypeForm handleSubmit={submitNewContentType} />}
+        {showModal && <NewContentTypeForm toggleModal={toggleModal} handleSubmit={submitNewContentType} />}
       </div>
     );
   }

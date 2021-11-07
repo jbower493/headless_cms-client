@@ -52,6 +52,7 @@ class NewContentTypeForm extends Component {
             embedded={true}
             name={`fields.${index}.name`}
             component={TextField}
+            validate={requiredField}
           />
         ),
         type: (
@@ -92,9 +93,9 @@ class NewContentTypeForm extends Component {
   }
 
   render() {
-    const { handleSubmit, content_types_new_status } = this.props;
+    const { handleSubmit, content_types_new_status, toggleModal } = this.props;
     const { name } = this.state;
-    const { setName, addNewField, getFieldsMatrix } = this;
+    const { setName, getFieldsMatrix } = this;
 
     const renderModal = (formProps, arrayHelpers) => {
       const { dirty, isValid, values: { fields } } = formProps;
@@ -131,7 +132,10 @@ class NewContentTypeForm extends Component {
             secondary: {
               type: 'onClick',
               text: 'Cancel',
-              onClick: () => alert('Cancelled')
+              onClick: (e) => {
+                e.preventDefault();
+                toggleModal();
+              }
             }
           }} />
       );
