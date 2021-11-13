@@ -28,6 +28,7 @@ class Button extends Component {
       );
       case 'onClick': return (
         <button
+          type="button"
           onClick={onClick}
           className={`${getClassName()}${addColorModifier()}`} >
             {text}

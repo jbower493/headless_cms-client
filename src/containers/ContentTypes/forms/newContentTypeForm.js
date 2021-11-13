@@ -132,10 +132,7 @@ class NewContentTypeForm extends Component {
             secondary: {
               type: 'onClick',
               text: 'Cancel',
-              onClick: (e) => {
-                e.preventDefault();
-                toggleModal();
-              }
+              onClick: (e) => toggleModal()
             }
           }} />
       );

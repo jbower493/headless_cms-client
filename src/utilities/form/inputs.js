@@ -39,14 +39,19 @@ export const PasswordField = ({ field, form, label, className, ...rest }) => {
   const { errors, touched } = form;
   const { name } = field;
 
-  const isError = errors[name] && touched[name];
+  const error = () => {
+    if (errors[name] && touched[name]) return errors[name];
+    const fieldArrayError = getIn(errors, name);
+    if (fieldArrayError) return fieldArrayError;
+    return null;
+  }
 
   return (
     <div className={`form__group`}>
       <label htmlFor={name}>{label}</label>
-      <input className={`form__password${getClassName(className, isError)}`} type="password" id={name} {...field} {...rest} />
+      <input className={`form__password${getClassName(className, error())}`} type="password" id={name} {...field} {...rest} />
       {
-        isError &&
+        error() &&
         <div className={`form__error`}>{errors[name]}</div>
       }
     </div>
@@ -59,7 +64,12 @@ export const SelectField = ({ field, form, label, embedded, className, options }
   const { errors, touched, setFieldValue, setFieldTouched } = form;
   const { name, value } = field;
 
-  const isError = errors[name] && touched[name];
+  const error = () => {
+    if (errors[name] && touched[name]) return errors[name];
+    const fieldArrayError = getIn(errors, name);
+    if (fieldArrayError) return fieldArrayError;
+    return null;
+  }
 
   const currentValueLabel = value ? options.find(option => option.value === value).label : 'Please Select';
 
@@ -67,7 +77,7 @@ export const SelectField = ({ field, form, label, embedded, className, options }
   return (
     <div className={`form__group form__group--select${embedded ? ' form__group--embedded' : ''}`}>
       <select
-        className={`form__hidden${getClassName(className, isError)}`}
+        className={`form__hidden${getClassName(className, error())}`}
         id={name}
         name={name}
       >
@@ -106,7 +116,7 @@ export const SelectField = ({ field, form, label, embedded, className, options }
         </ClickAwayListener>
       }
       {
-        isError &&
+        error() &&
         <div className={`form__error`}>{errors[name]}</div>
       }
     </div>
@@ -117,7 +127,12 @@ export const CheckboxField = ({ field, form, label, embedded, controlled, classN
   const { errors, touched, setFieldValue, setFieldTouched } = form;
   const { name, value } = field;
 
-  const isError = errors[name] && touched[name];
+  const error = () => {
+    if (errors[name] && touched[name]) return errors[name];
+    const fieldArrayError = getIn(errors, name);
+    if (fieldArrayError) return fieldArrayError;
+    return null;
+  }
 
   return (
     <div
@@ -128,12 +143,12 @@ export const CheckboxField = ({ field, form, label, embedded, controlled, classN
       className={`form__group form__group--checkbox${embedded ? ' form__group--embedded' : ''}`}
     >
       <input className={`form__hidden`} type="checkbox" id={name} {...field} {...rest} />
-      <div className={`form__checkbox${value ? ' form__checkbox--checked' : ''}${getClassName(className, isError)}`}>
+      <div className={`form__checkbox${value ? ' form__checkbox--checked' : ''}${getClassName(className, error())}`}>
         <div className={`form__checkboxInner`}></div>
       </div>
       {!embedded && <div className={`form__checkboxLabel`}>{label}</div>}
       {
-        isError &&
+        error() &&
           <div className={`form__error`}>{errors[name]}</div>
       }
     </div>
