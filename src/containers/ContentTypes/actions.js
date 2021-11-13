@@ -69,6 +69,7 @@ export const createNewContentType = (attributes) => {
     API.contentTypes.POST.new(attributes)
       .then(response => {
         const content_types_new_data = getSuccessData(response);
+        dispatch(setNotification('success', content_types_new_data.message));
         dispatch({
           type: CONTENT_TYPES_NEW_SUCCESS,
           content_types_new_data
