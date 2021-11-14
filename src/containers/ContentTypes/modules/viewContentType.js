@@ -2,8 +2,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { supported_field_types } from 'config/config';
-
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
@@ -12,11 +10,6 @@ import RequestLoader from 'components/Loaders/RequestLoader';
 import Modal from 'components/Modal';
 
 /*----------Actions----------*/
-import {
-  requiredField,
-  multipleValidations
-} from 'utilities/form/validation';
-
 
 /*----------Component start----------*/
 class ViewContentType extends Component {
@@ -30,53 +23,49 @@ class ViewContentType extends Component {
   }
 
   render() {
-    const { handleSubmit, content_types_new_status, toggleModal } = this.props;
-    const { name } = this.state;
-    const { setName, getFieldsMatrix } = this;
+    const { setModalTemplate, content_types_one_status, content_types_one_data } = this.props;
 
-    
+    const getTableBody = () => {
+      if (!content_types_one_data) return [];
+
+      return content_types_one_data.contentType.fields.map(field => (
+        { ...field, required: field.required ? 'true' : 'false' }
+      ));
+    };
 
     /*----------Render component----------*/
     return (
       <Modal
-        className={`newCTForm`}
-        status={`success`}
-        title={`New Content Type`}
+        className={`viewCT`}
+        status={content_types_one_status}
+        title={`View Content Type`}
         body={{
-          heading: 'The Name of the CT',
+          heading: content_types_one_data?.contentType.name,
           table: (
             <Table
               status={'success'}
               head={[
                 { heading: 'Field Name' },
                 { heading: 'Type' },
-                { heading: 'Required' },
-                { heading: '', type: 'actions' }
+                { heading: 'Required' }
               ]}
-              body={getFieldsMatrix(formProps, arrayHelpers)} />
-          ),
-          rest: <i onClick={() => arrayHelpers.push({
-            name: '',
-            type: 'text',
-            required: false
-          })} className={`newCTForm__addFieldIcon ${plus}`} />
+              body={getTableBody()} />
+          )
         }}
         actions={{
-          primary: {
-            type: 'submit',
-            submitButton: renderSubmitButton(content_types_new_status, dirty, isValid, 'Create')
-          },
           secondary: {
             type: 'onClick',
-            text: 'Cancel',
-            onClick: (e) => toggleModal()
+            text: 'Close',
+            onClick: (e) => setModalTemplate()
           }
-        }} />
+        }}
+        closeModal={setModalTemplate} />
     );
   }
 };
 
 /*----------Component end----------*/
 export default connect(state => ({
-  content_types_new_status: state.contentTypes.content_types_new_status
+  content_types_one_status: state.contentTypes.content_types_one_status,
+  content_types_one_data: state.contentTypes.content_types_one_data
 }))(ViewContentType);

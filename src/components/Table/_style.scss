@@ -10,7 +10,7 @@
 
   &__heading {
     @include flex(1, 1, 0);
-    padding-right: 30px;
+    padding-right: 40px;
 
     &--actions {
       @include flex(0, 0, auto);

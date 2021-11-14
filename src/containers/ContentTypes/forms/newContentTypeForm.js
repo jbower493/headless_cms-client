@@ -11,15 +11,11 @@ import { TextField, SelectField, CheckboxField, renderSubmitButton } from 'utili
 
 /*----------Shared components----------*/
 import Table from 'components/Table';
-import RequestLoader from 'components/Loaders/RequestLoader';
 import Modal from 'components/Modal';
 import EditableTitle from 'components/EditableTitle';
 
 /*----------Actions----------*/
-import {
-  requiredField,
-  multipleValidations
-} from 'utilities/form/validation';
+import { requiredField } from 'utilities/form/validation';
 
 
 /*----------Component start----------*/
@@ -94,12 +90,12 @@ class NewContentTypeForm extends Component {
   }
 
   render() {
-    const { handleSubmit, content_types_new_status, toggleModal } = this.props;
+    const { handleSubmit, content_types_new_status, setModalTemplate } = this.props;
     const { name } = this.state;
     const { setName, getFieldsMatrix } = this;
 
     const renderModal = (formProps, arrayHelpers) => {
-      const { dirty, isValid, values: { fields } } = formProps;
+      const { dirty, isValid } = formProps;
 
       return (
         <Modal
@@ -133,9 +129,10 @@ class NewContentTypeForm extends Component {
             secondary: {
               type: 'onClick',
               text: 'Cancel',
-              onClick: (e) => toggleModal()
+              onClick: (e) => setModalTemplate()
             }
-          }} />
+          }}
+          closeModal={setModalTemplate} />
       );
     };
 

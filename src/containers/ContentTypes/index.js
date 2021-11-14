@@ -7,13 +7,18 @@ import { eye, edit, trash, plus } from 'utilities/icons';
 
 /*----------Components, sections, modules----------*/
 import NewContentTypeForm from 'containers/contentTypes/forms/newContentTypeForm';
+import ViewContentType from 'containers/contentTypes/modules/viewContentType';
 
 /*----------Shared components----------*/
 import Table from 'components/Table';
 import RequestLoader from 'components/Loaders/RequestLoader';
 
 /*----------Actions----------*/
-import { getAllcontentTypes, createNewContentType } from 'containers/contentTypes/actions';
+import {
+  getAllcontentTypes,
+  createNewContentType,
+  getOneContentType
+} from 'containers/contentTypes/actions';
 
 /*----------Component start----------*/
 class ContentTypes extends Component {
@@ -21,11 +26,11 @@ class ContentTypes extends Component {
     super(props);
 
     this.state = {
-      showModal: false
+      modalTemplate: null
     }
 
     this.submitNewContentType = this.submitNewContentType.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
+    this.setModalTemplate = this.setModalTemplate.bind(this);
     this.getContentTypesMatrix = this.getContentTypesMatrix.bind(this);
   }
 
@@ -35,14 +40,17 @@ class ContentTypes extends Component {
     createNewContentType(attributes);
   }
 
-  toggleModal(cb) {
+  setModalTemplate(template = null, cb) {
     this.setState({
       ...this.state,
-      showModal: !this.state.showModal
+      modalTemplate: template
     }, () => { if (cb) cb() });
   }
 
   getContentTypesMatrix(data) {
+    const { getOneContentType } = this.props;
+    const { setModalTemplate } = this;
+
     if (data?.length <= 0) return [];
 
     return data.map(item => {
@@ -54,7 +62,7 @@ class ContentTypes extends Component {
           {
             buttonStyle: 'icon',
             icon: eye,
-            onClick: () => alert('Hey')
+            onClick: () => setModalTemplate('view', () => getOneContentType(name))
           },
           {
             buttonStyle: 'icon',
@@ -79,16 +87,16 @@ class ContentTypes extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { toggleModal } = this;
+    const { setModalTemplate } = this;
     const { content_types_new_status, getAllcontentTypes } = this.props;
 
-    if (content_types_new_status === 'success' && prevProps.content_types_new_status === 'loading') toggleModal(getAllcontentTypes);
+    if (content_types_new_status === 'success' && prevProps.content_types_new_status === 'loading') setModalTemplate(null, getAllcontentTypes);
   }
 
   render() {
     const { content_types_all_status, content_types_all_data } = this.props;
-    const { showModal } = this.state;
-    const { submitNewContentType, toggleModal, getContentTypesMatrix } = this;
+    const { modalTemplate } = this.state;
+    const { submitNewContentType, setModalTemplate, getContentTypesMatrix } = this;
 
     const renderMainContent = () => {
       return (
@@ -103,7 +111,7 @@ class ContentTypes extends Component {
               ]}
               body={getContentTypesMatrix(content_types_all_data?.contentTypes)}
             />
-            <i onClick={() => toggleModal()} className={`contentTypes__addNewIcon ${plus}`} />
+            <i onClick={() => setModalTemplate('new')} className={`contentTypes__addNewIcon ${plus}`} />
           </section>
         </>
       );
@@ -122,7 +130,8 @@ class ContentTypes extends Component {
     return (
       <div className={`contentTypes`}>
         {renderPage()}
-        {showModal && <NewContentTypeForm toggleModal={toggleModal} handleSubmit={submitNewContentType} />}
+        {modalTemplate === 'new' && <NewContentTypeForm setModalTemplate={setModalTemplate} handleSubmit={submitNewContentType} />}
+        {modalTemplate === 'view' && <ViewContentType setModalTemplate={setModalTemplate} />}
       </div>
     );
   }
@@ -135,5 +144,6 @@ export default withRouter(connect((state) => ({
   content_types_new_status: state.contentTypes.content_types_new_status
 }), {
   getAllcontentTypes,
-  createNewContentType
+  createNewContentType,
+  getOneContentType
 })(ContentTypes));

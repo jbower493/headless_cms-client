@@ -1,6 +1,8 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
 
+import { close } from 'utilities/icons';
+
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
@@ -12,10 +14,6 @@ import RequestLoader from 'components/Loaders/RequestLoader';
 
 /*----------Component start----------*/
 class Modal extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   /*----------Lifecycle methods----------*/
   componentDidMount() {
 
@@ -31,7 +29,8 @@ class Modal extends Component {
       status,
       title,
       body: { heading, table, rest },
-      actions: { primary, secondary }
+      actions: { primary, secondary },
+      closeModal
     } = this.props;
 
     const renderContent = () => {
@@ -44,26 +43,32 @@ class Modal extends Component {
             {rest}
           </div>
           <div className={`Modal__footer`}>
-            <div className={`Modal__buttonContainer`}>
-              {
-                primary.type === 'submit'
-                  ? primary.submitButton
-                  : (
-                    <Button
-                      type='onClick'
-                      buttonStyle='solid'
-                      onClick={primary.onClick}
-                      text={primary.text} />
-                  )
-              }
-            </div>
-            <div className={`Modal__buttonContainer`}>
-              <Button
-                type='onClick'
-                buttonStyle='outline'
-                onClick={secondary.onClick}
-                text={secondary.text} />
-            </div>
+            {
+              primary &&
+                <div className={`Modal__buttonContainer`}>
+                  {
+                    primary.type === 'submit'
+                      ? primary.submitButton
+                      : (
+                        <Button
+                          type='onClick'
+                          buttonStyle='solid'
+                          onClick={primary.onClick}
+                          text={primary.text} />
+                      )
+                  }
+                </div>
+            }
+            {
+              secondary &&
+                <div className={`Modal__buttonContainer`}>
+                  <Button
+                    type='onClick'
+                    buttonStyle='outline'
+                    onClick={secondary.onClick}
+                    text={secondary.text} />
+                </div>
+            }
           </div>
         </div>
       )
@@ -83,6 +88,7 @@ class Modal extends Component {
       <div className={`Modal__container`}>
         <div className={`Modal__backdrop`}></div>
         <div className={`Modal${className ? ' ' + className : ''}`}>
+          <i className={`Modal__close ${close}`} onClick={closeModal} />
           {renderModalContents()}
         </div>
       </div>
