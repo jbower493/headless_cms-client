@@ -12,12 +12,14 @@ import ViewContentType from 'containers/contentTypes/modules/viewContentType';
 /*----------Shared components----------*/
 import Table from 'components/Table';
 import RequestLoader from 'components/Loaders/RequestLoader';
+import ConfirmModal from 'components/Modal/ConfirmModal';
 
 /*----------Actions----------*/
 import {
   getAllcontentTypes,
   createNewContentType,
-  getOneContentType
+  getOneContentType,
+  deleteContentType
 } from 'containers/contentTypes/actions';
 
 /*----------Component start----------*/
@@ -26,7 +28,8 @@ class ContentTypes extends Component {
     super(props);
 
     this.state = {
-      modalTemplate: null
+      modalTemplate: null,
+      modalMeta: null
     }
 
     this.submitNewContentType = this.submitNewContentType.bind(this);
@@ -40,10 +43,11 @@ class ContentTypes extends Component {
     createNewContentType(attributes);
   }
 
-  setModalTemplate(template = null, cb) {
+  setModalTemplate(template = null, cb, modalMeta = null) {
     this.setState({
       ...this.state,
-      modalTemplate: template
+      modalTemplate: template,
+      modalMeta
     }, () => { if (cb) cb() });
   }
 
@@ -57,7 +61,7 @@ class ContentTypes extends Component {
       const { name } = item;
 
       return {
-        contentTypeName: `${name}s`,
+        contentTypeName: name,
         actions: [
           {
             buttonStyle: 'icon',
@@ -72,7 +76,7 @@ class ContentTypes extends Component {
           {
             buttonStyle: 'icon',
             icon: trash,
-            onClick: () => alert('Hey')
+            onClick: () => setModalTemplate('delete', null, { contentTypeName: name })
           }
         ]
       }
@@ -88,14 +92,21 @@ class ContentTypes extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { setModalTemplate } = this;
-    const { content_types_new_status, getAllcontentTypes } = this.props;
+    const { content_types_new_status, content_types_delete_status, getAllcontentTypes } = this.props;
 
     if (content_types_new_status === 'success' && prevProps.content_types_new_status === 'loading') setModalTemplate(null, getAllcontentTypes);
+
+    if (content_types_delete_status === 'success' && prevProps.content_types_delete_status === 'loading') setModalTemplate(null, getAllcontentTypes);
   }
 
   render() {
-    const { content_types_all_status, content_types_all_data } = this.props;
-    const { modalTemplate } = this.state;
+    const {
+      content_types_all_status,
+      content_types_all_data,
+      content_types_delete_status,
+      deleteContentType
+    } = this.props;
+    const { modalTemplate, modalMeta } = this.state;
     const { submitNewContentType, setModalTemplate, getContentTypesMatrix } = this;
 
     const renderMainContent = () => {
@@ -132,6 +143,15 @@ class ContentTypes extends Component {
         {renderPage()}
         {modalTemplate === 'new' && <NewContentTypeForm setModalTemplate={setModalTemplate} handleSubmit={submitNewContentType} />}
         {modalTemplate === 'view' && <ViewContentType setModalTemplate={setModalTemplate} />}
+        {modalTemplate === 'delete' &&
+          <ConfirmModal
+            title={`Confirm Delete Content Type`}
+            desc={`Are you sure you want to delete content type: ${modalMeta.contentTypeName}?`}
+            status={content_types_delete_status}
+            close={setModalTemplate}
+            onConfirm={() => deleteContentType(modalMeta.contentTypeName)}
+            onBack={setModalTemplate} />
+        }
       </div>
     );
   }
@@ -141,9 +161,11 @@ class ContentTypes extends Component {
 export default withRouter(connect((state) => ({
   content_types_all_status: state.contentTypes.content_types_all_status,
   content_types_all_data: state.contentTypes.content_types_all_data,
-  content_types_new_status: state.contentTypes.content_types_new_status
+  content_types_new_status: state.contentTypes.content_types_new_status,
+  content_types_delete_status: state.contentTypes.content_types_delete_status
 }), {
   getAllcontentTypes,
   createNewContentType,
-  getOneContentType
+  getOneContentType,
+  deleteContentType
 })(ContentTypes));

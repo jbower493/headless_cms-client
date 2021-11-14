@@ -16,6 +16,12 @@ export const API = {
 
       new: (attributes) => axios.post(`/api/content-type`, attributes)
 
+    },
+
+    DELETE: {
+
+      one: name => axios.delete(`/api/content-type/${name}`)
+
     }
   }
 };

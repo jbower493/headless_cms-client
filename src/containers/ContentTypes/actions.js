@@ -14,6 +14,10 @@ export const CONTENT_TYPES_NEW_REQUEST = 'contentTypes/CONTENT_TYPES_NEW_REQUEST
 export const CONTENT_TYPES_NEW_SUCCESS = 'contentTypes/CONTENT_TYPES_NEW_SUCCESS';
 export const CONTENT_TYPES_NEW_ERROR = 'contentTypes/CONTENT_TYPES_NEW_ERROR';
 
+export const CONTENT_TYPES_DELETE_REQUEST = 'contentTypes/CONTENT_TYPES_DELETE_REQUEST';
+export const CONTENT_TYPES_DELETE_SUCCESS = 'contentTypes/CONTENT_TYPES_DELETE_SUCCESS';
+export const CONTENT_TYPES_DELETE_ERROR = 'contentTypes/CONTENT_TYPES_DELETE_ERROR';
+
 
 /********** ALL **********/
 
@@ -81,6 +85,31 @@ export const createNewContentType = (attributes) => {
         dispatch({
           type: CONTENT_TYPES_NEW_ERROR,
           content_types_new_error
+        });
+      })
+  };
+};
+
+/********** DELETE **********/
+
+export const deleteContentType = (name) => {
+  return dispatch => {
+    dispatch({ type: CONTENT_TYPES_DELETE_REQUEST });
+    API.contentTypes.DELETE.one(name)
+      .then(response => {
+        const content_types_delete_data = getSuccessData(response);
+        dispatch(setNotification('success', content_types_delete_data.message));
+        dispatch({
+          type: CONTENT_TYPES_DELETE_SUCCESS,
+          content_types_delete_data
+        });
+      })
+      .catch(error => {
+        const content_types_delete_error = getErrorData(error);
+        dispatch(setNotification('error', content_types_delete_error));
+        dispatch({
+          type: CONTENT_TYPES_DELETE_ERROR,
+          content_types_delete_error
         });
       })
   };

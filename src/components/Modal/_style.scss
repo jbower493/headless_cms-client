@@ -5,6 +5,11 @@
   background-color: $clr--white;
   @include borderRadius($borderRadius--standard);
 
+  &--confirm {
+    height: 250px;
+    width: 500px;
+  }
+
   &__container {
     position: fixed;
     width: 100vw;
@@ -52,6 +57,10 @@
 
   &__bodyHeading {
     margin-bottom: 25px;
+  }
+
+  &--confirm .Modal__bodyHeading {
+    margin-bottom: 0;
   }
 
   &__footer {

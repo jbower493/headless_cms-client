@@ -7,7 +7,10 @@ import {
   CONTENT_TYPES_ONE_ERROR,
   CONTENT_TYPES_NEW_REQUEST,
   CONTENT_TYPES_NEW_SUCCESS,
-  CONTENT_TYPES_NEW_ERROR
+  CONTENT_TYPES_NEW_ERROR,
+  CONTENT_TYPES_DELETE_REQUEST,
+  CONTENT_TYPES_DELETE_SUCCESS,
+  CONTENT_TYPES_DELETE_ERROR
 } from 'containers/contentTypes/actions';
 
 const initialState = {
@@ -16,7 +19,13 @@ const initialState = {
   content_types_all_error: null,
   content_types_one_status: null,
   content_types_one_data: null,
-  content_types_one_error: null
+  content_types_one_error: null,
+  content_types_new_status: null,
+  content_types_new_data: null,
+  content_types_new_error: null,
+  content_types_delete_status: null,
+  content_types_delete_data: null,
+  content_types_delete_error: null
 };
 
 const contentTypesReducer = (state = initialState, action) => {
@@ -77,6 +86,25 @@ const contentTypesReducer = (state = initialState, action) => {
       ...state,
       content_types_new_status: 'error',
       content_types_new_error: action.content_types_new_error
+    }
+
+    case CONTENT_TYPES_DELETE_REQUEST: return {
+      ...state,
+      content_types_delete_status: 'loading',
+      content_types_delete_data: null,
+      content_types_delete_error: null
+    }
+
+    case CONTENT_TYPES_DELETE_SUCCESS: return {
+      ...state,
+      content_types_delete_status: 'success',
+      content_types_delete_data: action.content_types_delete_data
+    }
+
+    case CONTENT_TYPES_DELETE_ERROR: return {
+      ...state,
+      content_types_delete_status: 'error',
+      content_types_delete_error: action.content_types_delete_error
     }
 
     default: return state;
