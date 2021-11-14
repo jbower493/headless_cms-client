@@ -33,7 +33,9 @@ class AdminSetupForm extends Component {
           onSubmit={handleSubmit} >
           {({
             isValid,
-            dirty
+            dirty,
+            errors,
+            touched
           }) => {
             return (
               <Form>
@@ -43,6 +45,7 @@ class AdminSetupForm extends Component {
                   placeholder="Username"
                   component={TextField}
                   validate={requiredField}
+                  error={touched.username && errors.username}
                 />
                 <Field
                   label="Password"
@@ -50,6 +53,7 @@ class AdminSetupForm extends Component {
                   placeholder="Password"
                   component={PasswordField}
                   validate={value => multipleValidations(value, [requiredField, minLengthEight])}
+                  error={touched.password && errors.password}
                 />
                 {renderSubmitButton(auth_admin_setup_status, dirty, isValid, 'Continue')}
               </Form>

@@ -12,64 +12,41 @@ const getClassName = (className, error) => {
   return `${className ? ' ' + className : ''}${error ? ' form__input--error' : ''}`;
 };
 
-export const TextField = ({ field, form, label, embedded, className, ...rest }) => {
-  const { errors, touched } = form;
+export const TextField = ({ field, form, label, error, embedded, className, ...rest }) => {
   const { name } = field;
-  
-  const error = () => {
-    if (errors[name] && touched[name]) return errors[name];
-    const fieldArrayError = getIn(errors, name);
-    if (fieldArrayError) return fieldArrayError;
-    return null;
-  }
 
   return (
     <div className={`form__group${embedded ? ' form__group--embedded' : ''}`}>
       {!embedded && <label htmlFor={name}>{label}</label>}
-      <input className={`form__input${getClassName(className, error())}`} type="text" id={name} {...field} {...rest} />
+      <input className={`form__input${getClassName(className, error)}`} type="text" id={name} {...field} {...rest} />
       {
-        error() &&
-        <div className={`form__error`}>{error()}</div>
+        error &&
+        <div className={`form__error`}>{error}</div>
       }
     </div>
   )
 };
 
-export const PasswordField = ({ field, form, label, className, ...rest }) => {
-  const { errors, touched } = form;
+export const PasswordField = ({ field, form, label, error, className, ...rest }) => {
   const { name } = field;
-
-  const error = () => {
-    if (errors[name] && touched[name]) return errors[name];
-    const fieldArrayError = getIn(errors, name);
-    if (fieldArrayError) return fieldArrayError;
-    return null;
-  }
 
   return (
     <div className={`form__group`}>
       <label htmlFor={name}>{label}</label>
-      <input className={`form__password${getClassName(className, error())}`} type="password" id={name} {...field} {...rest} />
+      <input className={`form__password${getClassName(className, error)}`} type="password" id={name} {...field} {...rest} />
       {
-        error() &&
-        <div className={`form__error`}>{errors[name]}</div>
+        error &&
+        <div className={`form__error`}>{error}</div>
       }
     </div>
   );
 };
 
-export const SelectField = ({ field, form, label, embedded, className, options }) => {
+export const SelectField = ({ field, form, label, error, embedded, className, options }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { errors, touched, setFieldValue, setFieldTouched } = form;
+  const { setFieldValue, setFieldTouched } = form;
   const { name, value } = field;
-
-  const error = () => {
-    if (errors[name] && touched[name]) return errors[name];
-    const fieldArrayError = getIn(errors, name);
-    if (fieldArrayError) return fieldArrayError;
-    return null;
-  }
 
   const currentValueLabel = value ? options.find(option => option.value === value).label : 'Please Select';
 
@@ -77,7 +54,7 @@ export const SelectField = ({ field, form, label, embedded, className, options }
   return (
     <div className={`form__group form__group--select${embedded ? ' form__group--embedded' : ''}`}>
       <select
-        className={`form__hidden${getClassName(className, error())}`}
+        className={`form__hidden${getClassName(className, error)}`}
         id={name}
         name={name}
       >
@@ -116,23 +93,16 @@ export const SelectField = ({ field, form, label, embedded, className, options }
         </ClickAwayListener>
       }
       {
-        error() &&
-        <div className={`form__error`}>{errors[name]}</div>
+        error &&
+        <div className={`form__error`}>{error}</div>
       }
     </div>
   );
 }
 
-export const CheckboxField = ({ field, form, label, embedded, controlled, className, ...rest }) => {
-  const { errors, touched, setFieldValue, setFieldTouched } = form;
+export const CheckboxField = ({ field, form, label, error, embedded, controlled, className, ...rest }) => {
+  const { setFieldValue, setFieldTouched } = form;
   const { name, value } = field;
-
-  const error = () => {
-    if (errors[name] && touched[name]) return errors[name];
-    const fieldArrayError = getIn(errors, name);
-    if (fieldArrayError) return fieldArrayError;
-    return null;
-  }
 
   return (
     <div
@@ -143,13 +113,13 @@ export const CheckboxField = ({ field, form, label, embedded, controlled, classN
       className={`form__group form__group--checkbox${embedded ? ' form__group--embedded' : ''}`}
     >
       <input className={`form__hidden`} type="checkbox" id={name} {...field} {...rest} />
-      <div className={`form__checkbox${value ? ' form__checkbox--checked' : ''}${getClassName(className, error())}`}>
+      <div className={`form__checkbox${value ? ' form__checkbox--checked' : ''}${getClassName(className, error)}`}>
         <div className={`form__checkboxInner`}></div>
       </div>
       {!embedded && <div className={`form__checkboxLabel`}>{label}</div>}
       {
-        error() &&
-          <div className={`form__error`}>{errors[name]}</div>
+        error &&
+          <div className={`form__error`}>{error}</div>
       }
     </div>
   )

@@ -44,8 +44,8 @@ class NewContentTypeForm extends Component {
     });
   }
 
-  getFieldsMatrix(formProps, arrayHelpers) {
-    return formProps.values.fields.map((item, index) => {
+  getFieldsMatrix({ values, errors, touched }, arrayHelpers) {
+    return values.fields.map((item, index) => {
       return {
         fieldName: (
           <Field
@@ -53,6 +53,7 @@ class NewContentTypeForm extends Component {
             name={`fields.${index}.name`}
             component={TextField}
             validate={requiredField}
+            error={touched.fields && touched.fields[index]?.name && errors.fields && errors.fields[index]?.name}
           />
         ),
         type: (

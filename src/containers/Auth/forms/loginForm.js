@@ -27,14 +27,16 @@ class LoginForm extends Component {
         <p className={`loginForm__intro`}>Enter your credentials to login and start managing your content.</p>
         <Formik
           initialValues={{
-            // username: '',
+            username: '',
             password: '',
             role: 'user'
           }}
           onSubmit={handleSubmit} >
           {({
             dirty,
-            isValid
+            isValid,
+            errors,
+            touched
           }) => {
             return (
               <Form>
@@ -44,6 +46,7 @@ class LoginForm extends Component {
                   placeholder="Username"
                   component={TextField}
                   validate={requiredField}
+                  error={touched.username && errors.username}
                 />
                 <Field
                   label="Password"
@@ -51,12 +54,14 @@ class LoginForm extends Component {
                   placeholder="Password"
                   component={PasswordField}
                   validate={requiredField}
+                  error={touched.password && errors.password}
                 />
                 <Field
                   label="Role"
                   name="role"
                   component={SelectField}
                   validate={requiredField}
+                  error={touched.role && errors.role}
                   options={[
                     {
                       label: 'User',
