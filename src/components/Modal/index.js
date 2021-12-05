@@ -1,5 +1,6 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { close } from 'utilities/icons';
 
@@ -9,6 +10,7 @@ import { close } from 'utilities/icons';
 import Button from 'components/Buttons/Button';
 import ComponentError from 'components/Errors/ComponentError';
 import RequestLoader from 'components/Loaders/RequestLoader';
+import Table from 'components/Table';
 
 /*----------Actions----------*/
 
@@ -99,3 +101,41 @@ class Modal extends Component {
 /*----------Component end----------*/
 
 export default Modal;
+
+Modal.propTypes = {
+  className: PropTypes.string,
+  status: PropTypes.oneOf([
+    null,
+    'loading',
+    'error',
+    'success'
+  ]),
+  title: PropTypes.string.isRequired,
+  body: PropTypes.exact({
+    heading: PropTypes.string,
+    table: PropTypes.instanceOf(Table),
+    rest: PropTypes.node
+  }).isRequired,
+  actions: PropTypes.instanceOf({
+    primary: PropTypes.instanceOf({
+      type: 'submit',
+      submitButton: (props, propName, componentName) => {
+        if (props.type !== 'submit') return;
+        if (!props[propName]) return new Error('If actions.primary.type = "submit", you must pass a submit button as actions.primary.submitButton');
+      },
+      onClick: (props, propName, componentName) => {
+        if (props.type === 'submit') return;
+        if (!props[propName] || typeof props[propName] !== 'function') return new Error('If actions.primary.type is not "submit", you must pass a function as actions.primary.onClick');
+      },
+      text: (props, propName, componentName) => {
+        if (props.type === 'submit') return;
+        if (!props[propName] || typeof props[propName] !== 'string') return new Error('If actions.primary.type is not "submit", you must pass a string as actions.primary.text');
+      }
+    }),
+    secondary: PropTypes.instanceOf({
+      text: PropTypes.string,
+      onClick: PropTypes.func
+    })
+  }).isRequired,
+  closeModal: PropTypes.func.isRequired
+};

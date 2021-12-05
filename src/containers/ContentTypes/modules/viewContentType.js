@@ -6,22 +6,12 @@ import { connect } from 'react-redux';
 
 /*----------Shared components----------*/
 import Table from 'components/Table';
-import RequestLoader from 'components/Loaders/RequestLoader';
 import Modal from 'components/Modal';
 
 /*----------Actions----------*/
 
 /*----------Component start----------*/
 class ViewContentType extends Component {
-  /*----------Lifecycle methods----------*/
-  componentDidMount() {
-
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-
-  }
-
   render() {
     const { setModalTemplate, content_types_one_status, content_types_one_data } = this.props;
 

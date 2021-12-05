@@ -1,5 +1,6 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 /*----------Component start----------*/
 class DisabledButton extends Component {
@@ -15,3 +16,7 @@ class DisabledButton extends Component {
 
 /*----------Component end----------*/
 export default DisabledButton;
+
+DisabledButton.propTypes = {
+  text: PropTypes.string.isRequired
+};

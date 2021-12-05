@@ -1,6 +1,7 @@
 /*----------Base imports----------*/
 import React, { Component, createRef } from 'react';
 import ClickAwayListener from 'react-click-away-listener';
+import PropTypes from 'prop-types';
 
 /*----------Shared components----------*/
 import { edit } from 'utilities/icons';
@@ -60,3 +61,8 @@ class EditableTitle extends Component {
 
 /*----------Component end----------*/
 export default EditableTitle;
+
+EditableTitle.propTypes = {
+  name: PropTypes.string,
+  onChange: PropTypes.func
+};

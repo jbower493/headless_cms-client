@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import ClickAwayListener from 'react-click-away-listener';
-import { getIn } from 'formik';
 
 import Button from 'components/Buttons/Button';
 import DisabledButton from 'components/Buttons/DisabledButton';

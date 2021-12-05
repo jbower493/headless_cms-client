@@ -1,5 +1,6 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 /*----------Components, sections, modules----------*/
 
@@ -68,3 +69,17 @@ class ConfirmModal extends Component {
 /*----------Component end----------*/
 
 export default ConfirmModal;
+
+ConfirmModal.propTypes = {
+  onConfirm: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  status: PropTypes.oneOf([
+    null,
+    'loading',
+    'error',
+    'success'
+  ]),
+  title: PropTypes.string.isRequired,
+  desc: PropTypes.node
+};

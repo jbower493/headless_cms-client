@@ -1,5 +1,6 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 /*----------Component start----------*/
 class Button extends Component {
@@ -41,3 +42,20 @@ class Button extends Component {
 
 /*----------Component end----------*/
 export default Button;
+
+Button.propTypes = {
+  type: PropTypes.oneOf([
+    'submit',
+    'onClick'
+  ]),
+  text: PropTypes.string.isRequired,
+  buttonStyle: PropTypes.oneOf([
+    'solid',
+    'outline'
+  ]),
+  color: PropTypes.string,
+  onClick: (props, propName) => {
+    if (props.type !== 'onClick') return;
+    if (!props[propName] || typeof props[propName] !== 'function') return new Error('When button type is onClick, a funtion must be provded as the "onClick" prop.')
+  }
+};

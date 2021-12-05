@@ -1,6 +1,7 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
 import { product_name } from 'config/config';
+import PropTypes from 'prop-types';
 
 /*----------Component start----------*/
 class RequestLoader extends Component {
@@ -21,3 +22,10 @@ class RequestLoader extends Component {
 /*----------Component end----------*/
 
 export default RequestLoader;
+
+RequestLoader.propTypes = {
+  size: PropTypes.oneOf([
+    'sm',
+    'md'
+  ])
+};

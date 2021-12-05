@@ -1,5 +1,6 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 /*----------Components, sections, modules----------*/
 
@@ -12,19 +13,6 @@ import RequestLoader from 'components/Loaders/RequestLoader';
 
 /*----------Component start----------*/
 class Table extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  /*----------Lifecycle methods----------*/
-  componentDidMount() {
-    
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-
-  }
-
   render() {
     const { status, head, body } = this.props;
 
@@ -120,3 +108,37 @@ class Table extends Component {
 /*----------Component end----------*/
 
 export default Table;
+
+Table.propTypes = {
+  status: PropTypes.oneOf([
+    null,
+    'loading',
+    'error',
+    'success'
+  ]),
+  head: PropTypes.arrayOf((array, key, componentName, location, propFullName) => {
+    if (typeof array[key] !== 'object') return new Error('Each item in the "head" prop must be an object');
+    if (array[key].type && array[key].type !== 'actions') return new Error('head[index].type can either be ommitted, or passed as "actions"');
+    if (array[key].heading && typeof array[key].heading !== 'string') return new Error('head[index].heading must be a string if it is passed');
+  }),
+  body: PropTypes.arrayOf((array, key, componentName, location, propFullName) => {
+    const errors = [];
+    Object.entries(array[key]).forEach(([rowKey, rowValue]) => {
+      if (rowKey === 'actions') {
+        rowValue.forEach(action => {
+          if (!['solid button', 'outline button', 'icon'].includes(action.buttonStyle)) errors.push(new Error('Table action buttonStyle must be one of ["solid button", "outline button", "icon"]'));
+          if (!action.onClick || typeof action.onClick !== 'function') errors.push(new Error('Action onClick must be a function'));
+          if (action.buttonStyle === 'icon') {
+            if (!action.icon || typeof action.icon !== 'string') errors.push(new Error('If action buttonStyle is "icon", you must pass a string (className) as the icon property'));
+
+          } else {
+            if (action.text || typeof action.text !== 'string') errors.push(new Error('If action buttonStyle is not "icon", you must pass a string as the text property'));
+          }
+        })
+      } else {
+        if (!(typeof rowValue === 'string' || React.isValidElement(rowValue))) errors.push(new Error('Value of each key on a table row must be a string or a valid React element'));
+      }
+    })
+    if (errors.length > 0) return errors[0];
+  })
+};
