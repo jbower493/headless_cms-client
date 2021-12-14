@@ -1,10 +1,2 @@
-Tasks
-
-Build Component Error and Page Error, done
-
-Build loading animation and Request loader, done
-
-Build Admin Setup page, done
-
-
-Build Login page, in progress
+Known bugs:
+    - New content type form, when adding a new field, the form is valid until you focus the new input
