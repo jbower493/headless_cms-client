@@ -11,6 +11,7 @@ import Auth from 'containers/auth';
 import Dashboard from 'containers/dashboard';
 import Content from 'containers/content';
 import ContentTypes from 'containers/contentTypes';
+import Users from 'containers/users';
 
 /*----------Component start----------*/
 class Router extends Component {
@@ -31,6 +32,7 @@ class Router extends Component {
           <ProtectedRoute exact path='/dashboard' component={Dashboard} />
           <ProtectedRoute exact path='/content' component={Content} />
           <ProtectedRoute exact path='/content-types' component={ContentTypes} />
+          <ProtectedRoute exact path='/users' component={Users} />
 
           <Route exact path='/login' render={() => {
             if (!auth_admin_exists_data.adminExists) {
