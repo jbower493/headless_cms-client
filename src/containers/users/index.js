@@ -37,8 +37,26 @@ class Users extends Component {
         this.getUsersMatrix = this.getUsersMatrix.bind(this);
     }
 
-    submitNewUser(attributes) {
-        console.log(attributes)
+    submitNewUser(formValues) {
+        const { createNewUser } = this.props;
+        const { username, password, role } = formValues;
+
+        const attributes = {
+            username,
+            password,
+            role,
+            privileges: {
+                "create": formValues["create"],
+                "read own": formValues["read own"],
+                "read any": formValues["read any"],
+                "update own": formValues["update own"],
+                "update any": formValues["update any"],
+                "delete own": formValues["delete own"],
+                "delete any": formValues["delete any"]
+            }
+        }
+
+        createNewUser(attributes);
     }
 
     setModalTemplate(template = null, cb, modalMeta = null) {
@@ -56,25 +74,27 @@ class Users extends Component {
         if (data?.length <= 0) return [];
 
         return data.map(item => {
-            const { name } = item;
+            const { username, id, role } = item;
 
             return {
-                userName: name,
+                userName: username,
+                id,
+                role,
                 actions: [
                     {
                         buttonStyle: 'icon',
                         icon: eye,
-                        onClick: () => setModalTemplate('view', () => getOneUser(name))
+                        onClick: () => setModalTemplate('view', () => getOneUser(id))
                     },
                     {
                         buttonStyle: 'icon',
                         icon: edit,
-                        onClick: () => alert('Hey')
+                        onClick: () => alert('Still need to build this.')
                     },
                     {
                         buttonStyle: 'icon',
                         icon: trash,
-                        onClick: () => setModalTemplate('delete', null, { userName: name })
+                        onClick: () => setModalTemplate('delete', null, { userId: id, userName: username })
                     }
                 ]
             }
@@ -94,7 +114,7 @@ class Users extends Component {
 
         if (users_new_status === 'success' && prevProps.users_new_status === 'loading') setModalTemplate(null, getAllUsers);
 
-        if (users_delete_status === 'success' && prevProps.cusers_delete_status === 'loading') setModalTemplate(null, getAllUsers);
+        if (users_delete_status === 'success' && prevProps.users_delete_status === 'loading') setModalTemplate(null, getAllUsers);
     }
 
     render() {
@@ -113,9 +133,12 @@ class Users extends Component {
                     <h3 className={`users__heading`}>Users</h3>
                     <section className={`users__container`}>
                         <Table
+                            className={`usersListTable`}
                             status={'success'}
                             head={[
-                                { heading: 'User Name' },
+                                { heading: 'Username' },
+                                { heading: 'ID' },
+                                { heading: 'Role' },
                                 { heading: '', type: 'actions' }
                             ]}
                             body={getUsersMatrix(users_all_data?.users)}
@@ -137,7 +160,7 @@ class Users extends Component {
 
         /*----------Render component----------*/
         return (
-            <div className={`contentTypes`}>
+            <div className={`users`}>
                 {renderPage()}
                 {modalTemplate === 'new' && <NewUserForm setModalTemplate={setModalTemplate} handleSubmit={submitNewUser} />}
                 {modalTemplate === 'view' && <ViewUser setModalTemplate={setModalTemplate} />}
@@ -147,7 +170,7 @@ class Users extends Component {
                         desc={`Are you sure you want to delete user: ${modalMeta.userName}?`}
                         status={users_delete_status}
                         close={setModalTemplate}
-                        onConfirm={() => deleteUser(modalMeta.userName)}
+                        onConfirm={() => deleteUser(modalMeta.userId)}
                         onBack={setModalTemplate} />
                 }
             </div>

@@ -1,10 +1,7 @@
 /*----------Base imports----------*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Formik, Field, FieldArray, Form } from 'formik';
-
-import { trash, plus } from 'utilities/icons';
-import { supported_field_types } from 'config/config';
+import { Formik, Field, Form } from 'formik';
 
 /*----------Components, sections, modules----------*/
 import { TextField, SelectField, CheckboxField, renderSubmitButton } from 'utilities/form/inputs';
@@ -12,153 +9,176 @@ import { TextField, SelectField, CheckboxField, renderSubmitButton } from 'utili
 /*----------Shared components----------*/
 import Table from 'components/Table';
 import Modal from 'components/Modal';
-import EditableTitle from 'components/EditableTitle';
 
 /*----------Actions----------*/
 import { requiredField } from 'utilities/form/validation';
 
 
 /*----------Component start----------*/
-class NewContentTypeForm extends Component {
-  constructor(props) {
-    super(props);
+class NewUserForm extends Component {
+    /*----------Lifecycle methods----------*/
+    componentDidMount() {
 
-    this.state = {
-      name: 'Untitled'
     }
 
-    this.setName = this.setName.bind(this);
-    this.getFieldsMatrix = this.getFieldsMatrix.bind(this);
-  }
+    componentDidUpdate(prevProps, prevState) {
 
-  setName(e) {
-    e.preventDefault();
+    }
 
-    this.setState({
-      ...this.state,
-      name: e.target.value
-    });
-  }
+    render() {
+        const { handleSubmit, users_new_status, setModalTemplate } = this.props;
 
-  getFieldsMatrix({ values, errors, touched }, arrayHelpers) {
-    return values.fields.map((item, index) => {
-      return {
-        fieldName: (
-          <Field
-            embedded={true}
-            name={`fields.${index}.name`}
-            component={TextField}
-            validate={requiredField}
-            error={touched.fields && touched.fields[index]?.name && errors.fields && errors.fields[index]?.name}
-          />
-        ),
-        type: (
-          <Field
-            embedded={true}
-            name={`fields.${index}.type`}
-            placeholder="text"
-            component={SelectField}
-            options={supported_field_types}
-          />
-        ),
-        required: (
-          <Field
-            embedded={true}
-            name={`fields.${index}.required`}
-            placeholder="true"
-            component={CheckboxField}
-          />
-        ),
-        actions: [
-          {
-            buttonStyle: 'icon',
-            icon: trash,
-            onClick: () => arrayHelpers.remove(index)
-          }
-        ]
-      }
-    })
-  }
+        const renderModal = ({ dirty, isValid, touched, errors }) => {
 
-  /*----------Lifecycle methods----------*/
-  componentDidMount() {
+            return (
+                <Modal
+                    className={`newUserForm`}
+                    status={`success`}
+                    title={`New User`}
+                    body={{
+                        table: (
+                            <Table
+                                status={'success'}
+                                head={[
+                                    { heading: 'Username' },
+                                    { heading: 'New Password' },
+                                    { heading: 'Role' },
+                                    { heading: 'Privileges' }
+                                ]}
+                                body={[
+                                    {
+                                        username: (
+                                            <Field
+                                                embedded={true}
+                                                name="username"
+                                                placeholder="Username"
+                                                component={TextField}
+                                                validate={requiredField}
+                                                error={touched.username && errors.username}
+                                            />
+                                        ),
+                                        password: (
+                                            <Field
+                                                embedded={true}
+                                                name="password"
+                                                placeholder="New Password"
+                                                component={TextField}
+                                                validate={requiredField}
+                                                error={touched.username && errors.username}
+                                            />
+                                        ),
+                                        role: (
+                                            <Field
+                                                embedded={true}
+                                                label="Role"
+                                                name="role"
+                                                component={SelectField}
+                                                validate={requiredField}
+                                                error={touched.role && errors.role}
+                                                options={[
+                                                    {
+                                                        label: 'User',
+                                                        value: 'user',
+                                                    },
+                                                    {
+                                                        label: 'Admin',
+                                                        value: 'admin',
+                                                    }
+                                                ]}
+                                            />
+                                        ),
+                                        privileges: <div>
+                                            <Field
+                                                label="Create"
+                                                name="create"
+                                                placeholder="true"
+                                                component={CheckboxField}
+                                            />
+                                            <Field
+                                                label="Read Own"
+                                                name="read own"
+                                                placeholder="true"
+                                                component={CheckboxField}
+                                            />
+                                            <Field
+                                                label="Read Any"
+                                                name="read any"
+                                                placeholder="true"
+                                                component={CheckboxField}
+                                            />
+                                            <Field
+                                                label="Update Own"
+                                                name="update own"
+                                                placeholder="true"
+                                                component={CheckboxField}
+                                            />
+                                            <Field
+                                                label="Update Any"
+                                                name="update any"
+                                                placeholder="true"
+                                                component={CheckboxField}
+                                            />
+                                            <Field
+                                                label="Delete Own"
+                                                name="delete own"
+                                                placeholder="true"
+                                                component={CheckboxField}
+                                            />
+                                            <Field
+                                                label="Delete Any"
+                                                name="delete any"
+                                                placeholder="true"
+                                                component={CheckboxField}
+                                            />
+                                        </div>
+                                    }
+                                ]}
+                            />
+                        )
+                    }}
+                    actions={{
+                        primary: {
+                            type: 'submit',
+                            submitButton: renderSubmitButton(users_new_status, dirty, isValid, 'Create')
+                        },
+                        secondary: {
+                            type: 'onClick',
+                            text: 'Cancel',
+                            onClick: (e) => setModalTemplate()
+                        }
+                    }}
+                    closeModal={setModalTemplate} />
+            );
+        };
 
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-
-  }
-
-  render() {
-    const { handleSubmit, content_types_new_status, setModalTemplate } = this.props;
-    const { name } = this.state;
-    const { setName, getFieldsMatrix } = this;
-
-    const renderModal = (formProps, arrayHelpers) => {
-      const { dirty, isValid } = formProps;
-
-      return (
-        <Modal
-          className={`newUserForm`}
-          status={`success`}
-          title={`New Content Type`}
-          body={{
-            heading: <EditableTitle name={name} onChange={setName} />,
-            table: (
-              <Table
-                status={'success'}
-                head={[
-                  { heading: 'Field Name' },
-                  { heading: 'Type' },
-                  { heading: 'Required' },
-                  { heading: '', type: 'actions' }
-                ]}
-                body={getFieldsMatrix(formProps, arrayHelpers)} />
-            ),
-            rest: <i onClick={() => arrayHelpers.push({
-              name: '',
-              type: 'text',
-              required: false
-            })} className={`newUserForm__addFieldIcon ${plus}`} />
-          }}
-          actions={{
-            primary: {
-              type: 'submit',
-              submitButton: renderSubmitButton(content_types_new_status, dirty, isValid, 'Create')
-            },
-            secondary: {
-              type: 'onClick',
-              text: 'Cancel',
-              onClick: (e) => setModalTemplate()
-            }
-          }}
-          closeModal={setModalTemplate} />
-      );
-    };
-
-    /*----------Render component----------*/
-    return (
-
-      <Formik
-        initialValues={{
-          fields: []
-        }}
-        onSubmit={(values) => handleSubmit({ ...values, name })} >
-        {(formProps) => {
-          return (
-            <Form>
-              <FieldArray
-                name={`fields`}
-                render={arrayHelpers => renderModal(formProps, arrayHelpers)} />
-            </Form>
-          );
-        }}
-      </Formik>
-    );
-  }
+        /*----------Render component----------*/
+        return (
+            <Formik
+                initialValues={{
+                    username: '',
+                    role: 'user',
+                    "create": true,
+                    "read own": true,
+                    "read any": true,
+                    "update own": true,
+                    "update any": false,
+                    "delete own": true,
+                    "delete any": false
+                }}
+                onSubmit={(values) => handleSubmit({ ...values })} >
+                {(formProps) => {
+                    return (
+                        <Form>
+                            {renderModal(formProps)}
+                        </Form>
+                    );
+                }}
+            </Formik>
+        );
+    }
 };
 
 /*----------Component end----------*/
 export default connect(state => ({
-  content_types_new_status: state.contentTypes.content_types_new_status
-}))(NewContentTypeForm);
+    users_new_status: state.users.users_new_status
+}))(NewUserForm);

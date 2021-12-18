@@ -11,51 +11,55 @@ import Modal from 'components/Modal';
 /*----------Actions----------*/
 
 /*----------Component start----------*/
-class ViewContentType extends Component {
-  render() {
-    const { setModalTemplate, content_types_one_status, content_types_one_data } = this.props;
+class ViewUser extends Component {
+    render() {
+        const { setModalTemplate, users_one_status, users_one_data } = this.props;
 
-    const getTableBody = () => {
-      if (!content_types_one_data) return [];
-
-      return content_types_one_data.contentType.fields.map(field => (
-        { ...field, required: field.required ? 'true' : 'false' }
-      ));
-    };
-
-    /*----------Render component----------*/
-    return (
-      <Modal
-        className={`viewUser`}
-        status={content_types_one_status}
-        title={`View Content Type`}
-        body={{
-          heading: content_types_one_data?.contentType.name,
-          table: (
-            <Table
-              status={'success'}
-              head={[
-                { heading: 'Field Name' },
-                { heading: 'Type' },
-                { heading: 'Required' }
-              ]}
-              body={getTableBody()} />
-          )
-        }}
-        actions={{
-          secondary: {
-            type: 'onClick',
-            text: 'Close',
-            onClick: (e) => setModalTemplate()
-          }
-        }}
-        closeModal={setModalTemplate} />
-    );
-  }
+        /*----------Render component----------*/
+        return (
+            <Modal
+                className={`viewUser`}
+                status={users_one_status}
+                title={`View User`}
+                body={{
+                    heading: users_one_data?.user.username,
+                    table: (
+                        <Table
+                            status={'success'}
+                            head={[
+                                { heading: 'Username' },
+                                { heading: 'ID' },
+                                { heading: 'Role' },
+                                { heading: 'Privileges' }
+                            ]}
+                            body={[
+                                {
+                                    userName: users_one_data?.user.username,
+                                    id: users_one_data?.user.id,
+                                    role: users_one_data?.user.role,
+                                    privileges: <ul>
+                                        {users_one_data && Object.entries(users_one_data?.user.privileges).map(([key, value]) => (
+                                            <li>{key}: <span className={value ? 'true' : 'false'}>{value ? 'true' : 'false'}</span></li>
+                                        ))}
+                                    </ul>
+                                }
+                            ]} />
+                    )
+                }}
+                actions={{
+                    secondary: {
+                        type: 'onClick',
+                        text: 'Close',
+                        onClick: (e) => setModalTemplate()
+                    }
+                }}
+                closeModal={setModalTemplate} />
+        );
+    }
 };
 
 /*----------Component end----------*/
 export default connect(state => ({
-  content_types_one_status: state.contentTypes.content_types_one_status,
-  content_types_one_data: state.contentTypes.content_types_one_data
-}))(ViewContentType);
+    users_one_status: state.users.users_one_status,
+    users_one_data: state.users.users_one_data
+}))(ViewUser);

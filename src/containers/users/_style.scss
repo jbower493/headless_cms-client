@@ -1,50 +1,73 @@
 .users {
-  @include mainWindow;
+    @include mainWindow;
 
-  &__heading {
-    @include mainWindowHeading;
-  }
-
-  &__container {
-    @include mainWindowContainer;
-  }
-
-  .Table {
-    &__heading,
-    &__column {
-      
-      &:first-of-type {
-        @include flex(2, 2, 0);
-      }
-
-      &--actions {
-        width: 50px;
-      }
+    &__heading {
+        @include mainWindowHeading;
     }
 
-    &__column {
-
-      &.userName {
-        font-size: 18px;
-        text-transform: capitalize;
-      }
+    &__container {
+        @include mainWindowContainer;
     }
-  }
 
-  &__addNewIcon {
-    margin-top: 20px;
-    font-size: 20px;
-    color: $clr--primary;
-    cursor: pointer;
-  }
+    .Table {
+        &__heading,
+        &__column {
+            &:first-of-type {
+                @include flex(2, 2, 0);
+            }
+
+            &--actions {
+                width: 50px;
+            }
+        }
+    }
+
+    .usersListTable {
+        .Table__column {
+            &.userName,
+            &.id,
+            &.role {
+                font-size: 18px;
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    &__addNewIcon {
+        margin-top: 20px;
+        font-size: 20px;
+        color: $clr--primary;
+        cursor: pointer;
+    }
 }
 
 .newUserForm {
+    .Table {
+        &__row {
+            @include alignItems(flex-start);
+        }
 
-  &__addFieldIcon {
-    margin-top: 20px;
-    font-size: 20px;
-    color: $clr--primary;
-    cursor: pointer;
-  }
+        &__column .form__group--checkbox {
+            margin-bottom: 8px;
+        }
+    }
+}
+
+.viewUser {
+    .Table {
+        &__row {
+            @include alignItems(flex-start);
+        }
+
+        &__column.privileges {
+            span {
+                color: $clr--success;
+                margin-left: 5px;
+
+                &.false {
+                    color: $clr--error;
+                }
+            }
+        }
+    }
 }

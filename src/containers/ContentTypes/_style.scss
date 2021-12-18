@@ -1,50 +1,49 @@
 .contentTypes {
-  @include mainWindow;
+    @include mainWindow;
 
-  &__heading {
-    @include mainWindowHeading;
-  }
-
-  &__container {
-    @include mainWindowContainer;
-  }
-
-  .Table {
-
-    &__heading, &__column {
-
-      &:first-of-type {
-        @include flex(2, 2, 0);
-      }
-
-      &--actions {
-        width: 50px;
-      }
+    &__heading {
+        @include mainWindowHeading;
     }
 
-    &__column {
-
-      &.contentTypeName {
-        font-size: 18px;
-        text-transform: capitalize;
-      }
+    &__container {
+        @include mainWindowContainer;
     }
-  }
 
-  &__addNewIcon {
-    margin-top: 20px;
-    font-size: 20px;
-    color: $clr--primary;
-    cursor: pointer;
-  }
+    .Table {
+        &__heading,
+        &__column {
+            &:first-of-type {
+                @include flex(2, 2, 0);
+            }
+
+            &--actions {
+                width: 50px;
+            }
+        }
+    }
+
+    .contentTypesList {
+        .Table__column {
+            &.contentTypeName {
+                font-size: 18px;
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    &__addNewIcon {
+        margin-top: 20px;
+        font-size: 20px;
+        color: $clr--primary;
+        cursor: pointer;
+    }
 }
 
 .newCTForm {
-
-  &__addFieldIcon {
-    margin-top: 20px;
-    font-size: 20px;
-    color: $clr--primary;
-    cursor: pointer;
-  }
+    &__addFieldIcon {
+        margin-top: 20px;
+        font-size: 20px;
+        color: $clr--primary;
+        cursor: pointer;
+    }
 }
