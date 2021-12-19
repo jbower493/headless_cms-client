@@ -1,51 +1,52 @@
 @mixin sidebarLink {
-  text-decoration: none;
-  padding: 6px 20px;
+    text-decoration: none;
+    padding: 6px 20px;
 
-  &:hover {
-    background-color: $clr--sidebarHover;
-    transition: $transition--hover;
-  }
+    &:hover {
+        background-color: $clr--sidebarHover;
+        transition: $transition--hover;
+    }
 }
 
 .sidebar {
-  width: $width--sidebar;
-  background-color: $clr--lightNavy;
-  padding: 30px 0;
+    width: $width--sidebar;
+    @include flex(0, 0, $width--sidebar);
+    background-color: $clr--lightNavy;
+    padding: 30px 0;
 
-  &__contentTypes {
-    margin-bottom: 20px;
-  }
+    &__contentTypes {
+        margin-bottom: 20px;
+    }
 
-  &__sectionHeading {
-    display: block;
-    color: $clr--white;
-    @include sidebarLink;
-  }
+    &__sectionHeading {
+        display: block;
+        color: $clr--white;
+        @include sidebarLink;
+    }
 
-  &__sectionAddNew {
-    @include displayFlex;
-    @include justifyContent(space-between);
-    @include alignItems(center);
-    @include sidebarLink;
-  }
+    &__sectionAddNew {
+        @include displayFlex;
+        @include justifyContent(space-between);
+        @include alignItems(center);
+        @include sidebarLink;
+    }
 
-  &__sectionAddNewText {
-    color: $clr--grey;
-    margin-right: 10px;
-  }
+    &__sectionAddNewText {
+        color: $clr--grey;
+        margin-right: 10px;
+    }
 
-  &__sectionAddNewIcon {
-    color: $clr--primary;
-  }
+    &__sectionAddNewIcon {
+        color: $clr--primary;
+    }
 
-  &__sectionList {
-    margin-top: 15px;
-  }
+    &__sectionList {
+        margin-top: 10px;
+    }
 
-  &__sectionItem {
-    display: block;
-    color: $clr--grey;
-    @include sidebarLink;
-  }
+    &__sectionItem {
+        display: block;
+        color: $clr--grey;
+        @include sidebarLink;
+    }
 }
