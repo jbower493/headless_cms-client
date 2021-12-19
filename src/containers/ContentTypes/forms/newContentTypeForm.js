@@ -95,7 +95,10 @@ class NewContentTypeForm extends Component {
     const { setName, getFieldsMatrix } = this;
 
     const renderModal = (formProps, arrayHelpers) => {
-      const { dirty, isValid } = formProps;
+      const { dirty, isValid, values } = formProps;console.log(formProps)
+
+      // invalidate form if any field has an empty name
+      const formIsValid = isValid && !values.fields?.find(field => !field.name);
 
       return (
         <Modal
@@ -124,7 +127,7 @@ class NewContentTypeForm extends Component {
           actions={{
             primary: {
               type: 'submit',
-              submitButton: renderSubmitButton(content_types_new_status, dirty, isValid, 'Create')
+              submitButton: renderSubmitButton(content_types_new_status, dirty, formIsValid, 'Create')
             },
             secondary: {
               type: 'onClick',

@@ -33,6 +33,7 @@
       @include displayFlex;
       @include justifyContent(flex-end);
       width: $width--tableAction;
+      padding-right: 0px;
 
       i {
         color: $clr--primary;

@@ -15,10 +15,6 @@
             &:first-of-type {
                 @include flex(2, 2, 0);
             }
-
-            &--actions {
-                width: 50px;
-            }
         }
     }
 
