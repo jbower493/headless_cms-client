@@ -1,27 +1,27 @@
 import axios from 'axios';
 
 export const API = {
-  
-  contentTypes: {
 
-    GET: {
+    contentTypes: {
 
-      all: () => axios.get(`/api/content-types`),
+        GET: {
 
-      one: name => axios.get(`/api/content-type/${name}`)
+            all: () => axios.get(`/api/content-types`),
 
-    },
+            one: name => axios.get(`/api/content-type/${name}`)
 
-    POST: {
+        },
 
-      new: (attributes) => axios.post(`/api/content-type`, attributes)
+        POST: {
 
-    },
+            new: (attributes) => axios.post(`/api/content-type`, attributes)
 
-    DELETE: {
+        },
 
-      one: name => axios.delete(`/api/content-type/${name}`)
+        DELETE: {
 
+            one: name => axios.delete(`/api/content-type/${name}`)
+
+        }
     }
-  }
 };

@@ -3,39 +3,135 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { eye, edit, trash, plus } from 'utilities/icons';
+
 /*----------Components, sections, modules----------*/
 
 /*----------Shared components----------*/
+import Table from 'components/Table';
+import RequestLoader from 'components/Loaders/RequestLoader';
+import PageError from 'components/Errors/PageError';
 
 /*----------Actions----------*/
+import { getAllContent } from 'containers/content/actions';
 
 /*----------Component start----------*/
 class Content extends Component {
+    constructor(props) {
+        super(props);
 
-  /*----------Lifecycle methods----------*/
-  componentDidMount() {
-    
-  }
+        this.setModalTemplate = this.setModalTemplate.bind(this);
+        this.getContentMatrix = this.getContentMatrix.bind(this);
+    }
 
-  componentDidUpdate(prevProps, prevState) {
+    setModalTemplate(template = null, cb, modalMeta = null) {
+        this.setState({
+            ...this.state,
+            modalTemplate: template,
+            modalMeta
+        }, () => { if (cb) cb() });
+    }
 
-  }
+    getContentMatrix(data) {
+        const {  } = this.props;
+        const { setModalTemplate } = this;
 
-  render() {
+        if (!data || data.length <= 0) return [];
 
-    /*----------Render component----------*/
-    return (
-      <div className={`content`}>
-        Content
-      </div>
-    );
-  }
+        return data.map(item => {
+            const { id } = item;
+
+            return {
+                id: id,
+                fieldOne: 'Field One',
+                fieldTwo: 'Field Two',
+                actions: [
+                    {
+                        buttonStyle: 'icon',
+                        icon: eye,
+                        onClick: () => setModalTemplate('view', () => alert('Still need to build this'))
+                    },
+                    {
+                        buttonStyle: 'icon',
+                        icon: edit,
+                        onClick: () => alert('Still need to build this')
+                    },
+                    {
+                        buttonStyle: 'icon',
+                        icon: trash,
+                        onClick: () => setModalTemplate('delete', null, { contentId: id })
+                    }
+                ]
+            }
+        })
+    }
+
+    /*----------Lifecycle methods----------*/
+    componentDidMount() {
+        const { getAllContent, computedMatch: { params: { type } } } = this.props;
+
+        getAllContent(type);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const { getAllContent, computedMatch: { params: { type } } } = this.props;
+
+        if (type !== prevProps.computedMatch.params.type) getAllContent(type);
+    }
+
+    render() {
+        const {
+            content_all_status,
+            content_all_data,
+            computedMatch: { params: { type } }
+        } = this.props;
+        const { setModalTemplate, getContentMatrix } = this;
+
+        const renderMainContent = () => {
+            return (
+                <>
+                    <h3 className={`content__heading`}>Content: {type}</h3>
+                    <section className={`content__container`}>
+                        <Table
+                            className={`contentList`}
+                            status={'success'}
+                            head={[
+                                { heading: 'ID' },
+                                { heading: 'Field One' },
+                                { heading: 'Field Two' },
+                                { heading: '', type: 'actions' }
+                            ]}
+                            body={getContentMatrix(content_all_data?.content)}
+                        />
+                        <i onClick={() => setModalTemplate('new')} className={`content__addNewIcon ${plus}`} />
+                    </section>
+                </>
+            );
+        };
+
+        const renderPage = () => {
+            switch (content_all_status) {
+                case 'success': return renderMainContent();
+                case 'error': return <PageError />;
+                case 'loading':
+                default: return <RequestLoader />;
+            }
+        };
+
+        /*----------Render component----------*/
+        return (
+            <div className={`content`}>
+                {renderPage()}
+            </div>
+        );
+    }
 };
 
 /*----------Component end----------*/
-export default withRouter(connect((state) => {
-
-},
+export default withRouter(connect((state) => ({
+    content_all_status: state.content.content_all_status,
+    content_all_data: state.content.content_all_data
+}),
 {
-
+    getAllContent
 })(Content));

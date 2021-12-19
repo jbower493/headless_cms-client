@@ -14,7 +14,7 @@
 @import '../components/Errors/ComponentError/style';
 @import '../components/Loaders/RequestLoader/style';
 @import '../components/Modal/style';
-@import '../components/Notification/styles';
+@import '../components/Notification/style';
 @import '../components/Table/style';
 
 /*----------Containers----------*/
@@ -24,4 +24,5 @@
 @import '../containers/auth/style';
 @import '../containers/dashboard/style';
 @import '../containers/contentTypes/style';
+@import '../containers/content/style';
 @import '../containers/users/style';

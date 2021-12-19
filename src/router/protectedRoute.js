@@ -6,13 +6,13 @@ import { Route, Redirect } from 'react-router-dom';
 /*----------Component start----------*/
 class ProtectedRoute extends Component {
   render() {
-    const { auth_user_data, auth_admin_exists_data, location, component: Component } = this.props;
+    const { auth_user_data, auth_admin_exists_data, location, computedMatch, component: Component } = this.props;
 
     /*----------Render component----------*/
     return (
       <Route render={() => {
         if (auth_user_data?.user) {
-          return <Component />;
+          return <Component computedMatch={computedMatch} />;
         }
         if (auth_admin_exists_data.adminExists) {
           return <Redirect from={location.pathname} to='/login' />;

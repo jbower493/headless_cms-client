@@ -1,0 +1,18 @@
+.content {
+    @include mainWindow;
+
+    &__heading {
+        @include mainWindowHeading;
+    }
+
+    &__container {
+        @include mainWindowContainer;
+    }
+
+    &__addNewIcon {
+        margin-top: 20px;
+        font-size: 20px;
+        color: $clr--primary;
+        cursor: pointer;
+    }
+}

@@ -43,7 +43,7 @@ class Sidebar extends Component {
 
         const renderContentTypes = () => {
             return (
-                <div className={`sidebar__contentTypes`}>
+                <div className={`sidebar__section`}>
                     <Link className={`sidebar__sectionHeading`} to={`/content-types`}>Content Types</Link>
                     {/* <Link className={`sidebar__sectionAddNew`} to={`/content-types/new`}>
             <small className={`sidebar__sectionAddNewText`}>Add New</small>
@@ -60,7 +60,7 @@ class Sidebar extends Component {
 
         const renderUsers = () => {
             return (
-                <div className={`sidebar__users`}>
+                <div className={`sidebar__section`}>
                     <Link className={`sidebar__sectionHeading`} to={`/users`}>Users</Link>
                     {/* <Link className={`sidebar__sectionAddNew`} to={`/users/new`}>
             <small className={`sidebar__sectionAddNewText`}>Add New</small>
@@ -78,8 +78,8 @@ class Sidebar extends Component {
         /*----------Render component----------*/
         return (
             <div className={`sidebar`}>
-                {renderContentTypes()}
                 {renderUsers()}
+                {renderContentTypes()}
             </div>
         );
     }

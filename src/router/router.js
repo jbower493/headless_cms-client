@@ -30,7 +30,7 @@ class Router extends Component {
         
         <Switch>
           <ProtectedRoute exact path='/dashboard' component={Dashboard} />
-          <ProtectedRoute exact path='/content' component={Content} />
+          <ProtectedRoute exact path='/content/:type' component={Content} />
           <ProtectedRoute exact path='/content-types' component={ContentTypes} />
           <ProtectedRoute exact path='/users' component={Users} />
 

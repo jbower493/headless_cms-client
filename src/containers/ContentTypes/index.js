@@ -12,6 +12,7 @@ import ViewContentType from 'containers/contentTypes/modules/viewContentType';
 /*----------Shared components----------*/
 import Table from 'components/Table';
 import RequestLoader from 'components/Loaders/RequestLoader';
+import PageError from 'components/Errors/PageError';
 import ConfirmModal from 'components/Modal/ConfirmModal';
 
 /*----------Actions----------*/
@@ -55,7 +56,7 @@ class ContentTypes extends Component {
         const { getOneContentType } = this.props;
         const { setModalTemplate } = this;
 
-        if (data?.length <= 0) return [];
+        if (!data || data.length <= 0) return [];
 
         return data.map(item => {
             const { name } = item;
@@ -132,7 +133,7 @@ class ContentTypes extends Component {
         const renderPage = () => {
             switch (content_types_all_status) {
                 case 'success': return renderMainContent();
-                case 'error':
+                case 'error': return <PageError />;
                 case 'loading':
                 default: return <RequestLoader />;
             }
