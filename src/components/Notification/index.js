@@ -12,64 +12,87 @@ import { dismissNotification } from './actions';
 
 /*----------Component start----------*/
 class Notification extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.notificationTimer = null;
-  }
+        this.state = {
+            fadingOut: false
+        };
 
-  /*----------Lifecycle methods----------*/
-  componentDidMount() {
-    const { dismissNotification } = this.props;
-    this.notificationTimer = setTimeout(dismissNotification, 5000);
-  }
+        this.notificationTimer = null;
 
-  componentDidUpdate(prevProps, prevState) {
-    const { notification_data, dismissNotification } = this.props;
-
-    if (notification_data !== prevProps.notification_data) {
-      clearTimeout(this.notificationTimer);
-      this.notificationTimer = null;
-      this.notificationTimer = setTimeout(dismissNotification, 5000);
+        this.fadeOutNotification = this.fadeOutNotification.bind(this);
     }
-  }
 
-  componentWillUnmount() {
-    clearTimeout(this.notificationTimer);
-  }
+    fadeOutNotification() {
+        this.setState({
+            ...this.state,
+            fadingOut: true
+        });
+    }
 
-  render() {
-    const { notification_data, dismissNotification } = this.props;
-    const { type, text } = notification_data;
+    /*----------Lifecycle methods----------*/
+    componentDidMount() {
+        const { fadeOutNotification } = this;
 
-    const getIcon = () => {
-      switch (type) {
-        case 'success': return success;
-        case 'error': return error;
-        case 'info':
-        default: return question;
-      }
-    };
+        this.notificationTimer = setTimeout(fadeOutNotification, 5000);
+    }
 
-    /*----------Render component----------*/
-    return (
-      <div className={`Notification Notification--${type || 'info'}`}>
-        <div className={`Notification__iconContainer`}>
-          <i className={`${getIcon()} Notification__icon`} />
-        </div>
-        <p className={`Notification__text`}>{text || 'Something went wrong'}</p>
-        <i
-          className={`${close} Notification__dismiss`}
-          onClick={dismissNotification} />
-      </div>
-    );
-  }
+    componentDidUpdate(prevProps, prevState) {
+        const { notification_data } = this.props;
+        const { fadeOutNotification } = this;
+
+        if (notification_data !== prevProps.notification_data) {
+            clearTimeout(this.notificationTimer);
+            this.notificationTimer = null;
+            this.notificationTimer = setTimeout(fadeOutNotification, 5000);
+        }
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.notificationTimer);
+    }
+
+    render() {
+        const { fadingOut } = this.state;
+        const { notification_data, dismissNotification } = this.props;
+        const { fadeOutNotification } = this;
+
+        const { type, text } = notification_data;
+
+        const getIcon = () => {
+            switch (type) {
+                case 'success': return success;
+                case 'error': return error;
+                case 'info':
+                default: return question;
+            }
+        };
+
+        /*----------Render component----------*/
+        return (
+            <div
+                className={`Notification Notification--${type || 'info'}${fadingOut ? ' fadingOut' : ''}`}
+                onAnimationEnd={() => {
+                    if (fadingOut) dismissNotification();
+                }}
+            >
+                <div className={`Notification__iconContainer`}>
+                    <i className={`${getIcon()} Notification__icon`} />
+                </div>
+                <p className={`Notification__text`}>{text || 'Something went wrong'}</p>
+                <i
+                    className={`${close} Notification__dismiss`}
+                    onClick={fadeOutNotification} />
+            </div>
+        );
+    }
 };
 
 /*----------Component end----------*/
 
 export default connect(state => ({
-  notification_data: state.notification.notification_data
+    notification_data: state.notification.notification_data
 }), {
-  dismissNotification
+    dismissNotification
 })(Notification);

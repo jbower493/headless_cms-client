@@ -16,6 +16,10 @@
     width: 80vw;
   }
 
+  &.fadingOut {
+    animation: slideOut 0.5s ease-out 0s 1 forwards;
+  }
+
   &__iconContainer {
     height: 100%;
     width: 40px;
@@ -78,3 +82,13 @@
     right: 0;
   }
 }
+
+@keyframes slideOut {
+    from {
+      right: 0;
+    }
+  
+    to {
+      right: -400px;
+    }
+  }

@@ -95,7 +95,7 @@ class NewContentTypeForm extends Component {
     const { setName, getFieldsMatrix } = this;
 
     const renderModal = (formProps, arrayHelpers) => {
-      const { dirty, isValid, values } = formProps;console.log(formProps)
+      const { dirty, isValid, values } = formProps;
 
       // invalidate form if any field has an empty name
       const formIsValid = isValid && !values.fields?.find(field => !field.name);
