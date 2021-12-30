@@ -7,7 +7,7 @@ export const CONTENT_ALL_SUCCESS = 'content/CONTENT_ALL_SUCCESS';
 export const CONTENT_ALL_ERROR = 'content/CONTENT_ALL_ERROR';
 
 
-/********** NEW **********/
+/********** ALL **********/
 
 export const getAllContent = (contentTypeName) => {
     return dispatch => {
@@ -29,3 +29,26 @@ export const getAllContent = (contentTypeName) => {
             })
     };
 };
+
+/********** ONE **********/
+
+// export const getOneContent = (contentTypeName) => {
+//     return dispatch => {
+//         dispatch({ type: CONTENT_ALL_REQUEST });
+//         API.content.GET.one()
+//             .then(response => {
+//                 const content_all_data = getSuccessData(response);
+//                 dispatch({
+//                     type: CONTENT_ALL_SUCCESS,
+//                     content_all_data
+//                 });
+//             })
+//             .catch(error => {
+//                 const content_all_error = getErrorData(error);
+//                 dispatch({
+//                     type: CONTENT_ALL_ERROR,
+//                     content_all_error
+//                 });
+//             })
+//     };
+// };

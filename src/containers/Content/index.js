@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { eye, edit, trash, plus } from 'utilities/icons';
 
 /*----------Components, sections, modules----------*/
+import NewContentForm from 'containers/content/forms/newContentForm';
 
 /*----------Shared components----------*/
 import Table from 'components/Table';
@@ -19,6 +20,11 @@ import { getAllContent } from 'containers/content/actions';
 class Content extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            modalTemplate: null,
+            modalMeta: null
+        };
 
         this.setModalTemplate = this.setModalTemplate.bind(this);
         this.getContentMatrix = this.getContentMatrix.bind(this);
@@ -85,6 +91,7 @@ class Content extends Component {
             content_all_data,
             computedMatch: { params: { type } }
         } = this.props;
+        const { modalTemplate, modalMeta } = this.state;
         const { setModalTemplate, getContentMatrix } = this;
 
         const renderMainContent = () => {
@@ -103,7 +110,7 @@ class Content extends Component {
                             ]}
                             body={getContentMatrix(content_all_data?.content)}
                         />
-                        <i onClick={() => setModalTemplate('new')} className={`content__addNewIcon ${plus}`} />
+                        <i onClick={() => setModalTemplate('new', false, { contentTypeName: 'blog_post' })} className={`content__addNewIcon ${plus}`} />
                     </section>
                 </>
             );
@@ -122,6 +129,12 @@ class Content extends Component {
         return (
             <div className={`content`}>
                 {renderPage()}
+                {modalTemplate === 'new' && 
+                    <NewContentForm
+                        contentTypeName={modalMeta?.contentTypeName}
+                        setModalTemplate={setModalTemplate}
+                        handleSubmit={() => console.log('submitted new content form')} />
+                }
             </div>
         );
     }
